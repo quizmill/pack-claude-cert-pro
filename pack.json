@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 2,
+  "id": "claude-architect-pro",
+  "title": "Claude Architect – Professional",
+  "description": "Unofficial Claude Certified Architect – Professional (CCAR-P) practice — multiple-choice and multiple-response questions across the seven exam domains, with rationales.",
+  "homeSubtitle": "Architect Professional — own the whole delivery.",
+  "themeColor": "#3d348b",
+  "categories": [
+    {
+      "key": "solution-design",
+      "label": "Solution Design & Architecture",
+      "shortLabel": "Solution Design",
+      "icon": "🏗️",
+      "weight": 0.17
+    },
+    {
+      "key": "models-context",
+      "label": "Claude Models, Prompting & Context Engineering",
+      "shortLabel": "Models & Prompting",
+      "icon": "🧠",
+      "weight": 0.13
+    },
+    {
+      "key": "integration",
+      "label": "Integration",
+      "shortLabel": "Integration",
+      "icon": "🔌",
+      "weight": 0.19
+    },
+    {
+      "key": "evaluation-testing",
+      "label": "Evaluation, Testing & Optimization",
+      "shortLabel": "Eval & Testing",
+      "icon": "📊",
+      "weight": 0.16
+    },
+    {
+      "key": "governance-risk",
+      "label": "Governance, Safety & Risk Management",
+      "shortLabel": "Governance",
+      "icon": "🛡️",
+      "weight": 0.14
+    },
+    {
+      "key": "stakeholder-lifecycle",
+      "label": "Stakeholder Communication & Lifecycle Management",
+      "shortLabel": "Stakeholder",
+      "icon": "🤝",
+      "weight": 0.14
+    },
+    {
+      "key": "developer-enablement",
+      "label": "Developer Productivity & Operational Enablement",
+      "shortLabel": "Dev Enablement",
+      "icon": "⚙️",
+      "weight": 0.07
+    }
+  ],
+  "exam": {
+    "label": "CCAR-P exam",
+    "passPct": 72,
+    "scaled": true,
+    "questionCount": 63
+  }
+}
