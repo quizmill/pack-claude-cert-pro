@@ -13,6 +13,13 @@ The author states the set is original material written against Anthropic's
 publicly available exam guide (v1.0, July 2026) — **not** actual exam content,
 which is under NDA.
 
+**Licence status:** the post and its attached PDF carry no licence or reuse
+statement, and no written permission from the author is on file. The
+questions are included under attribution only, and every one of them stays
+`reviewStatus: draft` until a licence is recorded here or the bank is
+replaced with original material. See [docs/provenance.md](docs/provenance.md)
+for the full audit (2026-10-10).
+
 Adaptation notes: single-answer items are stored as `correctKey`,
 select-two items as `correctKeys`. The five **scenario-matching** items
 (1.11, 3.12, 4.10, 5.9, 6.9) were split into their individual sub-scenarios as
