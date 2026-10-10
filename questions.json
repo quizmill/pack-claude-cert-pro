@@ -151,7 +151,7 @@
     "id": "ccar-p-d1-05",
     "categoryKey": "solution-design",
     "difficulty": 3,
-    "prompt": "A travel company's booking agent must coordinate flight search, hotel search, visa checks and payment. Each sub-task needs its own tools and a long domain prompt, and the business wants the orchestration logic to be visible and testable in code rather than left to the model. Which design meets this?",
+    "prompt": "A travel company's booking agent must coordinate flight search, hotel search, visa checks and payment. Each sub-task needs its own tools and a long domain prompt. The business wants an ordered record of every step, no payment attempted if the visa check fails, and the orchestration logic visible and testable in code rather than left to the model. Which design meets this?",
     "options": [
       {
         "key": "A",
@@ -171,7 +171,7 @@
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. When the business wants orchestration that is inspectable and unit-testable, put the control flow in code and keep the model inside each specialist step; each sub-agent sees a narrow context, which also improves tool selection. A reproduces the bloated-context problem that decomposition is meant to solve. B makes the sequence emergent and hard to reason about or test. D is a legitimate orchestrator-workers pattern, but it moves the control flow into the model, which is exactly what the requirement rules out.",
+    "explanation": "Correct: C. When the business wants orchestration that is inspectable and unit-testable, put the control flow in code and keep the model inside each specialist step: the code records each outcome in order and stops the sequence when a step fails, and each sub-agent sees a narrow context, which also improves tool selection. A reproduces the bloated-context problem that decomposition is meant to solve. B makes the sequence emergent, so neither the ordering nor the halt can be guaranteed. D is a legitimate orchestrator-workers pattern, but it moves the control flow into the model, which is exactly what the requirement rules out.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -483,30 +483,30 @@
     "conceptId": "multi-agent-and-decomposition"
   },
   {
-    "id": "ccar-p-d1-14",
+    "id": "ccar-p-d1-18",
     "categoryKey": "solution-design",
     "difficulty": 2,
-    "prompt": "In the design of an end-to-end Claude solution, which component turns production outcomes into improvements to the system over time?",
+    "prompt": "A support team wants each inbound customer email summarised into a three-line CRM note. The CRM already fetches the customer's account record and supplies it with the email, and nothing else is needed. Which pattern fits?",
     "options": [
       {
         "key": "A",
-        "text": "The input layer that validates and normalises incoming requests before processing begins"
+        "text": "A prompt chain that extracts entities, then classifies the email, then writes the note in three sequenced calls"
       },
       {
         "key": "B",
-        "text": "The processing layer where the model, retrieval and tools do the work of producing an answer"
+        "text": "An agent loop with CRM search tools, so the model can look up whatever account history it decides it needs"
       },
       {
         "key": "C",
-        "text": "The output layer that formats and delivers results to the consuming system or user"
+        "text": "An orchestrator that hands the email to a specialist sub-agent per product line and merges their notes"
       },
       {
         "key": "D",
-        "text": "The feedback loop that collects outcome signals and feeds evaluation and iteration"
+        "text": "A single augmented call: one prompt holding the email and the supplied account record, returning the note"
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. The exam guide frames architectures as input, processing, output and feedback loops; the feedback loop is the part that closes the cycle by turning real outcomes into evaluation data and prompt or design changes. A, B and C are each necessary, but none of them learns from what happened after the output was produced.",
+    "explanation": "Correct: D. One transformation whose context is already supplied is the base case of the augmented LLM: a single call with retrieval done for it, no planning and no sequencing. A splits a one-step task into three calls and triples cost and latency for no quality gain. B gives the model autonomy to search when the only context it needs has already been provided. C adds coordination overhead to a task that has no independent sub-tasks.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -514,10 +514,10 @@
       "ccar-p",
       "domain-1",
       "multiple-choice",
-      "end-to-end",
-      "feedback-loop"
+      "architecture-patterns",
+      "augmented-llm"
     ],
-    "conceptId": "business-value-and-feedback"
+    "conceptId": "workflow-vs-agent"
   },
   {
     "id": "ccar-p-d1-15",
@@ -570,19 +570,19 @@
     "options": [
       {
         "key": "A",
-        "text": "Legal, financial and technical assessments each need their own tool set and specialist instructions"
-      },
-      {
-        "key": "B",
         "text": "The whole task must finish in under two seconds to meet the agreed response-time target"
       },
       {
+        "key": "B",
+        "text": "Legal, financial and technical assessments each need their own tool set and specialist instructions"
+      },
+      {
         "key": "C",
-        "text": "The assessments can run independently and only need combining at the end"
+        "text": "The task is a single extraction with a fixed schema applied to one document at a time"
       },
       {
         "key": "D",
-        "text": "The task is a single extraction with a fixed schema applied to one document at a time"
+        "text": "The assessments can run independently and only need combining at the end"
       },
       {
         "key": "E",
@@ -590,10 +590,10 @@
       }
     ],
     "correctKeys": [
-      "A",
-      "C"
+      "B",
+      "D"
     ],
-    "explanation": "Correct: A and C. Multiple agents pay off when sub-tasks need separate context and tools (so one agent's prompt would be bloated and confused) and when they can proceed in parallel and be merged. B and E argue against multi-agent, which adds latency and cost. D is a job for a single call.",
+    "explanation": "Correct: B and D. Multiple agents pay off when sub-tasks need separate context and tools (so one agent's prompt would be bloated and confused) and when they can proceed in parallel and be merged. A and E argue against multi-agent, which adds latency and cost. C is a job for a single call.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -621,22 +621,22 @@
       },
       {
         "key": "C",
-        "text": "Defining what a successful outcome looks like and how it will be measured"
-      },
-      {
-        "key": "D",
         "text": "Writing the first version of the system prompt for the returns-desk agent"
       },
       {
-        "key": "E",
+        "key": "D",
         "text": "Choosing between MCP and a direct API integration for connecting to the order system"
+      },
+      {
+        "key": "E",
+        "text": "Defining what a successful outcome looks like and how it will be measured"
       }
     ],
     "correctKeys": [
       "A",
-      "C"
+      "E"
     ],
-    "explanation": "Correct: A and C. Translating a business problem means understanding the process as it is and agreeing the measurable outcome; those decide what, if anything, to automate. B, D and E are design and implementation decisions that should follow from that understanding, not precede it.",
+    "explanation": "Correct: A and E. Translating a business problem means understanding the process as it is and agreeing the measurable outcome; those decide what, if anything, to automate. B, C and D are design and implementation decisions that should follow from that understanding, not precede it.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1027,30 +1027,30 @@
     "options": [
       {
         "key": "A",
-        "text": "Order the prompt so static content comes first and enable prompt caching on it"
-      },
-      {
-        "key": "B",
         "text": "Delete the examples section and rely on the model to infer the required output format on its own"
       },
       {
-        "key": "C",
-        "text": "Route simple requests to a smaller model that evaluation shows performs equally on them"
-      },
-      {
-        "key": "D",
+        "key": "B",
         "text": "Increase the maximum output tokens on every request so that responses are never cut short"
       },
       {
-        "key": "E",
+        "key": "C",
+        "text": "Order the prompt so static content comes first and enable prompt caching on it"
+      },
+      {
+        "key": "D",
         "text": "Send each request twice to two models and keep whichever response turned out to be cheaper"
+      },
+      {
+        "key": "E",
+        "text": "Route simple requests to a smaller model that evaluation shows performs equally on them"
       }
     ],
     "correctKeys": [
-      "A",
-      "C"
+      "C",
+      "E"
     ],
-    "explanation": "Correct: A and C. Caching a stable prefix cuts the cost of the repeated tokens, and tiering requests to the smallest model that measurably does the job cuts cost where capability is not needed. B reduces tokens by removing something that was there for quality. D does not reduce input cost and may raise output cost. E doubles cost.",
+    "explanation": "Correct: C and E. Caching a stable prefix cuts the cost of the repeated tokens, and tiering requests to the smallest model that measurably does the job cuts cost where capability is not needed. A reduces tokens by removing something that was there for quality. B does not reduce input cost and may raise output cost. D doubles cost.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1072,30 +1072,30 @@
     "options": [
       {
         "key": "A",
-        "text": "Use clear delimiters or tags to separate instructions, reference data and examples"
-      },
-      {
-        "key": "B",
         "text": "Write the instructions in as few words as possible, even where that leaves some cases implicit"
       },
       {
-        "key": "C",
-        "text": "Replace vague directives with explicit statements of the desired behaviour and its edge cases"
+        "key": "B",
+        "text": "Use clear delimiters or tags to separate instructions, reference data and examples"
       },
       {
-        "key": "D",
+        "key": "C",
         "text": "Place the most important rule in the middle of the prompt where it is surrounded by supporting context"
       },
       {
-        "key": "E",
+        "key": "D",
         "text": "Raise the temperature so that the model handles varied inputs more flexibly and naturally"
+      },
+      {
+        "key": "E",
+        "text": "Replace vague directives with explicit statements of the desired behaviour and its edge cases"
       }
     ],
     "correctKeys": [
-      "A",
-      "C"
+      "B",
+      "E"
     ],
-    "explanation": "Correct: A and C. Clear structure (so the model can tell instructions from data) and explicit, specific instructions that cover the edge cases are the two highest-leverage fixes for inconsistency. B leaves cases implicit, which is where inconsistency comes from. D buries the rule. E increases variability.",
+    "explanation": "Correct: B and E. Clear structure (so the model can tell instructions from data) and explicit, specific instructions that cover the edge cases are the two highest-leverage fixes for inconsistency. A leaves cases implicit, which is where inconsistency comes from. C buries the rule. D increases variability.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1710,30 +1710,30 @@
     "options": [
       {
         "key": "A",
-        "text": "Use semantic retrieval for procedure questions and an exact-match lookup for job numbers"
-      },
-      {
-        "key": "B",
         "text": "Use a single vector index for both and rely on the model to notice when a match is wrong"
       },
       {
-        "key": "C",
-        "text": "Attach metadata such as equipment type and date to chunks so retrieval can filter before ranking"
-      },
-      {
-        "key": "D",
+        "key": "B",
         "text": "Retrieve the top 100 chunks for every query so that the right one is always somewhere in context"
       },
       {
-        "key": "E",
+        "key": "C",
         "text": "Remove job numbers from the index entirely so that they cannot cause confusion in semantic search"
+      },
+      {
+        "key": "D",
+        "text": "Use semantic retrieval for procedure questions and an exact-match lookup for job numbers"
+      },
+      {
+        "key": "E",
+        "text": "Attach metadata such as equipment type and date to chunks so retrieval can filter before ranking"
       }
     ],
     "correctKeys": [
-      "A",
-      "C"
+      "D",
+      "E"
     ],
-    "explanation": "Correct: A and C. Different query patterns call for different retrieval paths, and metadata filtering narrows the candidate set before semantic ranking. B leaves the exact-identifier weakness in place. D floods the context. E deletes the data needed for the lookup use case.",
+    "explanation": "Correct: D and E. Different query patterns call for different retrieval paths, and metadata filtering narrows the candidate set before semantic ranking. A leaves the exact-identifier weakness in place. B floods the context. C deletes the data needed for the lookup use case.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1758,11 +1758,11 @@
       },
       {
         "key": "B",
-        "text": "Tool calls are executed by application code that holds the credentials outside the model's context"
+        "text": "The agent acts under one shared service identity regardless of which user is asking"
       },
       {
         "key": "C",
-        "text": "The agent acts under one shared service identity regardless of which user is asking"
+        "text": "Tool calls are executed by application code that holds the credentials outside the model's context"
       },
       {
         "key": "D",
@@ -1775,9 +1775,9 @@
     ],
     "correctKeys": [
       "A",
-      "C"
+      "B"
     ],
-    "explanation": "Correct: A and C. Secrets in the prompt can be leaked in output or by injection, and a single shared identity means the API cannot enforce per-user permissions, so the model becomes the only access control. B, D and E are the correct practices: credentials held outside the model, user identity propagated to the enforcing layer, and least-privilege scoping.",
+    "explanation": "Correct: A and B. Secrets in the prompt can be leaked in output or by injection, and a single shared identity means the API cannot enforce per-user permissions, so the model becomes the only access control. C, D and E are the correct practices: credentials held outside the model, user identity propagated to the enforcing layer, and least-privilege scoping.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1798,19 +1798,19 @@
     "options": [
       {
         "key": "A",
-        "text": "The tool and reference set is large and any single request uses only a small part of it"
-      },
-      {
-        "key": "B",
         "text": "Every request uses the same three tools and a 1,500-token prompt that rarely changes"
       },
       {
+        "key": "B",
+        "text": "The system has a hard requirement of exactly one model call per request with no extra lookups"
+      },
+      {
         "key": "C",
-        "text": "New tools and documents are added often and must become available without redeploying the prompt"
+        "text": "The tool and reference set is large and any single request uses only a small part of it"
       },
       {
         "key": "D",
-        "text": "The system has a hard requirement of exactly one model call per request with no extra lookups"
+        "text": "New tools and documents are added often and must become available without redeploying the prompt"
       },
       {
         "key": "E",
@@ -1818,10 +1818,10 @@
       }
     ],
     "correctKeys": [
-      "A",
-      "C"
+      "C",
+      "D"
     ],
-    "explanation": "Correct: A and C. Progressive discovery pays off when the full set is large and sparsely used, and when the catalogue changes often, because on-demand loading keeps prompts small and lets new capabilities appear without prompt changes. B and E describe small, stable contexts where monolithic loading is simpler and cheaper. D rules out the extra lookup step that discovery needs.",
+    "explanation": "Correct: C and D. Progressive discovery pays off when the full set is large and sparsely used, and when the catalogue changes often, because on-demand loading keeps prompts small and lets new capabilities appear without prompt changes. A and E describe small, stable contexts where monolithic loading is simpler and cheaper. B rules out the extra lookup step that discovery needs.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1850,11 +1850,11 @@
       },
       {
         "key": "C",
-        "text": "Per-step records of tool name, input summary, outcome and duration"
+        "text": "A weekly email summarising total spend and request volume for the engineering managers"
       },
       {
         "key": "D",
-        "text": "A weekly email summarising total spend and request volume for the engineering managers"
+        "text": "Per-step records of tool name, input summary, outcome and duration"
       },
       {
         "key": "E",
@@ -1863,9 +1863,9 @@
     ],
     "correctKeys": [
       "A",
-      "C"
+      "D"
     ],
-    "explanation": "Correct: A and C. Diagnosing a failing session requires tracing: a session-level identifier that ties the steps together, and structured step-level records to inspect. B and D are aggregate reporting that cannot point at a step inside one session. E removes the very data needed.",
+    "explanation": "Correct: A and D. Diagnosing a failing session requires tracing: a session-level identifier that ties the steps together, and structured step-level records to inspect. B and C are aggregate reporting that cannot point at a step inside one session. E removes the very data needed.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2363,15 +2363,15 @@
     "options": [
       {
         "key": "A",
-        "text": "A held-out test set with reference answers that the prompt was never tuned against"
-      },
-      {
-        "key": "B",
         "text": "A demo script that shows the assistant's best answers to executives and the regulator's liaison"
       },
       {
+        "key": "B",
+        "text": "A held-out test set with reference answers that the prompt was never tuned against"
+      },
+      {
         "key": "C",
-        "text": "Human expert review of a stratified sample, including safety and compliance cases, plus automated grading"
+        "text": "Adversarial cases that probe prompt injection, policy-violating requests and safety limits, graded by domain experts"
       },
       {
         "key": "D",
@@ -2383,10 +2383,10 @@
       }
     ],
     "correctKeys": [
-      "A",
+      "B",
       "C"
     ],
-    "explanation": "Correct: A and C. A regulated setting needs a clean held-out set (so scores are not inflated by tuning) and expert human review on the risky categories, combined with automated grading for scale. B is marketing, not evaluation. D hides the per-category failures a regulator will ask about. E leaves no time to act on the findings.",
+    "explanation": "Correct: B and C. A regulated setting needs a clean held-out set with reference answers (so scores are not inflated by tuning) and adversarial cases, graded by people who know the domain, showing that the boundaries hold under attack. A is marketing, not evaluation. D hides the per-category failures a regulator will ask about. E leaves no time to act on the findings.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2415,22 +2415,22 @@
       },
       {
         "key": "C",
-        "text": "The change history of the retrieval index and its source documents over the same period"
-      },
-      {
-        "key": "D",
         "text": "The team's on-call roster showing who was responsible for the system on each of the days"
       },
       {
-        "key": "E",
+        "key": "D",
         "text": "The model provider's public status page and its incident history for the two-week period"
+      },
+      {
+        "key": "E",
+        "text": "The mix of live inputs over the two weeks, checked for new query types, formats or languages"
       }
     ],
     "correctKeys": [
       "A",
-      "C"
+      "E"
     ],
-    "explanation": "Correct: A and C. With model, prompt and latency ruled out, the moving parts are the data and the tools: session traces show what the model was given, and the index change history shows whether the inputs changed when quality did. B and D are unlikely to explain a gradual quality change. E matters for outages, not gradual degradation with an unchanged model.",
+    "explanation": "Correct: A and E. With model, prompt and latency ruled out, what changed is what flows through the system: session traces show what the model was given in the failing cases, and the input mix shows whether the traffic has drifted away from what the system was designed and evaluated for. B and C are unlikely to explain a gradual quality change. D matters for outages, not gradual degradation with an unchanged model.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2451,30 +2451,30 @@
     "options": [
       {
         "key": "A",
-        "text": "Summarise or compact older turns past a length threshold, keeping the facts the assistant still needs"
-      },
-      {
-        "key": "B",
         "text": "Delete the system prompt after the first turn, since the model will remember it for the session"
       },
       {
-        "key": "C",
-        "text": "Prune large tool results from earlier turns once used, leaving a short note of what was found"
+        "key": "B",
+        "text": "Summarise or compact older turns past a length threshold, keeping the facts the assistant still needs"
       },
       {
-        "key": "D",
+        "key": "C",
         "text": "Send the full conversation twice per turn to be sure that nothing important is lost"
       },
       {
-        "key": "E",
+        "key": "D",
         "text": "Replace every tool result with the word \"done\" the moment it is returned to save tokens"
+      },
+      {
+        "key": "E",
+        "text": "Prune large tool results from earlier turns once used, leaving a short note of what was found"
       }
     ],
     "correctKeys": [
-      "A",
-      "C"
+      "B",
+      "E"
     ],
-    "explanation": "Correct: A and C. Context management for long sessions means compacting history and clearing bulky tool outputs once they have served their purpose, while preserving the information still needed. B breaks the assistant: each request is stateless and the system prompt must be sent every time. D doubles cost. E destroys information before it is used.",
+    "explanation": "Correct: B and E. Context management for long sessions means compacting history and clearing bulky tool outputs once they have served their purpose, while preserving the information still needed. A breaks the assistant: each request is stateless and the system prompt must be sent every time. C doubles cost. D destroys information before it is used.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2946,30 +2946,30 @@
     "options": [
       {
         "key": "A",
-        "text": "Limit the agent's tools to the minimum needed and require confirmation for writes"
-      },
-      {
-        "key": "B",
         "text": "Ask the model to rate how trustworthy each retrieved document seems before deciding whether to use it"
       },
       {
-        "key": "C",
-        "text": "Delimit retrieved content and tell the model it is data that may contain adversarial text"
-      },
-      {
-        "key": "D",
+        "key": "B",
         "text": "Increase the number of retrieved chunks per query so that any injected text is diluted by the rest"
       },
       {
-        "key": "E",
+        "key": "C",
+        "text": "Limit the agent's tools to the minimum needed and require confirmation for writes"
+      },
+      {
+        "key": "D",
         "text": "Disable logging of retrieved content so that injected text is never stored in the trace system"
+      },
+      {
+        "key": "E",
+        "text": "Delimit retrieved content and tell the model it is data that may contain adversarial text"
       }
     ],
     "correctKeys": [
-      "A",
-      "C"
+      "C",
+      "E"
     ],
-    "explanation": "Correct: A and C. Defence in depth against injection combines reducing what a hijacked model can do (least privilege, confirmations on consequential actions) with making the trust boundary explicit in the prompt. B asks the model to police itself. D adds more untrusted text. E hampers investigation and prevents nothing.",
+    "explanation": "Correct: C and E. Defence in depth against injection combines reducing what a hijacked model can do (least privilege, confirmations on consequential actions) with making the trust boundary explicit in the prompt. A asks the model to police itself. B adds more untrusted text. D hampers investigation and prevents nothing.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2998,11 +2998,11 @@
       },
       {
         "key": "C",
-        "text": "A user's crafted input causes the assistant to ignore its scope and leak internal information"
+        "text": "Answer wording varies between identical requests, which some users notice and remark on"
       },
       {
         "key": "D",
-        "text": "Answer wording varies between identical requests, which some users notice and remark on"
+        "text": "A user's crafted input causes the assistant to ignore its scope and leak internal information"
       },
       {
         "key": "E",
@@ -3011,9 +3011,9 @@
     ],
     "correctKeys": [
       "A",
-      "C"
+      "D"
     ],
-    "explanation": "Correct: A and C. Hallucinated content and prompt injection are two of the central failure modes of LLM systems and each needs a mitigation on the register. B describes a hosted service in a confused way. D is ordinary sampling variance, not a failure mode. E is false: inference does not update the model's weights.",
+    "explanation": "Correct: A and D. Hallucinated content and prompt injection are two of the central failure modes of LLM systems and each needs a mitigation on the register. B describes a hosted service in a confused way. C is ordinary sampling variance, not a failure mode. E is false: inference does not update the model's weights.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3400,30 +3400,30 @@
     "options": [
       {
         "key": "A",
-        "text": "The problem statement with success criteria and how they will be measured"
-      },
-      {
-        "key": "B",
         "text": "The final version of the system prompt that the assistant will use in production"
       },
       {
-        "key": "C",
-        "text": "The constraints: data sensitivity, compliance obligations, integration points and non-functional targets"
-      },
-      {
-        "key": "D",
+        "key": "B",
         "text": "The chosen vector database and the configuration it will run with in production"
       },
       {
-        "key": "E",
+        "key": "C",
         "text": "The sprint plan and staffing for the build phase that follows discovery"
+      },
+      {
+        "key": "D",
+        "text": "The problem statement with success criteria and how they will be measured"
+      },
+      {
+        "key": "E",
+        "text": "The constraints: data sensitivity, compliance obligations, integration points and non-functional targets"
       }
     ],
     "correctKeys": [
-      "A",
-      "C"
+      "D",
+      "E"
     ],
-    "explanation": "Correct: A and C. Discovery should end with an agreed problem and measure of success, plus the constraints the design must honour; without those, design decisions have nothing to be checked against. B and D are design and implementation outputs. E is planning that follows from the design rather than an input to it.",
+    "explanation": "Correct: D and E. Discovery should end with an agreed problem and measure of success, plus the constraints the design must honour; without those, design decisions have nothing to be checked against. A and B are design and implementation outputs. C is planning that follows from the design rather than an input to it.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3448,26 +3448,26 @@
       },
       {
         "key": "B",
-        "text": "Log each request against the agreed scope and show its cost, timeline and risk impact before accepting"
-      },
-      {
-        "key": "C",
         "text": "Refuse all changes until the original scope has shipped, then revisit the backlog of requests"
       },
       {
+        "key": "C",
+        "text": "Log each request against the agreed scope and show its cost and risk impact before accepting"
+      },
+      {
         "key": "D",
-        "text": "Hold a regular prioritisation session where stakeholders trade new requests off against commitments"
+        "text": "Hold a regular prioritisation session where stakeholders trade requests off against commitments"
       },
       {
         "key": "E",
-        "text": "Pad every estimate by 20% so that new requests can be absorbed without discussion"
+        "text": "Pad every estimate by 20% so that new requests can be absorbed later without any discussion of trade-offs"
       }
     ],
     "correctKeys": [
-      "B",
+      "C",
       "D"
     ],
-    "explanation": "Correct: B and D. Scope is managed by making the impact of each change visible against the agreed baseline and by giving stakeholders a structured forum to prioritise. A guarantees overrun. C damages the relationship and ignores legitimate change. E hides the trade-off instead of surfacing it.",
+    "explanation": "Correct: C and D. Scope is managed by making the impact of each change visible against the agreed baseline and by giving stakeholders a structured forum to prioritise. A guarantees overrun. B damages the relationship and ignores legitimate change. E hides the trade-off instead of surfacing it.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3488,11 +3488,11 @@
     "options": [
       {
         "key": "A",
-        "text": "Tracking accuracy, latency, cost and safety against the agreed targets and alerting on drift"
+        "text": "Interviewing stakeholders to decide whether the project should exist and what problem it would solve"
       },
       {
         "key": "B",
-        "text": "Interviewing stakeholders to decide whether the project should exist and what problem it would solve"
+        "text": "Tracking accuracy, latency, cost and safety against the agreed targets and alerting on drift"
       },
       {
         "key": "C",
@@ -3508,10 +3508,10 @@
       }
     ],
     "correctKeys": [
-      "A",
+      "B",
       "C"
     ],
-    "explanation": "Correct: A and C. Monitoring watches the live metrics and catches drift; iteration turns what monitoring finds into evaluated improvements. B is discovery. D is design. E is handoff preparation.",
+    "explanation": "Correct: B and C. Monitoring watches the live metrics and catches drift; iteration turns what monitoring finds into evaluated improvements. A is discovery. D is design. E is handoff preparation.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3525,41 +3525,48 @@
     "conceptId": "lifecycle-phases"
   },
   {
-    "id": "ccar-p-d6-14",
+    "id": "ccar-p-d6-15",
     "categoryKey": "stakeholder-lifecycle",
-    "difficulty": 3,
-    "prompt": "A sponsor asks the architect to commit to a response-time SLA for an assistant that is still being designed. What is the right way to handle the request?",
+    "difficulty": 2,
+    "prompt": "An engagement has agreed its problem statement, success measures and constraints. Which TWO activities belong to the design phase that follows? (Select TWO.)",
     "options": [
       {
         "key": "A",
-        "text": "Commit to a one-second SLA, because that is what the sponsor wants to hear and is prepared to fund the project for"
+        "text": "Choosing the retrieval strategy and deciding where guardrails and approvals sit"
       },
       {
         "key": "B",
-        "text": "Refuse to discuss SLAs at all until the system has been running in production for a while"
+        "text": "Interviewing frontline staff to find where time is lost in today's process"
       },
       {
         "key": "C",
-        "text": "Commit to the same SLA as the company's existing web services, since users expect parity"
+        "text": "Selecting between a workflow and an agent for the core processing"
       },
       {
         "key": "D",
-        "text": "Propose a provisional target from prototype measurements, define the measure, and confirm after load testing"
+        "text": "Walking the client's engineers through the runbooks and handing over on-call duty"
+      },
+      {
+        "key": "E",
+        "text": "Reviewing a month of production evaluation results to pick the next prompt changes"
       }
     ],
-    "correctKey": "D",
-    "explanation": "Correct: D. SLA alignment is evidence-based and staged: a provisional, measured target with a clear definition and a point at which it becomes firm. A commits without evidence. B leaves the sponsor without anything to plan around. C borrows a number from systems with different characteristics.",
+    "correctKeys": [
+      "A",
+      "C"
+    ],
+    "explanation": "Correct: A and C. Design turns agreed requirements into architectural choices: the pattern, the retrieval approach and the control points, each with its rationale recorded. B is discovery, which has already closed. D is handoff. E is monitoring and iteration, which follow launch.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
     "tags": [
       "ccar-p",
       "domain-6",
-      "multiple-choice",
-      "sla",
-      "expectation-management"
+      "multiple-response",
+      "lifecycle",
+      "design"
     ],
-    "conceptId": "discovery-and-expectations"
+    "conceptId": "lifecycle-phases"
   },
   {
     "id": "ccar-p-d7-01",
@@ -3795,11 +3802,11 @@
       },
       {
         "key": "B",
-        "text": "Allowing each team to grant the assistant any permission it asks for during a session"
+        "text": "Keeping AI-generated changes subject to the same CI checks and review rules as human changes"
       },
       {
         "key": "C",
-        "text": "Keeping AI-generated changes subject to the same CI checks and review rules as human changes"
+        "text": "Allowing each team to grant the assistant any permission it asks for during a session"
       },
       {
         "key": "D",
@@ -3812,9 +3819,9 @@
     ],
     "correctKeys": [
       "A",
-      "C"
+      "B"
     ],
-    "explanation": "Correct: A and C. Scaling safely means shared, reviewed configuration as the starting point and no exceptions to the existing quality gates for AI-authored work. B and E remove controls. D removes the visibility needed to operate the tooling responsibly.",
+    "explanation": "Correct: A and B. Scaling safely means shared, reviewed configuration as the starting point and no exceptions to the existing quality gates for AI-authored work. C and E remove controls. D removes the visibility needed to operate the tooling responsibly.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",

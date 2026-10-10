@@ -40,6 +40,14 @@ if single:
     top = max(letters.values()) / len(single)
     if top > 0.40:
         failures.append(f"one letter is correct in {top:.0%} of single-answer questions (limit 40%)")
+# The engine shows options in file order, so a dominant key pair on the
+# select-many items is just as exploitable as a dominant single letter.
+pairs = collections.Counter("+".join(sorted(q["correctKeys"])) for q in multi)
+print("correct pair (select-many):", dict(sorted(pairs.items())))
+if multi:
+    top_pair = max(pairs.values()) / len(multi)
+    if top_pair > 0.40:
+        failures.append(f"one key pair is correct in {top_pair:.0%} of select-many questions (limit 40%)")
 
 # --- length tell -------------------------------------------------------------
 # Rank 0 = the correct option is the longest of its question.
