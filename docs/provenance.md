@@ -32,8 +32,8 @@ attempt-history row can be mistaken for a different question.
 - **Explanations.** Present on 100/100, each naming the correct option and
   discussing the distractors (`scripts/check-bank.py` enforces this).
 - **Answer-key tells.** `scripts/check-bank.py` reports the correct option
-  as the single longest in 7 of 81 single-answer questions (9%) and the
-  mean length ratio of correct to distractor options at 1.01; correct
+  as the single longest in 10 of 81 single-answer questions (12%) and the
+  mean length ratio of correct to distractor options at 1.02; correct
   letters are spread A 20 / B 21 / C 20 / D 20 before any engine shuffle.
 - **Concept cards.** 24, one per objective cluster across all seven
   domains; every question links to one via `conceptId`. The issue asked

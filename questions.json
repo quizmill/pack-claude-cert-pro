@@ -230,7 +230,7 @@
     "options": [
       {
         "key": "A",
-        "text": "Which project exercises the newest model capabilities, so the team learns the most from it"
+        "text": "Which project shows the largest projected cost saving on paper in the business case"
       },
       {
         "key": "B",
@@ -246,7 +246,7 @@
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. A first project should be one where value can be measured, the data exists, and a wrong answer is recoverable; that is what lets the organisation learn and build trust. A optimises for novelty, not value. B matters for sponsorship but is not the primary selection criterion. D treats removing humans as the goal, which raises risk on the very first delivery.",
+    "explanation": "Correct: C. A first project should be one where value can be measured, the data exists, and a wrong answer is recoverable; that is what lets the organisation learn and build trust. A looks at value but ignores whether the data exists and whether a wrong answer is recoverable. B matters for sponsorship but is not the primary selection criterion. D treats removing humans as the goal, which raises risk on the very first delivery.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -411,7 +411,7 @@
     "id": "ccar-p-d1-12",
     "categoryKey": "solution-design",
     "difficulty": 3,
-    "prompt": "A logistics provider's leadership frames an AI programme around four pillars: efficiency, transformation, productivity and cost. The architect proposes an assistant that drafts customs declarations which clerks then check. Under which pillar should the business case primarily be made, and what metric supports it?",
+    "prompt": "A logistics provider's leadership frames an AI programme around five pillars: efficiency, transformation, productivity, cost and performance SLAs. The architect proposes an assistant that drafts customs declarations which clerks then check. Under which pillar should the business case primarily be made, and what metric supports it?",
     "options": [
       {
         "key": "A",
@@ -808,7 +808,7 @@
       },
       {
         "key": "B",
-        "text": "Move the rule into a short delimited instructions section at the top, apart from the reference material"
+        "text": "Move the rule into a short delimited instructions section at the top, and restate it after the reference material"
       },
       {
         "key": "C",
@@ -816,7 +816,7 @@
       },
       {
         "key": "D",
-        "text": "Move the rule into the user turn on each request so that it is always the most recent instruction the model sees"
+        "text": "Rely on each caller to include the rule in their own message so that it is the most recent instruction"
       }
     ],
     "correctKey": "B",
@@ -1039,7 +1039,7 @@
       },
       {
         "key": "D",
-        "text": "Increase the maximum output tokens so that fewer requests need a follow-up call to finish"
+        "text": "Increase the maximum output tokens on every request so that responses are never cut short"
       },
       {
         "key": "E",
@@ -1128,11 +1128,11 @@
       },
       {
         "key": "D",
-        "text": "Multi-agent: a pipeline with one agent per field, merged by an orchestrator at the end"
+        "text": "Free text: ask for a prose summary of the note and parse the three fields out of it in code"
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. Start simple: a precise zero-shot instruction is usually sufficient for an unambiguous extraction and is the cheapest to run and iterate on; add examples or reasoning only if evaluation shows a gap. B adds latency and tokens for a task with nothing to reason through. C front-loads effort on synthetic data before knowing it is needed. D is wildly over-engineered.",
+    "explanation": "Correct: A. Start simple: a precise zero-shot instruction is usually sufficient for an unambiguous extraction and is the cheapest to run and iterate on; add examples or reasoning only if evaluation shows a gap. B adds latency and tokens for a task with nothing to reason through. C front-loads effort on synthetic data before knowing it is needed. D gives up the model's ability to return the fields directly and adds fragile parsing.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1424,11 +1424,11 @@
       },
       {
         "key": "D",
-        "text": "Log everything to a shared spreadsheet that engineers can filter and search by hand when needed"
+        "text": "Keep full logging but add full-text search and longer retention over the raw payloads"
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. Observability at scale is about structure and sampling: traces that link every step of a session, metadata you can query, and full payloads only for a sample plus the failures you need to debug. A removes the information needed to diagnose anything. B keeps the cost problem and loses history. D does not scale past a few hundred sessions.",
+    "explanation": "Correct: C. Observability at scale is about structure and sampling: traces that link every step of a session, metadata you can query, and full payloads only for a sample plus the failures you need to debug. A removes the information needed to diagnose anything. B keeps the cost problem and loses history. D makes the cost problem bigger and still searches raw payloads rather than structured steps.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1846,7 +1846,7 @@
       },
       {
         "key": "B",
-        "text": "A larger font and a clearer colour scheme on the dashboard's latency chart for readability"
+        "text": "Average latency broken down by model version and by hour of the day"
       },
       {
         "key": "C",
@@ -1865,7 +1865,7 @@
       "A",
       "C"
     ],
-    "explanation": "Correct: A and C. Diagnosing a failing session requires tracing: a session-level identifier that ties the steps together, and structured step-level records to inspect. B and D change presentation and reporting, not the information captured. E removes the very data needed.",
+    "explanation": "Correct: A and C. Diagnosing a failing session requires tracing: a session-level identifier that ties the steps together, and structured step-level records to inspect. B and D are aggregate reporting that cannot point at a step inside one session. E removes the very data needed.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1894,7 +1894,7 @@
       },
       {
         "key": "C",
-        "text": "A larger model, so that the assistant's quality is less likely to be questioned at launch"
+        "text": "Run the offline evaluation suite the platform team already uses for its other assistants"
       },
       {
         "key": "D",
@@ -1902,7 +1902,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. \"Good enough\" has to be defined before it can be measured: agree the metrics and the thresholds that count as ready, then measure against them. A collects more anecdotes. B measures what is easy rather than what matters, and leaves out accuracy and safety. C changes the system without being able to tell whether it got better.",
+    "explanation": "Correct: D. \"Good enough\" has to be defined before it can be measured: agree the metrics and the thresholds that count as ready, then measure against them. A collects more anecdotes. B measures what is easy rather than what matters, and leaves out accuracy and safety. C borrows another system's metrics before this one's targets have been defined.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2323,11 +2323,11 @@
     "id": "ccar-p-d4-13",
     "categoryKey": "evaluation-testing",
     "difficulty": 2,
-    "prompt": "A team is defining metrics for an internal HR assistant. Which set covers the dimensions the exam blueprint expects an evaluation plan to address?",
+    "prompt": "A team is defining metrics for an internal HR assistant. Which set covers the dimensions a complete evaluation plan should address?",
     "options": [
       {
         "key": "A",
-        "text": "Accuracy only, since an assistant that gives correct answers is by definition a good one"
+        "text": "Accuracy, since an assistant that gives correct answers is a good assistant"
       },
       {
         "key": "B",
@@ -2339,7 +2339,7 @@
       },
       {
         "key": "D",
-        "text": "User satisfaction score alone, because the users of the assistant are the final judges"
+        "text": "User satisfaction score, because the users of the assistant are the final judges"
       }
     ],
     "correctKey": "B",
@@ -2403,7 +2403,7 @@
     "id": "ccar-p-d4-15",
     "categoryKey": "evaluation-testing",
     "difficulty": 4,
-    "prompt": "A production assistant's answer quality has degraded intermittently over two weeks. Latency, model version and prompts are unchanged. Which TWO data sources are most useful for finding the cause? (Select TWO.)",
+    "prompt": "A production assistant's answer quality has degraded gradually over two weeks. Latency, model version and prompts are unchanged. Which TWO data sources are most useful for finding the cause? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -2430,7 +2430,7 @@
       "A",
       "C"
     ],
-    "explanation": "Correct: A and C. With model, prompt and latency ruled out, the moving parts are the data and the tools: session traces show what the model was given, and the index change history shows whether the inputs changed when quality did. B and D are unlikely to explain an intermittent quality change. E matters for outages, not gradual degradation with an unchanged model.",
+    "explanation": "Correct: A and C. With model, prompt and latency ruled out, the moving parts are the data and the tools: session traces show what the model was given, and the index change history shows whether the inputs changed when quality did. B and D are unlikely to explain a gradual quality change. E matters for outages, not gradual degradation with an unchanged model.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2539,7 +2539,7 @@
       },
       {
         "key": "C",
-        "text": "Pseudonymise or strip personal data before export, send only what monitoring needs, cover the transfer"
+        "text": "Pseudonymise or strip personal data before export, send only what monitoring needs, and use a lawful transfer mechanism"
       },
       {
         "key": "D",
@@ -2568,7 +2568,7 @@
     "options": [
       {
         "key": "A",
-        "text": "The colour scheme and layout of the interface that clinicians will use on the wards and in clinics"
+        "text": "The chunk size and overlap for the index built over the patient records"
       },
       {
         "key": "B",
@@ -2576,15 +2576,15 @@
       },
       {
         "key": "C",
-        "text": "Which emoji the assistant uses when it acknowledges a question from a clinician"
+        "text": "Which model tier to use for the first release of the assistant"
       },
       {
         "key": "D",
-        "text": "The wording of the welcome message that is shown to each clinician on first use"
+        "text": "The wording of the disclaimer shown to clinicians on first use"
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Regulated data flows are structural: where protected health information goes, which services touch it, access control and audit logging cannot be bolted on after launch without rebuilding the system. A, C and D are presentation details that can change at any time without affecting compliance.",
+    "explanation": "Correct: B. Regulated data flows are structural: where protected health information goes, which services touch it, access control and audit logging cannot be bolted on after launch without rebuilding the system. A, C and D can each be changed in a later release without rebuilding the system; the data-handling design cannot.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2865,11 +2865,11 @@
     "options": [
       {
         "key": "A",
-        "text": "LLMs cannot read numbers reliably, so dosages will be garbled in the answers they give to patients"
+        "text": "LLMs cannot do the arithmetic that dosage calculations need reliably enough"
       },
       {
         "key": "B",
-        "text": "LLMs are slower than a human pharmacist at answering dosage questions"
+        "text": "LLM latency is too high for a patient-facing channel such as this one"
       },
       {
         "key": "C",
@@ -2881,7 +2881,7 @@
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. The relevant failure mode is confident error: fluency is not accuracy, and where a wrong answer can cause serious harm the design needs human-in-the-loop validation. A and B are false. D overstates the position; healthcare use is possible with appropriate controls.",
+    "explanation": "Correct: C. The relevant failure mode is confident error: fluency is not accuracy, and where a wrong answer can cause serious harm the design needs human-in-the-loop validation. A and B are not the decisive limitation: latency is manageable and arithmetic can be checked in code; the problem is unvalidated confident error. D overstates the position; healthcare use is possible with appropriate controls.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2914,7 +2914,7 @@
       },
       {
         "key": "D",
-        "text": "A deterministic check that flags any draft containing amounts, dates or commitments for verification"
+        "text": "A deterministic check that flags amounts, dates and commitments so the reviewer must verify each against the account record"
       },
       {
         "key": "E",
@@ -3002,7 +3002,7 @@
       },
       {
         "key": "D",
-        "text": "The model's answers are identical every time for the same input, which users find repetitive"
+        "text": "Answer wording varies between identical requests, which some users notice and remark on"
       },
       {
         "key": "E",
@@ -3013,7 +3013,7 @@
       "A",
       "C"
     ],
-    "explanation": "Correct: A and C. Hallucinated content and prompt injection are two of the central failure modes of LLM systems and each needs a mitigation on the register. B describes a hosted service in a confused way. D is not how sampled outputs behave and is not a risk. E is false: inference does not update the model's weights.",
+    "explanation": "Correct: A and C. Hallucinated content and prompt injection are two of the central failure modes of LLM systems and each needs a mitigation on the register. B describes a hosted service in a confused way. D is ordinary sampling variance, not a failure mode. E is false: inference does not update the model's weights.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3363,7 +3363,7 @@
     "options": [
       {
         "key": "A",
-        "text": "A list of every library version the design team happened to have installed on their own laptops"
+        "text": "A pinned dependency manifest for the reference implementation the design team built"
       },
       {
         "key": "B",
@@ -3379,7 +3379,7 @@
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Implementation guidance needs the structure, the data flows (especially for sensitive data), the prompts as first-class artefacts, the quality gates and the rationale that stops implementers from undoing decisions. A is environment trivia. C is available to everyone already. D is context, not guidance.",
+    "explanation": "Correct: B. Implementation guidance needs the structure, the data flows (especially for sensitive data), the prompts as first-class artefacts, the quality gates and the rationale that stops implementers from undoing decisions. A is useful to have but conveys nothing about the design. C is available to everyone already. D is context, not guidance.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3416,14 +3416,14 @@
       },
       {
         "key": "E",
-        "text": "The colour palette and typography for the user interface the assistant will be presented in"
+        "text": "The sprint plan and staffing for the build phase that follows discovery"
       }
     ],
     "correctKeys": [
       "A",
       "C"
     ],
-    "explanation": "Correct: A and C. Discovery should end with an agreed problem and measure of success, plus the constraints the design must honour; without those, design decisions have nothing to be checked against. B and D are design and implementation outputs. E is a presentation detail.",
+    "explanation": "Correct: A and C. Discovery should end with an agreed problem and measure of success, plus the constraints the design must honour; without those, design decisions have nothing to be checked against. B and D are design and implementation outputs. E is planning that follows from the design rather than an input to it.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3460,14 +3460,14 @@
       },
       {
         "key": "E",
-        "text": "Stop reporting progress so that the stakeholders have less to react to and fewer ideas for additions"
+        "text": "Pad every estimate by 20% so that new requests can be absorbed without discussion"
       }
     ],
     "correctKeys": [
       "B",
       "D"
     ],
-    "explanation": "Correct: B and D. Scope is managed by making the impact of each change visible against the agreed baseline and by giving stakeholders a structured forum to prioritise. A guarantees overrun. C damages the relationship and ignores legitimate change. E breaks the feedback loop.",
+    "explanation": "Correct: B and D. Scope is managed by making the impact of each change visible against the agreed baseline and by giving stakeholders a structured forum to prioritise. A guarantees overrun. C damages the relationship and ignores legitimate change. E hides the trade-off instead of surfacing it.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
