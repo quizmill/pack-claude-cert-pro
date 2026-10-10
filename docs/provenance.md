@@ -1,64 +1,53 @@
-# Provenance audit — 2026-10-10
+# Provenance audit
 
 Every question in `questions.json` carries a `source` and a `sourceRef`.
-This audit walks all of them and records what each source permits, so the
-bank can leave `reviewStatus: draft` with its attribution in order.
+This audit records what each source permits, so the bank can leave
+`reviewStatus: draft` with its attribution in order.
 
-## Summary
+## Current bank (from 2026-10-10)
 
-| sourceRef | Questions | Source items | Licence found | Status |
-|---|---|---|---|---|
-| Matthew Purcell, *CCAR-P Full Practice Exam Question Set* (LinkedIn post `ugcPost-7482585280751824896`) | 83 of 83 | 63 (five scenario-matching items split into 25 single-answer questions) | **None.** The post and its attached PDF carry no licence, Creative Commons mark, or reuse statement. The author describes the set as free and original, written against Anthropic's public exam guide. | **Not clearly licensed** — included under attribution only; no written permission on file. |
+| sourceRef | Questions | Licence | Status |
+|---|---|---|---|
+| Anthropic, *Claude Certified Architect – Professional Exam Guide* v1.0 (public PDF linked from the Anthropic Partner Academy certification page) | 100 of 100 | The guide is the public reference for the exam. The questions are **original**: written against the guide's domain objectives with new scenarios, options and rationales. Nothing from the guide's three sample items is reproduced. | Clear — original work; `source: original`. |
 
-There are no other sources: no hand-authored questions, no questions from
-MIT-licensed community banks, and no `conceptId` links (the pack has no
-`concepts.json` yet).
+`concepts.json` (24 cards) is original in the same way.
 
-## What "not clearly licensed" means here
+## Earlier bank — removed 2026-10-10
 
-"Free" on a social post is not a licence. Absent an explicit grant, the
-text stays under the author's copyright, and adapting it (splitting,
-re-keying, rewording rationales) does not change that. The sibling pack
-`quizmill/pack-claude-cert` draws the same line: its MIT-licensed banks
-are included, while a bank with no upstream licence is excluded until one
-appears. By that rule, **every question in this pack is flagged.**
+| sourceRef | Questions | Licence found | Outcome |
+|---|---|---|---|
+| Matthew Purcell, *CCAR-P Full Practice Exam Question Set* (LinkedIn post `ugcPost-7482585280751824896`) | 83 of 83 | **None.** Checked again on 2026-10-10: the post body, its attached document and the visible comments carry no licence, Creative Commons mark or reuse statement. The author invites readers to repost, which is not a grant to adapt or redistribute. The author's profile returned an HTTP 999 (LinkedIn blocks unauthenticated fetches), so no further statement could be found there; no written permission is on file. | **Not clearly licensed → removed.** The sibling pack `quizmill/pack-claude-cert` applies the same rule (no upstream licence → excluded). The maintainer chose to replace the bank with original questions rather than seek a licence. |
 
-Removing all 83 would leave an empty pack, so this audit flags rather than
-removes. The options, in recommended order:
+The old questions had ids `cca-p-*`; the new bank uses `ccar-p-*`, so no
+attempt-history row can be mistaken for a different question.
 
-1. **Ask the author for a written licence** (CC BY 4.0 or a direct
-   permission note covering adaptation and redistribution), record it in
-   `NOTICE.md`, and keep the bank.
-2. **Replace the bank with original questions** written against
-   Anthropic's public exam guide and Claude documentation, keeping the
-   seven-domain blueprint and the question ids where the topic survives.
-3. Keep the bank under attribution only. Not recommended for anything
-   beyond personal practice.
+## Other checks (2026-10-10)
 
-Until one of these is chosen, every question stays `reviewStatus: draft`.
-
-## Other checks run in the same pass
-
-- **Blueprint weights.** `pack.json` category weights sum to 1.00 and match
-  the seven-domain table in `README.md` (17 / 13 / 19 / 16 / 14 / 14 / 7).
-  The bank is distributed close to those weights, with Models & Prompting
-  (10% of the bank vs 13%) and Dev Enablement (5% vs 7%) slightly under.
-  The weights were not re-checked against Anthropic's exam guide in this
-  pass; the guide's page could not be fetched.
-- **Explanations.** Present on all 83 questions; none shorter than 80
-  characters.
+- **Blueprint weights.** Confirmed against the exam guide itself (section
+  6): 17 / 13 / 19 / 16 / 14 / 14 / 7. `pack.json` weights match and sum
+  to 1.00. The bank has exactly those percentages (100 questions).
+- **Exam block.** The guide gives 63 items, 120 minutes, multiple-choice
+  and multiple-response, scaled pass mark 720 on 100–1,000. The manifest
+  carries `questionCount: 63`, `passPct: 72`, `scaled: true`.
+- **Explanations.** Present on 100/100, each naming the correct option and
+  discussing the distractors (`scripts/check-bank.py` enforces this).
+- **Answer-key tells.** `scripts/check-bank.py` reports the correct option
+  as the single longest in 7 of 81 single-answer questions (9%) and the
+  mean length ratio of correct to distractor options at 1.01; correct
+  letters are spread A 20 / B 21 / C 20 / D 20 before any engine shuffle.
+- **Concept cards.** 24, one per objective cluster across all seven
+  domains; every question links to one via `conceptId`. The issue asked
+  for cards chosen by the maintainer's weakest topics; that ranking needs
+  a progress export and can re-prioritise these cards later.
 - **Engine validation.** `npm run pack:validate` on the engine reports a
-  valid pack, 83 questions.
-- **Bundle.** `quizmill bundle` produces a single bundle file from the pack
-  (83 questions, 0 images, 111 KiB). Bundles are gitignored
-  (`*.bundle.json`) so one is never committed here by accident.
-- **Concept cards.** None yet. The plan is cards for the weakest topics
-  measured from real practice history, which needs a progress export from
-  the app (Settings → Move progress) rather than a guess from tag counts.
+  valid pack, 100 questions.
+- **Bundle.** `quizmill bundle` builds a single bundle file from the pack.
+  Bundles are gitignored (`*.bundle.json`) so one is never committed here.
 
 ## Reproduce
 
 ```
 npm --prefix <engine checkout> run pack:validate -- <this directory>
 npm --prefix <engine checkout> run pack:bundle   -- <this directory> --out claude-architect-pro.bundle.json
+python3 scripts/check-bank.py
 ```

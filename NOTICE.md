@@ -1,31 +1,26 @@
 # Notices
 
-## Source — Matthew Purcell's CCAR-P practice set
+## Questions and concept cards — original
 
-The questions in this pack are adapted from Matthew Purcell's free *"Claude
-Certified Architect – Professional (CCAR-P) Full Practice Exam Question Set,"*
-shared publicly on LinkedIn:
+Every question in `questions.json` and every card in `concepts.json` was
+written for this pack. Each question's `source` is `original` and its
+`sourceRef` points at the document the question was written against:
+Anthropic's public *Claude Certified Architect – Professional Exam Guide*
+(v1.0, July 2026), which lists the seven content domains, their weights,
+and the objectives each domain measures. The questions test those
+objectives with scenarios, options and rationales of our own; none are
+drawn from the live exam, which is under NDA, and none reproduce the
+guide's three sample items.
 
-- <https://www.linkedin.com/in/purcellmatthew>
-- https://www.linkedin.com/posts/purcellmatthew_claude-certified-architect-professional-practice-ugcPost-7482585280751824896-E03X/
+## Earlier bank — removed
 
-The author states the set is original material written against Anthropic's
-publicly available exam guide (v1.0, July 2026) — **not** actual exam content,
-which is under NDA.
+Until October 2026 this pack carried a bank adapted from a practice set
+shared on LinkedIn by Matthew Purcell. That post and its PDF carry no
+licence or reuse statement, and no permission from the author is on
+file, so the bank was removed rather than redistributed. See
+[docs/provenance.md](docs/provenance.md) for the audit.
 
-**Licence status:** the post and its attached PDF carry no licence or reuse
-statement, and no written permission from the author is on file. The
-questions are included under attribution only, and every one of them stays
-`reviewStatus: draft` until a licence is recorded here or the bank is
-replaced with original material. See [docs/provenance.md](docs/provenance.md)
-for the full audit (2026-10-10).
+## Trademarks
 
-Adaptation notes: single-answer items are stored as `correctKey`,
-select-two items as `correctKeys`. The five **scenario-matching** items
-(1.11, 3.12, 4.10, 5.9, 6.9) were split into their individual sub-scenarios as
-single-answer multiple-choice questions, since the quizmill engine does not yet
-support a native matching question type. Each carries the `scenario-matching`
-tag. Per-question provenance is recorded in each question's `sourceRef`.
-
-"Claude" and "Claude Certified Architect" are trademarks of Anthropic, PBC.
-This project is not affiliated with or endorsed by Anthropic.
+"Claude" and "Claude Certified Architect" are trademarks of Anthropic,
+PBC. This project is not affiliated with or endorsed by Anthropic.
