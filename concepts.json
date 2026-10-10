@@ -1,0 +1,245 @@
+[
+  {
+    "id": "workflow-vs-agent",
+    "title": "Workflow or agent? Let the shape of the problem decide",
+    "body": "A workflow is code that calls the model in a sequence you designed: the path is fixed, every step can be logged and validated, and behaviour is predictable. An agent is a loop in which the model chooses its own next action from the tools it has, observes the result, and continues until a stopping condition.\n\nChoose a workflow when the steps are known in advance and the business wants step-level auditability. Choose an agent when the number and order of steps depend on what earlier steps reveal. Start with the simplest design that fits; add autonomy only where the problem demands it, and always design the stopping condition and budget before the loop.",
+    "commonMistakes": [
+      "Reaching for an agent because it sounds more capable, when the task never branches.",
+      "Forcing a fixed pipeline onto open-ended work and then patching it with ever more special cases.",
+      "Building an agent loop without a turn budget or a defined hand-off when it cannot finish."
+    ],
+    "tags": ["domain-1", "architecture-patterns"]
+  },
+  {
+    "id": "workflow-patterns",
+    "title": "The five workflow patterns and what each one buys you",
+    "body": "Prompt chaining runs steps in a fixed order, with checks between them: use it for repeatable, auditable processes. Routing classifies the input first and sends it to a prompt and tool set built for that type: use it to separate concerns and tune one path without touching the others. Parallelisation runs independent calls at once, either by sectioning the work or by voting on the same question: use it for large inputs or where several opinions beat one. Orchestrator-workers has a model break a task into sub-tasks, spawn workers, and merge their results: use it when the sub-tasks cannot be known in advance. Evaluator-optimizer pairs a generator with a checker that sends it back for revision: use it when criteria are explicit and iteration improves the result.\n\nThe exam asks you to pick the pattern that fits the described problem, not the most powerful one.",
+    "commonMistakes": [
+      "Confusing parallelisation (independent calls merged in code) with orchestrator-workers (a model decides the decomposition).",
+      "Applying evaluator-optimizer where there is no clear rule the evaluator can check against."
+    ],
+    "tags": ["domain-1", "architecture-patterns"]
+  },
+  {
+    "id": "multi-agent-and-decomposition",
+    "title": "When to split into multiple agents, and how to keep them under control",
+    "body": "One agent with everything in context degrades as the tool list and the system prompt grow: tool selection gets worse, latency rises, and rules get ignored. Decompose when sub-tasks need distinct tools and instructions, when they can run independently, or when a single prompt has become too large to follow reliably. Keep the orchestration in application code when the business needs it visible and testable; let a model orchestrate only when the decomposition itself is unknowable up front.\n\nEvery agent still needs engineered limits: a turn budget, a hand-off path when it cannot finish, idempotent write tools so a retried action is harmless, and shared state so workers do not repeat each other's work.",
+    "commonMistakes": [
+      "Adding a second agent to police the first instead of adding deterministic controls.",
+      "Splitting a task that one well-scoped call handles, which adds latency and cost for nothing."
+    ],
+    "tags": ["domain-1", "multi-agent"]
+  },
+  {
+    "id": "business-value-and-feedback",
+    "title": "Start from the business problem and close the loop",
+    "body": "A solution is an answer to a measured problem. Before any architecture: map the current process, find where time and errors actually go, and agree what success looks like and how it is measured. First projects should have a measurable outcome, data that exists, and a tolerable cost of error.\n\nThe exam guide describes an end-to-end architecture as input, processing, output and feedback loops. The feedback loop is the part most often missing: capture what happened after the output (accepted, overridden, escalated) and feed it into evaluation and iteration. Frame value in the business's own pillars (efficiency, transformation, productivity, cost, performance SLAs) and report the metric that matches the pillar, not token counts.",
+    "commonMistakes": [
+      "Choosing the first project by novelty or sponsor enthusiasm rather than measurable value.",
+      "Shipping dashboards of cost and latency with no signal about whether outputs were right."
+    ],
+    "tags": ["domain-1", "business-value"]
+  },
+  {
+    "id": "model-selection",
+    "title": "Model selection is a measured trade-off, not a rule of thumb",
+    "body": "Claude models trade capability against cost and latency. The right choice depends on the task: run candidate models on a representative evaluation set, then weigh the measured quality gap against the cost and latency difference at the real volume. For high-volume, simple tasks where accuracy is equivalent, the smallest model wins. For reasoning-heavy, low-volume tasks a quality gap usually justifies the more capable model because the absolute cost difference is small.\n\nTiering is common: route simple requests to a small model and hard ones to a capable model, with evaluation deciding the boundary.",
+    "commonMistakes": [
+      "Picking the largest model because the domain is important, without measuring whether it is needed.",
+      "Switching every workload to the smallest model to hit a cost target without checking quality per workload."
+    ],
+    "tags": ["domain-2", "model-selection"]
+  },
+  {
+    "id": "prompt-caching",
+    "title": "Prompt caching reuses an exact prefix",
+    "body": "Prompt caching lets repeated requests reuse the processed prefix of a prompt up to a cache breakpoint, which reduces both time-to-first-token and cost. It only works when the prefix matches exactly. Put static content (system instructions, policy documents, tool definitions, examples) first, and anything that changes per request (timestamps, session IDs, the user message) after the cached section.\n\nCaching makes repeated tokens cheaper; it does not make them free or remove them from the context window. If the content is rarely needed, loading it on demand is better than caching it.",
+    "commonMistakes": [
+      "Placing a timestamp or request ID at the top of the system prompt, which makes every prefix unique.",
+      "Expecting a cache hit to depend on the user message being identical."
+    ],
+    "tags": ["domain-2", "prompt-caching"]
+  },
+  {
+    "id": "prompting-techniques-and-structure",
+    "title": "Match the technique to the task, and structure the prompt",
+    "body": "Zero-shot (a clear instruction) is the starting point for simple, unambiguous tasks. Few-shot examples are the most reliable way to pin down an exact output format or style. Chain-of-thought helps tasks with genuine reasoning steps and is pure overhead on lookups and extractions. Measure before adding a technique everywhere.\n\nStructure matters as much as wording: separate instructions from reference data and examples with clear delimiters, state critical rules explicitly and prominently rather than burying them in long context, cover the edge cases, and define the refusal or fallback behaviour. A guardrail prompt also needs a check outside the model, because any prompt can be talked around.",
+    "commonMistakes": [
+      "Applying chain-of-thought uniformly, making simple endpoints slower and dearer for no gain.",
+      "Describing a format in prose when showing two examples would settle it.",
+      "Leaving two instructions in the prompt that cannot both be satisfied."
+    ],
+    "tags": ["domain-2", "prompting"]
+  },
+  {
+    "id": "prompt-reuse-and-skills",
+    "title": "Reuse prompts as modules; load rare procedures as Skills",
+    "body": "Shared instructions (brand voice, compliance rules, output conventions) should live once, as a versioned prompt module that each application's prompt composes in at build time. Copies drift; modules do not.\n\nSkills apply progressive disclosure to long procedures: the model sees a short description of each skill and loads the full instructions only when a request calls for them. That keeps every-request prompts small while still making specialist procedures available. Prompt caching, modular prompts and Skills are complementary: cache what every request needs, modularise what several prompts share, and defer what only some requests use.",
+    "commonMistakes": [
+      "Keeping a 9,000-token procedure in every prompt when one request in twenty uses it.",
+      "Treating caching as the fix for a prompt that is simply too large."
+    ],
+    "tags": ["domain-2", "prompt-reuse", "skills"]
+  },
+  {
+    "id": "context-window-management",
+    "title": "Put the right tokens in the window, not all of them",
+    "body": "A large context window is not a reason to fill it. Large, mostly irrelevant context costs money and latency and degrades answers about material in the middle. Retrieve the relevant sections and present them clearly labelled, instead of loading an entire corpus on every request.\n\nFor long-running conversations, manage the history: compact or summarise older turns past a threshold while preserving the facts still needed, and clear bulky tool results once they have been used, leaving a short note of what was found. The system prompt must be sent on every request; requests are stateless.",
+    "commonMistakes": [
+      "Instructing the model to \"pay attention to the middle\" instead of trimming the context.",
+      "Stripping headings and structure to save tokens, which removes the cues the model uses to navigate."
+    ],
+    "tags": ["domain-2", "context-window"]
+  },
+  {
+    "id": "integration-mechanisms",
+    "title": "Direct API, MCP, or agent-to-agent: pick by ownership and reuse",
+    "body": "A direct API call is right when existing application code needs a single, deterministic model call inside its own pipeline, with no tool discovery. MCP (Model Context Protocol) is right when a capability should be exposed once by the team that owns it and used by many model applications: each system gets a server; applications discover and use the tools they need. Agent-to-agent communication is right when autonomous agents under different ownership must cooperate without exposing their internal tools or systems to each other: they exchange structured messages at the boundary.\n\nThe question to ask is who owns the capability, how many consumers it has, and whether the parties will share internals.",
+    "commonMistakes": [
+      "Wrapping a one-shot classification call in an agent or an MCP server.",
+      "Handing one organisation's agent direct credentials for another organisation's systems."
+    ],
+    "tags": ["domain-3", "mcp", "connection-protocols"]
+  },
+  {
+    "id": "tool-design-and-capability-bloat",
+    "title": "Fewer, sharper tools beat many vague ones",
+    "body": "Every registered tool costs tokens on every call and dilutes the model's choice. Prune tools that are never used, merge overlapping ones, and give each a distinct name and a description that says when to use it and when not to. Narrow, parameterised tools (`revenue_by_region(month)`) are safer and easier to select than broad ones (`run_sql`).\n\nWhen the full tool and reference set is large and any one request uses a small slice, use progressive discovery: load a short catalogue and fetch definitions and context on demand. Load everything up front only when the set is small, stable and fully used.",
+    "commonMistakes": [
+      "Adding longer descriptions to fifty tools instead of removing the twenty nobody calls.",
+      "Scoping a tool in the system prompt (\"only run SELECT\") instead of in the tool's interface."
+    ],
+    "tags": ["domain-3", "tool-design", "progressive-discovery"]
+  },
+  {
+    "id": "authorization-below-the-model",
+    "title": "Authorization is enforced by the tool layer, never by the prompt",
+    "body": "A prompt is not an access-control mechanism. If an agent calls an API with a broad service account and the system prompt says \"only return the asking user's data\", the system prompt is the only thing between any user and everyone's data, and it can be manipulated. Propagate the authenticated user's identity to the tool layer and let the API enforce that user's permissions.\n\nApply least privilege to the agent itself: give it only the tools its role needs, hold credentials in application code outside the model's context, scope and rotate them, and add confirmation steps for consequential actions. Logging is a detective control; it does not prevent anything.",
+    "commonMistakes": [
+      "Putting API keys in the system prompt so the model can \"include them in tool calls\".",
+      "Treating audit logging or a confirmation prompt as a substitute for removing an unneeded capability."
+    ],
+    "tags": ["domain-3", "security", "least-privilege"]
+  },
+  {
+    "id": "rag-chunking-and-retrieval",
+    "title": "RAG: chunk to the data's shape, retrieve to the query's shape",
+    "body": "Retrieval-augmented generation keeps knowledge in an index that is refreshed when the source changes, and gives the model only the relevant pieces at query time. Chunk along the document's own structure (clauses, sections) with overlap, and prepend each chunk with document and section context so a fragment still makes sense. Fixed small chunks split meaning; whole-document chunks cannot be retrieved precisely.\n\nMatch retrieval to the query pattern: semantic search for natural-language questions, lexical or exact-match search for identifiers such as part numbers, hybrid when both occur, and metadata filters to narrow candidates before ranking. Rebuild indexes to completion and switch atomically, with version metadata on chunks, so a refresh never serves a mix of old and new.",
+    "commonMistakes": [
+      "Fine-tuning a model on content that changes monthly instead of indexing it.",
+      "Retrieving many more chunks to compensate for bad chunking."
+    ],
+    "tags": ["domain-3", "rag"]
+  },
+  {
+    "id": "observability-and-tracing",
+    "title": "Trace sessions, sample payloads, watch the leading indicators",
+    "body": "At scale, logging every full prompt and response is expensive and still does not tell you which step failed. Use structured traces: a correlation ID that ties every model call and tool call in a session together, step-level records (tool, input summary, outcome, duration), sampled full payloads, and full capture triggered on failure.\n\nMonitor leading indicators of quality, not just lagging ones. In a RAG system that means retrieval relevance and the rate of unsupported answers on live samples; by the time support tickets rise, users have already noticed. When an agent misbehaves, pull the traces first; they show what the model saw before it acted, which separates a prompt problem from injected content or a data change.",
+    "commonMistakes": [
+      "Rewriting the system prompt during an incident before reading the traces.",
+      "Reporting uptime and token spend as if they measured answer quality."
+    ],
+    "tags": ["domain-3", "domain-4", "observability"]
+  },
+  {
+    "id": "evaluation-framework",
+    "title": "Define the metrics, build a real test set, roll out with evidence",
+    "body": "Evaluation covers accuracy, latency, cost, safety and security, each with a target and a way to measure it. A trustworthy test set reflects real traffic, includes hard, adversarial and edge cases, and carries reference answers and rubrics; keep a held-out portion that prompts were never tuned against. Mix methods: automated checks where answers are exact, model-as-judge grading with a rubric calibrated against human labels where qualities are subjective, and expert human review on a stratified sample for risky categories.\n\nOffline gains need confirming on live traffic: A/B test a fraction of requests on the agreed metrics before full rollout, and treat a model version change like any other change: evaluate, roll out gradually, monitor, keep a rollback path.",
+    "commonMistakes": [
+      "Grading a model's outputs with the same model on data it generated.",
+      "Treating pilot anecdotes or a demo deck as evidence of readiness.",
+      "Collapsing everything into one aggregate score that hides per-category failures."
+    ],
+    "tags": ["domain-4", "evaluation"]
+  },
+  {
+    "id": "failure-diagnosis",
+    "title": "Name the failure: prompt, hallucination, model mismatch or retrieval",
+    "body": "Prompt failure: the instructions are contradictory, vague or buried, and the model is following one reading of them. Fix the prompt. Hallucination: the model produces content with no basis in its inputs, such as a tracking number when the tool returned nothing. Specify the empty-result behaviour and validate outputs against tool results. Model mismatch: the same prompt works on easy inputs and fails on hard ones. Use a more capable model or decompose the task. Retrieval failure: answers turn confidently wrong after a data refresh with prompt and model unchanged. Look at what was retrieved.\n\nWhen quality degrades intermittently with model, prompt and latency unchanged, the moving parts are the data and the tools: session traces and the index change history are the places to look.",
+    "commonMistakes": [
+      "Calling an omission a hallucination, or a contradiction a model problem.",
+      "Blaming the model version when the retrieval index was rebuilt the same day."
+    ],
+    "tags": ["domain-4", "failure-diagnosis"]
+  },
+  {
+    "id": "cost-and-latency-optimisation",
+    "title": "Measure, then take the cheapest change that holds quality",
+    "body": "Start by profiling where tokens and time actually go. Then apply the smallest change that meets the target without a quality regression, verified by the evaluation suite: cache static prefixes, trim or defer context, tier workloads to the smallest model that measurably does the job, run independent calls in parallel, and use batch processing for jobs with no interactive user.\n\nAccuracy-latency trade-offs are decided with numbers against the SLA: a material accuracy gain that keeps p95 inside the limit is worth taking, and the decision and its measurements should be recorded.",
+    "commonMistakes": [
+      "Expecting caching to make generation instant; it reduces time-to-first-token and prefix cost.",
+      "Rejecting any added latency on principle instead of checking the SLA margin."
+    ],
+    "tags": ["domain-4", "cost", "latency"]
+  },
+  {
+    "id": "guardrails-and-human-in-the-loop",
+    "title": "Put hard rules in code and humans where the stakes are high",
+    "body": "Pick the control by the nature of the risk. A rule that must never be broken and can be detected deterministically (no card numbers in output) belongs in an output filter outside the model. A decision with serious financial, legal or health consequences needs a human who reviews and owns it before it takes effect. A need to reconstruct what happened months later needs an immutable, timestamped audit log. A desire to notice trends early needs monitoring and alerting.\n\nHuman approval gates go before irreversible or costly actions; reversible, low-risk actions should flow without them, or the automation delivers nothing. Fluency is not accuracy: confident wrong answers are the failure mode that justifies human validation in high-harm domains.",
+    "commonMistakes": [
+      "Using a system-prompt instruction as the primary control for a \"never\" rule.",
+      "Placing the approval gate on every action, or on none."
+    ],
+    "tags": ["domain-5", "guardrails", "human-in-the-loop"]
+  },
+  {
+    "id": "prompt-injection",
+    "title": "Treat retrieved and user-supplied content as untrusted data",
+    "body": "Prompt injection is content that reaches the model (a user message, a retrieved document, a web page, a tool result) carrying instructions the system designer did not write. The architectural response is a trust boundary: delimit external content clearly, tell the model it is data that may contain adversarial text and contains no instructions, and enforce the real limits outside the model with least-privilege tools, confirmations on consequential actions and output checks.\n\nA single prompt rule to \"ignore instructions in documents\" reduces the rate but is not a boundary; a keyword filter blocks one phrasing of an unbounded set.",
+    "commonMistakes": [
+      "Considering an injection finding closed after adding one sentence to the system prompt.",
+      "Giving an agent that reads untrusted content the same write tools it would need if all input were trusted."
+    ],
+    "tags": ["domain-5", "prompt-injection", "security"]
+  },
+  {
+    "id": "compliance-and-ethics",
+    "title": "Compliance is structural: decide data flows, access and audit at design time",
+    "body": "Regulations such as GDPR, HIPAA and FedRAMP constrain where data may go, who may see it, how it is minimised and how access is audited. Those are architecture decisions: data minimisation and lawful transfer before anything is exported, protected data kept within authorised environments, access control and logging designed in, not added later.\n\nEthical considerations are also tested: removing demographic fields does not remove bias when other inputs act as proxies, so measure outcomes across groups and make fairness part of evaluation. Transparency means users know they are talking to an AI, understand its limits and can reach a person.",
+    "commonMistakes": [
+      "Treating a privacy-policy sentence or transit encryption as a GDPR safeguard for exported personal data.",
+      "Assuming a large provider is automatically authorised for a government workload."
+    ],
+    "tags": ["domain-5", "compliance", "ethics"]
+  },
+  {
+    "id": "discovery-and-expectations",
+    "title": "Discover before you design, and turn absolutes into measurable targets",
+    "body": "A request like \"we want an agent for the warehouse\" is the start of discovery, not a specification. Interview the people involved, map the current process, and agree the problem statement, success criteria, measures and constraints (data sensitivity, compliance, integrations, non-functional targets) before design begins.\n\nStakeholders will ask for 100% accuracy or sub-second answers. Explain honestly what a probabilistic system can do, then convert the absolute into a measured target plus the controls that handle the residual: acceptable accuracy per use case, a provisional SLA based on prototype measurements and confirmed after load testing, options such as streaming or a fast mode where the full pipeline cannot meet the wish.",
+    "commonMistakes": [
+      "Promising the number the sponsor wants and planning to renegotiate later.",
+      "Starting with a prototype or a model choice before the problem and the measure of success are agreed."
+    ],
+    "tags": ["domain-6", "discovery", "expectation-management"]
+  },
+  {
+    "id": "communicating-decisions-and-handoff",
+    "title": "Communicate trade-offs in the audience's terms and leave a record",
+    "body": "When a decision has consequences (the cheapest model has a higher error rate on regulatory filings), put the evidence, the cost and the consequences in front of the decision-maker, make a clear recommendation, and let the business own the choice. Explain architectural decisions in the audience's concerns (how fast policy changes take effect, cost, auditability) and record options and trade-offs in short decision records.\n\nReporting keeps sponsors aligned when it speaks to outcomes they signed up for, not only technical metrics. Scope changes are managed by making each request's impact visible against the agreed baseline and by a regular prioritisation forum. A handoff needs architecture documentation with decision records, runbooks, the evaluation suite and a guide to iterating prompts safely.",
+    "commonMistakes": [
+      "Quietly overriding a stakeholder's instruction instead of presenting the evidence.",
+      "Handing over code and a demo recording without runbooks or the evaluation suite."
+    ],
+    "tags": ["domain-6", "communication", "handoff"]
+  },
+  {
+    "id": "lifecycle-phases",
+    "title": "Discovery, design, handoff, monitoring, iteration",
+    "body": "Discovery learns how the work is done today, where it hurts, and what success means. Design chooses the architecture, patterns, retrieval strategy and guardrails for the agreed problem. Handoff transfers a finished system to the people who will operate it, with documentation and runbooks. Monitoring watches the live metrics against targets and catches drift. Iteration turns what monitoring and evaluation find into the next set of improvements, shipped through the evaluation gate.\n\nThe exam asks you to place an activity in its phase; the clue is what the activity consumes and produces.",
+    "commonMistakes": [
+      "Filing prompt improvements driven by production evidence under design rather than iteration.",
+      "Treating handoff as the end of the lifecycle instead of the start of monitoring."
+    ],
+    "tags": ["domain-6", "lifecycle"]
+  },
+  {
+    "id": "developer-enablement",
+    "title": "Shared configuration, the same quality gates, independent review",
+    "body": "Scale AI-assisted development with configuration that lives in the repository: a project instructions file with conventions and commands, shared tool and permission settings, versioned and reviewed like code. AI-authored changes go through the same branches, CI checks and human-reviewed merges as human changes; nothing bypasses the safety net.\n\nA review done in the same session that wrote the code inherits the author's assumptions; review in a separate context with explicit criteria and keep a human accountable for the merge. For operational issues, read the traces before changing anything. For structured output, constrain it to a schema, validate in code, and define the retry or fallback.",
+    "commonMistakes": [
+      "Pasting the same project briefing into every session instead of committing it.",
+      "Letting the assistant push to main or deploy on its own because the tests passed."
+    ],
+    "tags": ["domain-7", "claude-code", "enablement"]
+  }
+]
