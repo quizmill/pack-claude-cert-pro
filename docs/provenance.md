@@ -32,13 +32,16 @@ attempt-history row can be mistaken for a different question.
 - **Explanations.** Present on 100/100, each naming the correct option and
   discussing the distractors (`scripts/check-bank.py` enforces this).
 - **Answer-key tells.** `scripts/check-bank.py` reports the correct option
-  as the single longest in 10 of 81 single-answer questions (12%) and the
-  mean length ratio of correct to distractor options at 1.02; correct
-  letters are spread A 20 / B 21 / C 20 / D 20 before any engine shuffle.
+  as the single longest in 10 of 80 single-answer questions (12%) and the
+  mean length ratio of correct to distractor options at 1.02. The engine
+  shows options in file order, so letter balance matters: correct letters
+  are A 20 / B 21 / C 20 / D 19, and the 20 select-two items use each of
+  the ten possible key pairs exactly twice.
+- **Coverage of the removed bank.** Every concept the removed bank tested
+  is tested here with original scenarios; the item-by-item map is in
+  [coverage.md](coverage.md).
 - **Concept cards.** 24, one per objective cluster across all seven
-  domains; every question links to one via `conceptId`. The issue asked
-  for cards chosen by the maintainer's weakest topics; that ranking needs
-  a progress export and can re-prioritise these cards later.
+  domains; every question links to one via `conceptId`.
 - **Engine validation.** `npm run pack:validate` on the engine reports a
   valid pack, 100 questions.
 - **Bundle.** `quizmill bundle` builds a single bundle file from the pack.

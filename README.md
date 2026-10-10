@@ -10,7 +10,7 @@ practice app.
 
 ## What's in it
 
-- **100 original questions** — 81 single-answer and 19 "select TWO" items,
+- **100 original questions** — 80 single-answer and 20 "select TWO" items,
   written against the objectives in Anthropic's public
   [exam guide](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf)
   (v1.0, July 2026). Every question has a rationale that says why the
