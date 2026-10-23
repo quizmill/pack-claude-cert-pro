@@ -36,7 +36,7 @@ jobs:
     uses: quizmill/quizmill/.github/workflows/deploy-pack.yml@main
     with:
       project: quizmill-claude-cert-pro
-      app: claude-architect-pro-app
+      app: claude-cert-pro-app
       engine: ${{ github.event.client_payload.version || 'latest' }}
       # Cloud sync via the shared quizmill-sync Worker/D1 (sync-key auth).
       # Public by design — this URL ships in the client bundle. The worker
