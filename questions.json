@@ -1037,7 +1037,7 @@
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. Parallelisation is suitable for independent subtasks; when later work depends on earlier outputs, those steps must run in sequence with the outputs passed forward, and only the genuinely independent pieces (for example the reading list) run concurrently. A adds a costly repair pass. B substitutes guesses for real inputs. D applies voting to a problem of dependencies, not of judgement reliability.",
+    "explanation": "Correct: C. Parallelisation is suitable for independent subtasks; when later work depends on earlier outputs, those steps must run in sequence with the outputs passed forward, and only the genuinely independent pieces run concurrently. A adds a costly repair pass. B substitutes guesses for real inputs. D applies voting to a problem of dependencies, not of judgement reliability.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3192,7 +3192,7 @@
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. A remote MCP server using the Streamable HTTP transport can be updated centrally, and the MCP authorisation specification for HTTP-based transports builds on OAuth, letting each user sign in and the client obtain a token scoped to that user; stdio servers instead typically read credentials from the local environment. A shares one unrevocable key and still needs reinstalls. B fixes updates but keeps users handling API keys. D replaces authentication with a guessable-in-practice shared secret.",
+    "explanation": "Correct: C. A remote MCP server using the Streamable HTTP transport can be updated centrally, and the MCP authorisation specification for HTTP-based transports builds on OAuth, letting each user sign in and the client obtain a token scoped to that user; stdio servers instead typically read credentials from the local environment. A shares one unrevocable key and still needs reinstalls. B fixes updates but keeps users handling API keys. D replaces authentication with a bearer URL that leaks easily and carries no user identity, scoping or revocation.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3413,7 +3413,7 @@
       {
         "key": "A",
         "text": "At indexing time, prepend to each chunk a short header naming its policy, product, and section, and then embed and index that combined text",
-        "explanation": "Correct: adding situating context to each chunk before indexing makes otherwise identical chunks distinguishable to both retrievers."
+        "explanation": "Correct: adding situating context to each chunk before indexing makes otherwise identical chunks distinguishable at retrieval time."
       },
       {
         "key": "B",
@@ -3432,7 +3432,7 @@
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. The chunks lose the context that distinguishes them once they are cut from their document. Anthropic's contextual retrieval approach prepends chunk-specific context, such as the document and section it comes from, before embedding and before building the keyword index, which sharply reduces retrieval failures. B removes more context. C widens recall without making chunks distinguishable. D filters on a signal the correct chunks do not contain.",
+    "explanation": "Correct: A. The chunks lose the context that distinguishes them once they are cut from their document. Anthropic's contextual retrieval approach prepends chunk-specific context, such as the document and section it comes from, before embedding (and before building any keyword index), which sharply reduces retrieval failures. B removes more context. C widens recall without making chunks distinguishable. D filters on a signal the correct chunks do not contain.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4969,7 +4969,7 @@
     "id": "ccar-p-d4-28",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A manufacturer's quality team uses Claude to turn inspection reports into a JSON list of defects. About 3% of responses fail to parse, almost all from the longest reports, and each failing response ends partway through an object. What should the engineer check first?",
+    "prompt": "A manufacturer's quality team uses Claude to turn inspection reports into a JSON list of defects. About 3% of responses fail to parse, almost all from the longest reports, and each failing response ends partway through an object. Even the longest reports use a small fraction of the context window. What should the engineer check first?",
     "options": [
       {
         "key": "A",
@@ -4989,11 +4989,11 @@
       {
         "key": "D",
         "text": "Whether long reports exceed the context window, causing the model to lose the schema instructions at the top",
-        "explanation": "Exceeding the context window would cause the request to fail, not a well-started response that stops partway."
+        "explanation": "Inspection reports are far smaller than the window; and a context-window limit would also show in `stop_reason`, as `model_context_window_exceeded`."
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Responses that end mid-object, concentrated on the longest inputs, are the signature of output truncation. The API reports `stop_reason: max_tokens` in that case, so checking it confirms the cause; the fix is a higher limit or splitting the output. A would not correlate with input length or end abruptly. C would usually still produce valid JSON. D would produce an error, not a truncated reply.",
+    "explanation": "Correct: B. Responses that end mid-object, concentrated on the longest inputs, are the signature of output truncation. The API reports `stop_reason: max_tokens` in that case, so checking it confirms the cause; the fix is a higher limit or splitting the output. A would not correlate with input length or end abruptly. C would usually still produce valid JSON. D is implausible for reports of this size, and a context-window limit would also show in `stop_reason`, as `model_context_window_exceeded`.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -7132,11 +7132,11 @@
       {
         "key": "D",
         "text": "Explain that setting temperature to zero makes output deterministic and that, as a result, published summaries will be free of errors.",
-        "explanation": "Lower temperature reduces variation but does not make outputs correct, and deterministic does not mean error-free."
+        "explanation": "Even at temperature zero, outputs are not fully deterministic, and more consistent output is not the same as correct output."
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. Probabilistic behaviour is best communicated as a measured rate on representative data, concrete examples of the failure types, the controls that catch them (such as editorial review) and how the rate is monitored after launch. B over-promises. C explains mechanisms without answering the question. D is wrong: low temperature reduces variation but does not remove errors.",
+    "explanation": "Correct: A. Probabilistic behaviour is best communicated as a measured rate on representative data, concrete examples of the failure types, the controls that catch them (such as editorial review) and how the rate is monitored after launch. B over-promises. C explains mechanisms without answering the question. D is wrong twice over: temperature zero does not make output fully deterministic, and consistency would not remove errors anyway.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
