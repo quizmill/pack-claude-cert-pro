@@ -4,7 +4,8 @@
 The engine's `quizmill validate` checks the schema and cross-references.
 This script checks the things a test-wise candidate exploits instead:
 
-  * the correct option must not be systematically the longest one
+  * the correct option must not be systematically the longest one,
+    nor systematically the shortest
   * the correct letter must be spread across A–D (A–E for select-two)
   * no absolute-language tells ("always", "never") only in distractors
   * every question has a difficulty, tags, and an explanation that names
@@ -69,6 +70,11 @@ print(f"correct option is the single longest: {longest}/{len(single)} ({share:.0
       f"single shortest: {shortest}; mean length ratio correct/others: {statistics.mean(ratios):.2f}")
 if share > 0.35:
     failures.append(f"correct option is the longest in {share:.0%} of single-answer questions (limit 35%)")
+# The reverse tell: trimming keys to dodge the longest check makes
+# "pick the shortest" pay instead. Chance is 25% with four options.
+short_share = shortest / max(len(single), 1)
+if short_share > 0.30:
+    failures.append(f"correct option is the shortest in {short_share:.0%} of single-answer questions (limit 30%)")
 if statistics.mean(ratios) > 1.15:
     failures.append(f"correct options average {statistics.mean(ratios):.2f}x the length of distractors (limit 1.15)")
 
