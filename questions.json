@@ -792,7 +792,7 @@
       },
       {
         "key": "D",
-        "text": "An augmented LLM: one model call given retrieved documentation and access to the plan lookup as a tool",
+        "text": "An augmented LLM: a single model call given the retrieved documentation and access to the plan lookup as a tool",
         "explanation": "The simplest pattern that meets the need: retrieval and one tool around a single model call."
       }
     ],
@@ -872,7 +872,7 @@
       },
       {
         "key": "D",
-        "text": "Run a dedicated screening call in parallel with the answering call, and release the drafted reply only if screening passes",
+        "text": "Run a dedicated screening call in parallel with the answering call, and release the drafted reply only once screening has passed",
         "explanation": "Sectioning gives each concern focused attention and separate tuning while keeping latency close to one call."
       }
     ],
@@ -977,7 +977,7 @@
     "options": [
       {
         "key": "A",
-        "text": "Give each worker its own attributed output store and make the orchestrator the sole merger and conflict resolver",
+        "text": "Give each worker its own attributed output store, and make the orchestrator the sole merger and resolver of conflicts",
         "explanation": "Removes concurrent writes, keeps provenance per claim, and gives conflict resolution a single owner."
       },
       {
@@ -1027,7 +1027,7 @@
       },
       {
         "key": "C",
-        "text": "Produce learning outcomes first, pass them to dependent steps, and parallelise only truly independent steps",
+        "text": "Produce the learning outcomes first, pass them to the steps that depend on them, and parallelise only independent steps",
         "explanation": "Respects the dependencies so later steps build on real outputs, while keeping parallelism where it is safe."
       },
       {
@@ -1988,7 +1988,7 @@
       },
       {
         "key": "C",
-        "text": "Tools come before the system prompt in the cached prefix; send one stable tool set and enforce entitlements in the tool handlers",
+        "text": "Tools come before the system prompt in the cached prefix; send one stable tool set and enforce entitlements in the tools' handlers",
         "explanation": "Changing tool definitions invalidates everything after them; entitlements belong in code below the model anyway."
       },
       {
@@ -2070,7 +2070,7 @@
       },
       {
         "key": "C",
-        "text": "Clear the oldest tool results past a context threshold, and have the agent note key findings in a memory file it can reread",
+        "text": "Clear the oldest tool results past a context threshold, and have the agent note its key findings in a memory file it can re-read",
         "explanation": "Clearing stale results bounds context, and the memory file preserves the few facts needed later."
       },
       {
@@ -2156,7 +2156,7 @@
       },
       {
         "key": "D",
-        "text": "Count tokens with the token-counting endpoint first, and chunk only if the count plus expected output exceeds the window",
+        "text": "Count tokens with the token-counting endpoint first, and chunk only if that count plus the expected output exceeds the window",
         "explanation": "Measuring tokens directly avoids both overflows and needless chunking."
       }
     ],
@@ -2196,7 +2196,7 @@
       },
       {
         "key": "D",
-        "text": "Build one versioned template with fixed instructions first and variables like {{product}} and {{customer}} wrapped in XML tags",
+        "text": "Build one versioned template with the fixed instructions first and variables like {{product}} and {{customer}} wrapped in XML tags",
         "explanation": "A template gives one source of truth, tagged variables separate data, and a static prefix suits caching."
       }
     ],
@@ -3182,7 +3182,7 @@
       },
       {
         "key": "C",
-        "text": "Host the server remotely over Streamable HTTP and use MCP's OAuth-based authorisation, so each user signs in and the client gets a scoped token",
+        "text": "Host the server remotely over Streamable HTTP and use MCP's OAuth-based authorisation, so that each user signs in and the client gets a scoped token",
         "explanation": "Correct: a remote HTTP server is updated in one place, and MCP authorisation for HTTP transports is built on OAuth so users sign in rather than manage keys."
       },
       {
@@ -3227,7 +3227,7 @@
       },
       {
         "key": "D",
-        "text": "Give the agent its own non-human workload identity with only the scopes the reconciliation needs, issued from the secrets manager",
+        "text": "Give the agent its own non-human workload identity, issued from the secrets manager, with only the scopes that the nightly reconciliation job needs",
         "explanation": "Correct: an autonomous job should act as itself with least-privilege scopes, so its actions are attributable and survive staff changes."
       }
     ],
@@ -3412,7 +3412,7 @@
     "options": [
       {
         "key": "A",
-        "text": "At indexing time, prepend to each chunk a short header naming its policy, product and section, and index that combined text",
+        "text": "At indexing time, prepend to each chunk a short header naming its policy, product, and section, and then embed and index that combined text",
         "explanation": "Correct: adding situating context to each chunk before indexing makes otherwise identical chunks distinguishable to both retrievers."
       },
       {
@@ -3502,7 +3502,7 @@
       },
       {
         "key": "C",
-        "text": "Re-embed the whole archive with the new model into a new index, check it on a retrieval test set, then switch queries over to it",
+        "text": "Re-embed the whole archive with the new model into a new index, check it on a retrieval test set, and only then switch queries over to it",
         "explanation": "Correct: queries and documents must be embedded with the same model, so a model change requires a full re-index."
       },
       {
@@ -3662,7 +3662,7 @@
       },
       {
         "key": "C",
-        "text": "Create a trace ID at session start, propagate it through every subagent, tool and MCP call, and record each step as a linked span",
+        "text": "Create a trace ID at the start of each session, propagate it through every subagent, tool and MCP call, and record each step as a span",
         "explanation": "Correct: one propagated trace context ties every step across hosts into a single tree that can be queried directly."
       },
       {
@@ -3702,7 +3702,7 @@
       },
       {
         "key": "C",
-        "text": "Choose config 2, which clears the accuracy target with margin inside the budget, and record why configs 3 and 4 were rejected",
+        "text": "Choose config 2, which clears the accuracy target with a margin while staying inside the budget, and record why configs 3 and 4 were both rejected",
         "explanation": "Correct: it meets both agreed targets, and the alternatives either break the budget or add latency and tokens for a within-noise gain."
       },
       {
@@ -4583,7 +4583,7 @@
       },
       {
         "key": "C",
-        "text": "Present every pair in both orders and count a win only when the judge prefers the same headline both times",
+        "text": "Present every pair in both orders, and count a win only when the judge prefers the same headline on both occasions",
         "explanation": "Right: swapping order exposes and neutralises position bias, and inconsistent verdicts are treated as ties."
       },
       {
@@ -4653,7 +4653,7 @@
     "options": [
       {
         "key": "A",
-        "text": "Version the prompts and run a regression eval suite on every change, blocking merges below per-category thresholds",
+        "text": "Version the prompts and run a regression eval suite on every change, blocking any merges below the per-category thresholds",
         "explanation": "Right: prompts are code; automated per-category checks in CI catch a regression in dispute handling before release."
       },
       {
@@ -4783,7 +4783,7 @@
       },
       {
         "key": "C",
-        "text": "Estimate the sample size needed to detect a gain of this size, and run the test until that size is reached",
+        "text": "Estimate the sample size needed to detect a gain of this size, and keep running the test until that size is reached",
         "explanation": "Right: deciding the required sample in advance and reaching it is what makes the comparison trustworthy."
       },
       {
@@ -4813,7 +4813,7 @@
     "options": [
       {
         "key": "A",
-        "text": "The false-refusal rate on legitimate but sensitive member questions, such as mental-health coverage",
+        "text": "The false-refusal rate on legitimate but sensitive member questions, such as those about mental-health coverage",
         "explanation": "Right: over-tightening shows up as refusals of benign questions, which only a benign-sensitive set will reveal."
       },
       {
@@ -4978,7 +4978,7 @@
       },
       {
         "key": "B",
-        "text": "The `stop_reason` of the failing responses, to see whether they hit the `max_tokens` limit",
+        "text": "The `stop_reason` field of the failing responses, to tell whether those responses hit the `max_tokens` limit",
         "explanation": "Right: endings cut off mid-object on the longest inputs point to truncation, which the stop reason confirms directly."
       },
       {
@@ -5028,7 +5028,7 @@
       },
       {
         "key": "D",
-        "text": "The prompt is overfitted to the test set; build a larger held-out set from live vacancies, never used for tuning",
+        "text": "The prompt is overfitted to the test set; build a larger held-out set from live vacancies and never use it for tuning",
         "explanation": "Right: repeated tuning against one small set fits its quirks; only untouched, representative data measures real performance."
       }
     ],
@@ -5121,7 +5121,7 @@
       },
       {
         "key": "E",
-        "text": "Tell the judge to give its score immediately without any explanation, which keeps grading fast and avoids rationalisation",
+        "text": "Tell the judge to give its score immediately without writing any explanation, which keeps grading fast and avoids rationalisation",
         "explanation": "Asking for reasoning before the score usually improves judge quality; suppressing it tends to make scores less reliable."
       }
     ],
@@ -5777,7 +5777,7 @@
     "options": [
       {
         "key": "A",
-        "text": "Map each student identifier to every store holding their data, including vector chunks, logs and cache entries, then delete and verify in each",
+        "text": "Map each student identifier to every store that holds their data, including vector chunks, logs and cache entries, and then delete and verify in each",
         "explanation": "Erasure has to reach every derived copy, which is only practical if records are traceable to the person across stores."
       },
       {
@@ -5869,7 +5869,7 @@
       },
       {
         "key": "C",
-        "text": "Seed known-error cases to measure review, show source documents beside key fields, and require reviewers to confirm those fields",
+        "text": "Seed known-error cases to measure the review, show the source documents beside the key fields, and require reviewers to confirm each of those fields",
         "explanation": "This counters automation bias by making reviewers check evidence and by measuring whether review actually catches errors."
       },
       {
@@ -5997,7 +5997,7 @@
       },
       {
         "key": "D",
-        "text": "Screen model outputs and the whole conversation, not just single messages, and add multi-turn attacks to the red-team suite",
+        "text": "Screen the model's outputs and the whole conversation, not just individual messages, and add multi-turn attacks into the red-team test suite",
         "explanation": "Conversation-level and output-side checks catch harm that only emerges across turns, and regular tests catch regressions."
       }
     ],
@@ -6033,7 +6033,7 @@
       },
       {
         "key": "C",
-        "text": "In an isolated, short-lived sandbox per session with no secrets, no other tenants' data, restricted network and resource limits",
+        "text": "In an isolated, short-lived sandbox per session, with no secrets, no other tenants' data, a restricted network and resource limits",
         "explanation": "Isolation contains whatever the code does, even if the model was manipulated into writing something harmful."
       },
       {
@@ -6881,7 +6881,7 @@
       },
       {
         "key": "B",
-        "text": "Find out who owns eligibility policy and signs off letter quality, and interview the caseworkers who will actually use the drafts.",
+        "text": "Find out who owns the eligibility policy and signs off letter quality, and interview the caseworkers who will actually use the drafts.",
         "explanation": "Right: the real decision-maker and the affected users must shape scope, and neither is in the room yet."
       },
       {
@@ -6971,7 +6971,7 @@
       },
       {
         "key": "D",
-        "text": "Where patient data may be processed and stored, how fast summaries must be ready for ward rounds, and the daily note volume.",
+        "text": "Where patient data may be processed and stored, how quickly summaries must be ready for ward rounds, and the daily volume of notes.",
         "explanation": "Right: residency, latency and volume constrain deployment region, model choice and batch versus real-time design."
       }
     ],
@@ -7161,7 +7161,7 @@
       },
       {
         "key": "B",
-        "text": "A stated percentile of end-to-end latency, measured where staff experience it, over a defined window with agreed exclusions.",
+        "text": "A stated percentile of end-to-end latency, measured where staff experience it, over a defined window and with agreed exclusions.",
         "explanation": "Right: it pins down what is measured, where, at which percentile and over what period."
       },
       {
@@ -7246,7 +7246,7 @@
       },
       {
         "key": "C",
-        "text": "Report the result against target, broken down by exception type with causes, and set out options with costs and a recommendation.",
+        "text": "Report the result against the target, broken down by exception type with causes, and set out options with costs and a recommendation.",
         "explanation": "Right: honest results plus a diagnosis and costed options let the sponsor make an informed decision."
       },
       {
@@ -7779,7 +7779,7 @@
       },
       {
         "key": "B",
-        "text": "A post-edit hook in committed project settings that runs the formatter and linter after each file edit",
+        "text": "A post-edit hook in the committed project settings that runs the formatter and then the linter after every file edit",
         "explanation": "Hooks are executed by the client on the matching lifecycle event, so formatting runs every time regardless of what the model decides."
       },
       {
@@ -7894,7 +7894,7 @@
     "options": [
       {
         "key": "A",
-        "text": "Pull the trace for that request id, replay its exact inputs and tool results offline, and keep it as a regression case",
+        "text": "Pull the trace for that request id, replay its exact inputs and tool results offline, and then keep it as a regression test case",
         "explanation": "The trace captures the real prompt version, context and tool outputs, so replaying it reproduces the failure and the case guards against recurrence."
       },
       {
