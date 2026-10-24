@@ -148,3 +148,51 @@ the blueprint counts are unchanged; two select-two items had lost a
 component of the removed item's key and have it back. 73 of the 100
 current questions map to a removed item; the remaining 27 test guide
 objectives the removed bank did not reach.
+
+## The second hundred (2026-10-24)
+
+The bank doubled to 200 at the same blueprint split, so each domain now
+has twice the depth. The new questions were aimed at the guide
+objectives and angles the first hundred reached least; this table maps
+each one to the guide objective it tests.
+
+| Domain | Objective (exam guide) | New questions |
+|---|---|---|
+| 1 | Translate business problems into solutions | d1-19 |
+| 1 | End-to-end architecture with feedback loops | d1-20, d1-21, d1-35 |
+| 1 | Architectural patterns (workflow, agentic, augmented LLM) | d1-22, d1-23, d1-24 |
+| 1 | Multi-agent systems and orchestration | d1-25, d1-26, d1-27, d1-33 |
+| 1 | Decomposition | d1-28, d1-29, d1-30 |
+| 1 | Business value pillars and SLAs | d1-31, d1-32, d1-34 |
+| 2 | Model selection on trade-offs | d2-20 |
+| 2 | System prompts, templates and guardrails | d2-22, d2-23, d2-24 |
+| 2 | Zero-shot, few-shot, chain-of-thought / thinking | d2-14, d2-26 |
+| 2 | Context windows and token usage | d2-15, d2-19, d2-21 |
+| 2 | Prompt reuse: caching, modular prompts, Skills | d2-16, d2-17, d2-18, d2-25 |
+| 3 | Capability bloat in tool configuration | d3-25, d3-26, d3-32 |
+| 3 | Authentication and authorization gaps | d3-22, d3-23, d3-24 |
+| 3 | Accuracy–latency trade-offs | d3-34 |
+| 3 | Observability at scale | d3-33, d3-36 |
+| 3 | RAG chunking and indexing | d3-27, d3-29 |
+| 3 | Retrieval matched to data shape and query | d3-28, d3-30, d3-37 |
+| 3 | Integration mechanism (MCP, API/CLI, agent-to-agent) | d3-20, d3-21, d3-31 |
+| 3 | Progressive discovery vs monolithic context | d3-35, d3-38 |
+| 4 | Evaluation metrics (accuracy, safety, security) | d4-22, d4-24, d4-25 |
+| 4 | Datasets and mixed-method test frameworks | d4-17, d4-18, d4-19, d4-21, d4-29, d4-31 |
+| 4 | A/B testing and iteration | d4-20, d4-23, d4-32 |
+| 4 | Diagnosing system issues | d4-28 |
+| 4 | Token, latency and cost trade-offs | d4-26, d4-27 |
+| 4 | Monitoring with logging and observability | d4-30 |
+| 5 | Guardrails and safety controls | d5-21, d5-22, d5-27 |
+| 5 | Risks, limitations and failure modes | d5-19, d5-20, d5-23, d5-28 |
+| 5 | Human-in-the-loop validation | d5-17, d5-18 |
+| 5 | Regulatory compliance (GDPR, HIPAA) | d5-15, d5-16, d5-26 |
+| 5 | Bias, fairness and transparency | d5-24, d5-25 |
+| 6 | Structured discovery and requirements | d6-16, d6-17, d6-18 |
+| 6 | Communicating decisions and trade-offs | d6-20, d6-21, d6-22 |
+| 6 | Feedback loops and expectation alignment (SLAs) | d6-23, d6-24, d6-25 |
+| 6 | Documentation and implementation guidance | d6-27, d6-28 |
+| 6 | Lifecycle phases | d6-19, d6-26, d6-29 |
+| 7 | Configure Claude tools for teams | d7-08, d7-09, d7-11 |
+| 7 | AI-assisted developer workflows | d7-10, d7-13, d7-14 |
+| 7 | Debugging and operational issue resolution | d7-12 |
