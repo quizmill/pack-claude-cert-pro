@@ -10,11 +10,12 @@ practice app.
 
 ## What's in it
 
-- **100 original questions** — 80 single-answer and 20 "select TWO" items,
+- **200 original questions** — 160 single-answer and 40 "select TWO" items,
   written against the objectives in Anthropic's public
   [exam guide](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf)
-  (v1.0, July 2026). Every question has a rationale that says why the
-  answer is right and why each distractor is wrong.
+  (v1.0, July 2026) and Anthropic's public docs. Every question has a
+  rationale that says why the answer is right and why each distractor is
+  wrong; questions 101–200 also carry a one-line verdict on each option.
 - **Blueprint weighting** — the bank's domain split matches the exam
   blueprint to the question, and the manifest carries the same weights so
   the engine's readiness estimate is blueprint-weighted.
@@ -23,13 +24,13 @@ practice app.
 
 | Domain | Weight | Questions |
 |---|---|---|
-| Solution Design & Architecture | 17% | 17 |
-| Claude Models, Prompting & Context Engineering | 13% | 13 |
-| Integration | 19% | 19 |
-| Evaluation, Testing & Optimization | 16% | 16 |
-| Governance, Safety & Risk Management | 14% | 14 |
-| Stakeholder Communication & Lifecycle Management | 14% | 14 |
-| Developer Productivity & Operational Enablement | 7% | 7 |
+| Solution Design & Architecture | 17% | 34 |
+| Claude Models, Prompting & Context Engineering | 13% | 26 |
+| Integration | 19% | 38 |
+| Evaluation, Testing & Optimization | 16% | 32 |
+| Governance, Safety & Risk Management | 14% | 28 |
+| Stakeholder Communication & Lifecycle Management | 14% | 28 |
+| Developer Productivity & Operational Enablement | 7% | 14 |
 
 The real exam has 63 items, 120 minutes, and a scaled pass mark of 720 on a
 100–1,000 scale; the manifest's `exam` block records this so the app can
@@ -60,7 +61,8 @@ python3 scripts/check-bank.py    # curation checks (this repo)
 ```
 
 The curation script guards against the things a test-wise candidate
-exploits rather than knowledge: the correct option being the longest,
+exploits rather than knowledge: the correct option being the longest
+(or the shortest),
 one letter dominating, absolute wording only in distractors, and
 explanations that do not discuss the distractors. It also checks the
 domain split against the manifest weights.
