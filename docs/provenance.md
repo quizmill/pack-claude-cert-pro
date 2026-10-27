@@ -21,6 +21,20 @@ product facts; the fixes from that read are in the git history. Each of
 these questions also carries a one-line verdict on every option. The
 first hundred keep their ids unchanged.
 
+**Scenario pass (2026-10-27).** Scoring every stem against the removed
+bank (token Jaccard on lowercased words of four letters or more,
+markdown stripped) found 43 of the first hundred at 0.40 or above, two of
+them identical: the scenarios still tracked the removed items even though
+options and rationales did not. Those 43 stems were rewritten with a new
+setting, actors and specifics, testing the same objective; ids, domains,
+answer keys and the select-two count are unchanged, and options or
+rationale were adjusted only where the new scenario named something
+different. Every stem now scores below 0.40 against the removed bank
+(highest 0.39) and below 0.30 against every other current stem.
+`scripts/check-bank.py` now fails at 0.50 against the removed bank (read
+from git history, never re-committed) and above 0.70 between two current
+stems.
+
 ## Earlier bank — removed 2026-10-10
 
 | sourceRef | Questions | Licence found | Outcome |
