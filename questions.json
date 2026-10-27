@@ -523,11 +523,11 @@
     "id": "ccar-p-d1-15",
     "categoryKey": "solution-design",
     "difficulty": 3,
-    "prompt": "An architect is choosing between a fixed workflow and an autonomous agent for a new solution. Which TWO properties of the problem most strongly favour the fixed workflow? (Select TWO.)",
+    "prompt": "A payroll provider is planning how Claude will handle the salary-adjustment forms its clients upload. Before picking a scripted pipeline or a free-running agent loop, the architect notes down properties of the job. Which TWO point toward the scripted pipeline? (Select TWO.)",
     "options": [
       {
         "key": "A",
-        "text": "The sequence of steps is the same for every request"
+        "text": "The sequence of steps is the same for every form that comes in"
       },
       {
         "key": "B",
@@ -550,7 +550,7 @@
       "A",
       "C"
     ],
-    "explanation": "Correct: A and C. A workflow is the right choice when the path is known up front and when the business needs step-level predictability, validation and replay. B, D and E describe variable, exploratory work where the model must decide its own next step, which is exactly what an agent loop is for.",
+    "explanation": "Correct: A and C. A scripted pipeline (a fixed workflow) is the right choice when the path is known up front and when the business needs step-level predictability, validation and replay. B, D and E describe variable, exploratory work where the model must decide its own next step, which is exactly what an agent loop is for.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -566,7 +566,7 @@
     "id": "ccar-p-d1-16",
     "categoryKey": "solution-design",
     "difficulty": 3,
-    "prompt": "A team is deciding whether a merger-screening task justifies a multi-agent design rather than one augmented agent. Which TWO characteristics of the task most strongly indicate that several agents are warranted? (Select TWO.)",
+    "prompt": "A venture fund wants Claude to vet startups ahead of its investment committee: market sizing, a cap-table review and an audit of the product's code. The architect must pick between one augmented agent and several cooperating agents. Which TWO facts about the work argue for several agents? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -574,7 +574,7 @@
       },
       {
         "key": "B",
-        "text": "Legal, financial and technical assessments each need their own tool set and specialist instructions"
+        "text": "Market, cap-table and code reviews each need their own tool set and specialist instructions"
       },
       {
         "key": "C",
@@ -1504,11 +1504,11 @@
     "id": "ccar-p-d2-05",
     "categoryKey": "models-context",
     "difficulty": 3,
-    "prompt": "A system prompt holds a non-negotiable rule (\"do not disclose wholesale prices\") in the middle of 14,000 tokens of product reference material. The rule is followed inconsistently, and rewording it has not helped. Which change is most likely to fix it?",
+    "prompt": "A travel agency's concierge prompt opens with 14,000 tokens of hotel and route descriptions; somewhere in the middle sits the line \"do not reveal our commission rates\". Commission figures still slip into some replies, and rephrasing that line changed nothing. What change most improves compliance?",
     "options": [
       {
         "key": "A",
-        "text": "Repeat the rule three times at different points inside the product reference material"
+        "text": "Repeat the rule three times at different points inside the hotel and route descriptions"
       },
       {
         "key": "B",
@@ -1727,11 +1727,11 @@
     "id": "ccar-p-d2-11",
     "categoryKey": "models-context",
     "difficulty": 3,
-    "prompt": "A high-volume application has a large, mostly static prompt and rising per-request cost. Which TWO changes most directly cut cost per request without reducing capability? (Select TWO.)",
+    "prompt": "A tax-preparation service sends every user question along with the same 30,000-token rulebook and a few worked returns, and its monthly API bill has tripled since filing season opened. Which TWO changes most directly lower the price of each call while keeping answers as good? (Select TWO.)",
     "options": [
       {
         "key": "A",
-        "text": "Delete the examples section and rely on the model to infer the required output format on its own"
+        "text": "Delete the worked returns and rely on the model to infer the required answer format on its own"
       },
       {
         "key": "B",
@@ -1772,7 +1772,7 @@
     "id": "ccar-p-d2-12",
     "categoryKey": "models-context",
     "difficulty": 3,
-    "prompt": "An architect is reviewing a system prompt that produces inconsistent behaviour. Which TWO practices are most likely to improve instruction adherence? (Select TWO.)",
+    "prompt": "A logistics firm's dispatch assistant applies its customs-paperwork rules on some shipments and skips them on others, with no obvious pattern. Which TWO edits to its system prompt are most likely to make it behave consistently? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -2395,7 +2395,7 @@
     "id": "ccar-p-d3-01",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "A company is connecting Claude to fifteen internal systems owned by different teams. Tools will be added and retired often, and several AI applications across the company need the same integrations. Which integration approach best fits?",
+    "prompt": "A university wants its admissions chatbot, its research-grant helper and AI tools not yet built to reach the registry, library, finance and timetabling systems. Each system has its own IT owner, and new ones are connected every term. Which integration approach fits best?",
     "options": [
       {
         "key": "A",
@@ -2407,7 +2407,7 @@
       },
       {
         "key": "C",
-        "text": "One central team writes a single library containing all fifteen integrations and ships it to every application"
+        "text": "One central team writes a single library containing every integration and ships it to all the applications"
       },
       {
         "key": "D",
@@ -2432,7 +2432,7 @@
     "id": "ccar-p-d3-02",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "An agent has grown to 52 registered tools across seven business areas. Tool-selection accuracy has fallen, latency has risen, and usage logs show that 20 of the tools have never been called in production. What should the architect do first?",
+    "prompt": "A retail operations agent was handed a tool for every internal API the company has: 52 of them, covering stock, pricing, returns, staffing and more. It now often picks the wrong one and answers more slowly, and call logs show 20 have never been used. What should the architect do first?",
     "options": [
       {
         "key": "A",
@@ -2543,7 +2543,7 @@
     "id": "ccar-p-d3-05",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "A RAG system over supplier contracts splits every document into fixed 250-token chunks. Retrieved chunks are often clause fragments whose meaning depends on definitions and cross-references elsewhere in the contract, and answers suffer. Which chunking change addresses this?",
+    "prompt": "A law firm's research assistant indexes lease agreements in fixed 250-token slices. Answers about a tenant's obligations often cite a slice that mentions \"the Premises\" or \"Schedule 3\" without the text that defines them. Which change to how the leases are split addresses this?",
     "options": [
       {
         "key": "A",
@@ -2555,7 +2555,7 @@
       },
       {
         "key": "C",
-        "text": "Index each whole contract as a single chunk so that no clause is ever separated from its definitions"
+        "text": "Index each whole lease as a single chunk so that no clause is ever separated from its definitions"
       },
       {
         "key": "D",
@@ -2563,7 +2563,7 @@
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Chunking should follow the shape of the data: structure-aware chunks with overlap and contextual headers keep a clause intact and tell the model which contract and section it came from. A makes the fragments smaller and worse. C produces chunks too large to retrieve precisely or fit several of in context. D floods the context with fragments instead of fixing them.",
+    "explanation": "Correct: B. Chunking should follow the shape of the data: structure-aware chunks with overlap and contextual headers keep a clause intact and tell the model which lease and section it came from. A makes the fragments smaller and worse. C produces chunks too large to retrieve precisely or fit several of in context. D floods the context with fragments instead of fixing them.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2580,7 +2580,7 @@
     "id": "ccar-p-d3-06",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "A spare-parts assistant uses purely semantic vector retrieval. Natural-language questions work well, but searches for exact part codes such as \"TR-7731-C\" often return similar-looking but wrong parts. Which retrieval strategy fixes this?",
+    "prompt": "Mechanics ask a dealership's workshop assistant things like \"which gasket fits a 2019 diesel van?\" and get good results from its embedding index, but typing an exact code such as \"TR-7731-C\" brings back near-miss parts. Which retrieval strategy fixes this?",
     "options": [
       {
         "key": "A",
@@ -2617,7 +2617,7 @@
     "id": "ccar-p-d3-07",
     "categoryKey": "integration",
     "difficulty": 4,
-    "prompt": "Adding a re-ranking step to a support assistant's retrieval raises answer accuracy from 85% to 92% and adds 600 ms. The contractual response-time SLA is 3 seconds and current p95 latency is 1.5 seconds. What should the architect decide?",
+    "prompt": "On a bank's mortgage helpdesk, a proposed re-ranking stage would lift correct answers from 85% to 92% and add 600 ms to every request. Calls complete at 1.5 seconds p95 today, and the service agreement allows 3 seconds. What should the architect decide?",
     "options": [
       {
         "key": "A",
@@ -2654,7 +2654,7 @@
     "id": "ccar-p-d3-08",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "A platform runs 80,000 agent sessions a day. Engineers log every full prompt, response and tool payload; storage cost is high and failures are still hard to locate. Which observability strategy is more appropriate at this scale?",
+    "prompt": "An insurer's claims agents handle 80,000 conversations a day. Each one is dumped verbatim, with every tool input and output, into a storage bucket; the bill keeps growing, and when a claim goes wrong it still takes hours to find the conversation. How should tracing be set up at this volume?",
     "options": [
       {
         "key": "A",
@@ -2691,7 +2691,7 @@
     "id": "ccar-p-d3-09",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "A hospital's scheduling agent must coordinate appointment slots with an independently operated transport provider's agent. Neither organisation will expose internal systems or tools to the other. Which connection mechanism fits?",
+    "prompt": "A hospital's ward-planning agent needs to book patient transfers with an ambulance company that runs its own dispatch agent. Each side insists that its internal systems and tools stay private. Which connection mechanism fits?",
     "options": [
       {
         "key": "A",
@@ -2728,7 +2728,7 @@
     "id": "ccar-p-d3-10",
     "categoryKey": "integration",
     "difficulty": 2,
-    "prompt": "An existing invoice-processing microservice needs to call Claude exactly once per document to classify it, inside its own tightly controlled pipeline with no need for the model to discover tools. Which integration mechanism is the most appropriate?",
+    "prompt": "An invoice-processing microservice runs a fixed pipeline; one step should send each scanned invoice to Claude and get a category label back. Nothing needs to be discovered or planned. Which integration mechanism is the most appropriate?",
     "options": [
       {
         "key": "A",
@@ -2915,7 +2915,7 @@
     "id": "ccar-p-d3-15",
     "categoryKey": "integration",
     "difficulty": 2,
-    "prompt": "A new internal knowledge base should be usable by any current or future agent in the organisation without each agent team writing its own integration. Which mechanism serves this best?",
+    "prompt": "The HR department is launching a policy wiki. The help-desk agent, the onboarding agent and agents not yet built should all be able to search it, without each team writing its own connector. Which mechanism serves this best?",
     "options": [
       {
         "key": "A",
@@ -3040,7 +3040,7 @@
     "id": "ccar-p-d3-18",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "An architect is weighing progressive discovery (loading tools and context on demand) against a monolithic strategy (everything in context up front). Which TWO situations most strongly favour progressive discovery? (Select TWO.)",
+    "prompt": "An architect is designing how a field-service agent gets its tools and manuals: fetched when a request needs them, or packed into the prompt of every request. Which TWO conditions make the fetch-when-needed design the better choice? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -3872,7 +3872,7 @@
     "id": "ccar-p-d3-38",
     "categoryKey": "integration",
     "difficulty": 4,
-    "prompt": "An architect is deciding whether a new agent should discover tools and reference material on demand or load everything into context up front. Which TWO characteristics most strongly favour loading everything up front? (Select TWO.)",
+    "prompt": "For a new expense-claims agent, the team must choose between looking up tools and policy text per request and carrying all of it in a fixed prompt. Which TWO characteristics most strongly favour carrying everything up front? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -3920,11 +3920,11 @@
     "id": "ccar-p-d4-01",
     "categoryKey": "evaluation-testing",
     "difficulty": 2,
-    "prompt": "A steering group asks whether a new policy-lookup assistant is \"good enough to launch\". The team has enthusiastic quotes from pilot users but no measurements. What should the architect put in place first?",
+    "prompt": "A city council has piloted an assistant that answers residents' building-permit questions. Councillors want to know if it can go live; so far the evidence is a handful of positive comments from residents. What should the architect put in place first?",
     "options": [
       {
         "key": "A",
-        "text": "A longer pilot with more users, so there are more quotes and anecdotes to present to the steering group"
+        "text": "A longer pilot with more residents, so there are more comments and anecdotes to present to the councillors"
       },
       {
         "key": "B",
@@ -3956,7 +3956,7 @@
     "id": "ccar-p-d4-02",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A team is assembling an evaluation dataset for a travel-booking assistant before launch. Which composition gives the most trustworthy signal?",
+    "prompt": "An airline's rebooking assistant goes live next quarter. The quality lead is choosing the conversations the release will be judged on. Which set should be chosen?",
     "options": [
       {
         "key": "A",
@@ -3992,7 +3992,7 @@
     "id": "ccar-p-d4-03",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A marketing-copy assistant must be checked for tone and brand alignment across thousands of outputs a week. Reviewing every output by hand is not feasible. Which evaluation method fits?",
+    "prompt": "A cosmetics brand's copywriting assistant produces about 5,000 product blurbs a week, and the brand team needs to know whether they sound on-brand. Only a few can be read by a person. Which evaluation method fits?",
     "options": [
       {
         "key": "A",
@@ -4029,7 +4029,7 @@
     "id": "ccar-p-d4-04",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A revised prompt beats the current production prompt by five points on the offline evaluation suite. The team wants confidence before replacing it for all users. What is the right next step?",
+    "prompt": "A support chatbot's new prompt scores five points higher than the live one on the team's offline test set. Before switching every customer over, the product owner wants more confidence. What is the right next step?",
     "options": [
       {
         "key": "A",
@@ -4066,7 +4066,7 @@
     "id": "ccar-p-d4-05",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A finance director asks for a 40% cut in a solution's inference bill. The team's first proposal is to switch every workload to the smallest model. What should the architect do before agreeing?",
+    "prompt": "An e-commerce company runs six Claude workloads, from product tagging to fraud-case summaries, and the board wants the monthly model bill down by 40%. An engineer suggests moving all six to the cheapest model tier this week. What should the architect do before agreeing?",
     "options": [
       {
         "key": "A",
@@ -4102,7 +4102,7 @@
     "id": "ccar-p-d4-06",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A team is moving production traffic to a newly released model version. Spot checks look fine. Which rollout practice best protects production quality?",
+    "prompt": "A newly released model version promises better reasoning, and a logistics company wants its routing assistant on it. A developer tried twenty requests by hand and saw no problems. How should the switch be made?",
     "options": [
       {
         "key": "A",
@@ -4139,11 +4139,11 @@
     "id": "ccar-p-d4-07",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "An architect wants early warning of quality degradation in a production RAG assistant, before users start complaining. Which signal is the most useful leading indicator?",
+    "prompt": "A legal research tool answers lawyers' questions from a case-law index. The architect wants to know that answer quality is slipping before the lawyers notice it. Which signal gives the earliest warning?",
     "options": [
       {
         "key": "A",
-        "text": "The number of support tickets that mention the assistant, reviewed by the team at the end of each month"
+        "text": "The number of support tickets that mention the tool, reviewed by the team at the end of each month"
       },
       {
         "key": "B",
@@ -4397,7 +4397,7 @@
     "id": "ccar-p-d4-14",
     "categoryKey": "evaluation-testing",
     "difficulty": 4,
-    "prompt": "A team is designing the pre-production evaluation framework for an assistant that will operate in a regulated industry. Which TWO components are most important to include? (Select TWO.)",
+    "prompt": "A pharmaceutical company's assistant will answer medical-information questions from doctors, and the regulator will inspect how it was tested. Which TWO elements belong in the pre-launch test plan? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -4441,7 +4441,7 @@
     "id": "ccar-p-d4-15",
     "categoryKey": "evaluation-testing",
     "difficulty": 4,
-    "prompt": "A production assistant's answer quality has degraded gradually over two weeks. Latency, model version and prompts are unchanged. Which TWO data sources are most useful for finding the cause? (Select TWO.)",
+    "prompt": "Over the last two weeks, an online retailer's returns assistant has slowly started giving worse answers. Nobody has touched its prompts, the model version is pinned, and response times are flat. Which TWO places should the team look first? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -5193,7 +5193,7 @@
     "id": "ccar-p-d5-01",
     "categoryKey": "governance-risk",
     "difficulty": 3,
-    "prompt": "An agent can draft supplier emails, update internal records and raise purchase orders up to 40,000 euros. The business wants human oversight without slowing every interaction. Where should the human approval gate go?",
+    "prompt": "A facilities agent at a hotel chain books contractors, edits maintenance tickets and can commit up to 40,000 euros per repair order. Managers want a person in the loop without having to approve every routine step. Where should the approval gate go?",
     "options": [
       {
         "key": "A",
@@ -5205,11 +5205,11 @@
       },
       {
         "key": "C",
-        "text": "After each purchase order is sent, as part of a weekly review of all the orders the agent raised"
+        "text": "After each repair order is placed, as part of a weekly review of all the orders the agent placed"
       },
       {
         "key": "D",
-        "text": "Before irreversible or costly actions such as raising a purchase order; drafting and updates run free"
+        "text": "Before irreversible or costly actions such as placing a repair order; ticket edits run free"
       }
     ],
     "correctKey": "D",
@@ -5266,7 +5266,7 @@
     "id": "ccar-p-d5-03",
     "categoryKey": "governance-risk",
     "difficulty": 3,
-    "prompt": "A hospital wants an assistant that answers clinicians' questions using patient records. Which consideration must be settled at the architecture stage rather than left for a later release?",
+    "prompt": "A US clinic network plans an assistant that summarises a patient's chart for the nurse at the bedside. Which design question cannot be deferred to a later release and must be answered in the architecture?",
     "options": [
       {
         "key": "A",
@@ -5303,7 +5303,7 @@
     "id": "ccar-p-d5-04",
     "categoryKey": "governance-risk",
     "difficulty": 4,
-    "prompt": "A tenant-screening assistant is found to rate applicants from certain neighbourhoods systematically lower, even though names and demographic fields were removed from its input. What does this most likely indicate, and what should be done?",
+    "prompt": "A landlord's applicant-ranking tool never sees names, ages or ethnicity, yet an audit shows people from three neighbourhoods are ranked consistently lower. What does this most likely indicate, and what should be done?",
     "options": [
       {
         "key": "A",
@@ -5378,7 +5378,7 @@
     "id": "ccar-p-d5-06",
     "categoryKey": "governance-risk",
     "difficulty": 3,
-    "prompt": "An insurer deploys an AI assistant on its public website. Compliance asks how the design supports transparency obligations. Which measure addresses this most directly?",
+    "prompt": "A utility company is putting a Claude-powered chat window on its billing page. Its compliance officer asks what in the design meets the duty to be open with customers about the AI. Which measure addresses this most directly?",
     "options": [
       {
         "key": "A",
@@ -5600,7 +5600,7 @@
     "id": "ccar-p-d5-12",
     "categoryKey": "governance-risk",
     "difficulty": 3,
-    "prompt": "A bank is deploying an assistant that drafts replies to customer complaints. Regulators require that no incorrect financial commitment reaches a customer. Which TWO controls most directly meet this requirement? (Select TWO.)",
+    "prompt": "A mobile operator's assistant drafts replies to customers disputing their bills, and a reply can offer refunds or credit. The regulator says no wrong refund promise may ever reach a customer. Which TWO controls most directly meet this? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -5620,7 +5620,7 @@
       },
       {
         "key": "E",
-        "text": "A faster response-time target so that customers receive replies to their complaints sooner"
+        "text": "A faster response-time target so that customers receive replies to their disputes sooner"
       }
     ],
     "correctKeys": [
@@ -5644,7 +5644,7 @@
     "id": "ccar-p-d5-13",
     "categoryKey": "governance-risk",
     "difficulty": 4,
-    "prompt": "An architect is hardening a RAG agent with write tools against prompt injection carried in retrieved documents. Which TWO measures most reduce the risk? (Select TWO.)",
+    "prompt": "A purchasing agent reads supplier web pages and PDFs and can update vendor records and send email. A red team showed that one hidden line in a PDF made it mail an internal price list out. Which TWO measures most reduce this risk? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -6330,7 +6330,7 @@
     "id": "ccar-p-d6-01",
     "categoryKey": "stakeholder-lifecycle",
     "difficulty": 3,
-    "prompt": "During discovery, a client's sponsor insists the assistant must be \"100% accurate\" before it can go live. What is the architect's most effective response?",
+    "prompt": "A logistics client's operations director says the invoice-matching assistant will be signed off only when it \"never gets a single invoice wrong\". What is the architect's most effective response?",
     "options": [
       {
         "key": "A",
@@ -6366,7 +6366,7 @@
     "id": "ccar-p-d6-02",
     "categoryKey": "stakeholder-lifecycle",
     "difficulty": 2,
-    "prompt": "A client opens an engagement with \"we want an AI agent for our warehouse\". Before proposing any architecture, what should the architect do first?",
+    "prompt": "A retail chain's COO emails: \"We want an AI agent for our warehouses, can you start next week?\" What is the architect's first move?",
     "options": [
       {
         "key": "A",
@@ -6403,7 +6403,7 @@
     "id": "ccar-p-d6-03",
     "categoryKey": "stakeholder-lifecycle",
     "difficulty": 4,
-    "prompt": "A finance director instructs the team to use the cheapest model for a document-analysis solution that feeds regulatory filings. Testing shows the cheapest model has a materially higher error rate on this task. What should the architect do?",
+    "prompt": "The head of procurement at an asset manager tells the team to run fund-report extraction on the lowest-priced model, since \"they are all the same\". The extracted figures go into reports filed with the regulator, and the team's benchmark shows that model makes noticeably more extraction errors. What should the architect do?",
     "options": [
       {
         "key": "A",
@@ -6411,7 +6411,7 @@
       },
       {
         "key": "B",
-        "text": "Comply with the instruction, since budget decisions belong to the finance director and not to the architect or the team"
+        "text": "Comply with the instruction, since budget decisions belong to the head of procurement and not to the architect or the team"
       },
       {
         "key": "C",
@@ -6419,7 +6419,7 @@
       },
       {
         "key": "D",
-        "text": "Escalate to the finance director's manager and ask for the instruction to be overruled on quality grounds"
+        "text": "Escalate to the head of procurement's manager and ask for the instruction to be overruled on quality grounds"
       }
     ],
     "correctKey": "A",
@@ -6439,7 +6439,7 @@
     "id": "ccar-p-d6-04",
     "categoryKey": "stakeholder-lifecycle",
     "difficulty": 3,
-    "prompt": "A stakeholder demands complete answers in under one second from an assistant that performs multi-step retrieval and reasoning. Engineering analysis shows the pipeline cannot finish in under three seconds. Which approach best manages this?",
+    "prompt": "A sales director wants the contract-question assistant to show its full answer in under a second. The assistant queries three systems and reasons over the results, and load tests put the floor at about three seconds. Which approach best manages this?",
     "options": [
       {
         "key": "A",
@@ -6476,7 +6476,7 @@
     "id": "ccar-p-d6-05",
     "categoryKey": "stakeholder-lifecycle",
     "difficulty": 3,
-    "prompt": "A consultancy is handing a completed assistant to the client's own engineers, who will run it from now on. Beyond the source code, which set of artefacts matters most for a successful handoff?",
+    "prompt": "After nine months building a claims-triage assistant, an outside consultancy is leaving, and the client's platform team takes over running and changing it. Apart from the source code, which artefacts matter most to hand over?",
     "options": [
       {
         "key": "A",
@@ -6513,7 +6513,7 @@
     "id": "ccar-p-d6-06",
     "categoryKey": "stakeholder-lifecycle",
     "difficulty": 3,
-    "prompt": "Three months after launch, the sponsor's interest in an assistant is fading. The fortnightly report lists token spend, latency and uptime, and nothing else. What change would most improve alignment?",
+    "prompt": "A logistics firm's assistant has been live for a quarter. The operations VP who funded it has stopped opening the team's fortnightly update, which shows token spend, latency and uptime. What change would most improve alignment?",
     "options": [
       {
         "key": "A",
@@ -6696,7 +6696,7 @@
     "id": "ccar-p-d6-11",
     "categoryKey": "stakeholder-lifecycle",
     "difficulty": 3,
-    "prompt": "An architect is closing the discovery phase of a new engagement. Which TWO outputs are the most important to have agreed in writing before design begins? (Select TWO.)",
+    "prompt": "Four weeks of interviews and process mapping at a regional bank are wrapping up, and the build team is waiting to start design. Which TWO things should be agreed in writing at this point? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -6740,7 +6740,7 @@
     "id": "ccar-p-d6-12",
     "categoryKey": "stakeholder-lifecycle",
     "difficulty": 3,
-    "prompt": "Midway through a build, stakeholders keep adding requests: new data sources, extra user groups, more output formats. Which TWO practices best manage this while keeping the relationship healthy? (Select TWO.)",
+    "prompt": "Halfway through building an HR assistant, the client keeps asking for more: payroll data, a contractor portal, a Spanish version. Which TWO practices best handle this without souring the working relationship? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -7464,7 +7464,7 @@
     "id": "ccar-p-d7-01",
     "categoryKey": "developer-enablement",
     "difficulty": 3,
-    "prompt": "An engineering lead is rolling out Claude Code to a 40-person team. Early adopters have each configured it differently, producing inconsistent code style and repeated setup effort. What is the most effective enablement step?",
+    "prompt": "A fintech's 40 developers adopted Claude Code on their own. Each has a different personal setup, pull requests now mix formatting styles, and new hires spend a day reconstructing a working configuration. What is the most effective enablement step?",
     "options": [
       {
         "key": "A",
@@ -7501,7 +7501,7 @@
     "id": "ccar-p-d7-02",
     "categoryKey": "developer-enablement",
     "difficulty": 3,
-    "prompt": "A team uses one AI coding session to both write a change and review it. Reviews rarely find anything, yet defects keep reaching production. Which adjustment most directly improves review quality?",
+    "prompt": "A startup's developers ask Claude to implement a feature and then, in the same conversation, to check its own work. These self-reviews almost never flag a problem, yet bugs keep shipping. Which adjustment most directly improves review quality?",
     "options": [
       {
         "key": "A",
@@ -7538,7 +7538,7 @@
     "id": "ccar-p-d7-03",
     "categoryKey": "developer-enablement",
     "difficulty": 3,
-    "prompt": "A production agent has started taking unexpected actions on a subset of requests. The on-call engineer wants to rewrite the system prompt immediately. What should happen first?",
+    "prompt": "Since this morning, an invoicing agent has been emailing duplicate payment reminders to some customers. The engineer on call proposes rewriting the system prompt straight away. What should happen first?",
     "options": [
       {
         "key": "A",
@@ -7686,7 +7686,7 @@
     "id": "ccar-p-d7-07",
     "categoryKey": "developer-enablement",
     "difficulty": 3,
-    "prompt": "A platform team wants to scale AI-assisted development across the organisation without adding operational risk. Which TWO practices best support this? (Select TWO.)",
+    "prompt": "A bank's platform group is opening Claude Code to 600 developers across 40 teams and must not raise the risk of outages or security incidents. Which TWO practices best support this? (Select TWO.)",
     "options": [
       {
         "key": "A",
