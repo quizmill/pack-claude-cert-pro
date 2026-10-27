@@ -11,6 +11,9 @@ This script checks the things a test-wise candidate exploits instead:
   * every question has a difficulty, tags, and an explanation that names
     the correct option and at least one distractor
   * the bank's domain split tracks the manifest weights
+  * no stem tracks the removed bank (token Jaccard < 0.50 against every
+    removed stem, read from git history) and no two stems are near-copies
+    (Jaccard <= 0.70)
 
 Run from the pack root:  python3 scripts/check-bank.py
 Exit code is non-zero when a hard check fails.
@@ -19,6 +22,7 @@ import collections
 import json
 import re
 import statistics
+import subprocess
 import sys
 from pathlib import Path
 
@@ -134,6 +138,55 @@ for key, w in weights.items():
     print(f"  {key:24s} bank {have:5.1%}  blueprint {w:4.0%}{flag}")
     if abs(have - w) > 0.03:
         failures.append(f"{key}: bank share {have:.1%} is more than 3 points from blueprint {w:.0%}")
+
+# --- stem overlap ------------------------------------------------------------
+# The bank removed on 2026-10-10 must not live on in reworded scenarios,
+# and two current items must not be near-copies of each other. It is read
+# from git history so it is never committed again.
+REMOVED_AT = "e521c1c"
+REMOVED_LIMIT = 0.50
+SIBLING_LIMIT = 0.70
+
+
+def tokens(text: str) -> set[str]:
+    text = re.sub(r"[`*_#>\[\]()]", " ", text)
+    return set(re.findall(r"[a-z]{4,}", text.lower()))
+
+
+def jaccard(a: set[str], b: set[str]) -> float:
+    return len(a & b) / len(a | b) if a | b else 0.0
+
+
+try:
+    removed = json.loads(subprocess.run(
+        ["git", "-C", str(ROOT), "show", f"{REMOVED_AT}:questions.json"],
+        check=True, capture_output=True, text=True).stdout)
+except (subprocess.CalledProcessError, FileNotFoundError):
+    removed = None
+    failures.append(f"cannot read the removed bank from git ({REMOVED_AT}:questions.json); "
+                    "run from a full clone")
+stems = {q["id"]: tokens(q["prompt"]) for q in qs}
+if removed is not None:
+    old = {q["id"]: tokens(q["prompt"]) for q in removed}
+    bands = collections.Counter()
+    for qid, t in stems.items():
+        best_id, best = max(((oid, jaccard(t, ot)) for oid, ot in old.items()), key=lambda p: p[1])
+        bands["1.00" if best == 1 else "0.60-0.99" if best >= 0.60 else "0.50-0.59" if best >= 0.50
+              else "0.40-0.49" if best >= 0.40 else "<0.40"] += 1
+        if best >= REMOVED_LIMIT:
+            failures.append(f"{qid}: stem overlap {best:.2f} with removed {best_id} (limit <{REMOVED_LIMIT:.2f})")
+    print(f"stem overlap vs removed bank ({len(old)} items):",
+          {k: bands[k] for k in ("1.00", "0.60-0.99", "0.50-0.59", "0.40-0.49", "<0.40")})
+ids = sorted(stems)
+top_pair = (0.0, "", "")
+for i, a in enumerate(ids):
+    for b in ids[i + 1:]:
+        s = jaccard(stems[a], stems[b])
+        top_pair = max(top_pair, (s, a, b))
+        if s > SIBLING_LIMIT:
+            failures.append(f"{a} / {b}: stem overlap {s:.2f} (limit {SIBLING_LIMIT:.2f})")
+print(f"highest stem overlap between current items: {top_pair[0]:.2f} ({top_pair[1]} / {top_pair[2]})")
+
 diff = collections.Counter(q["difficulty"] for q in qs)
 print("difficulty:", dict(sorted(diff.items())))
 print("reviewStatus:", dict(collections.Counter(q["reviewStatus"] for q in qs)))
