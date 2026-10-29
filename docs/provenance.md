@@ -29,8 +29,12 @@ options and rationales did not. Those 43 stems were rewritten with a new
 setting, actors and specifics, testing the same objective; ids, domains,
 answer keys and the select-two count are unchanged, and options or
 rationale were adjusted only where the new scenario named something
-different. Every stem now scores below 0.40 against the removed bank
-(highest 0.39) and below 0.30 against every other current stem.
+different. On merging with the 2026-10-29 Fable grading
+(docs/fable-grading-2026-10-29.md), each item keeps the graded options
+and explanation; the stem is the graded one where the grading rewrote it
+below 0.50, and this pass's rewrite otherwise (15 items). Every stem now
+scores below 0.45 against the removed bank (three between 0.40 and 0.44)
+and at most 0.31 against every other current stem.
 `scripts/check-bank.py` now fails at 0.50 against the removed bank (read
 from git history, never re-committed) and above 0.70 between two current
 stems.
