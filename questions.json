@@ -2650,11 +2650,11 @@
     "options": [
       {
         "key": "A",
-        "text": "The hospital agent is given API credentials for the transport provider's booking system"
+        "text": "The hospital agent is given API credentials for the ambulance company's booking system"
       },
       {
         "key": "B",
-        "text": "The transport provider publishes an MCP server exposing its tools to the hospital agent"
+        "text": "The ambulance company publishes an MCP server exposing its tools to the hospital agent"
       },
       {
         "key": "C",
@@ -4029,7 +4029,7 @@
       },
       {
         "key": "B",
-        "text": "Survey the pilot users on which of the two prompts they prefer before deciding"
+        "text": "Survey a sample of customers on which of the two prompts they prefer, then decide"
       },
       {
         "key": "C",
@@ -4041,7 +4041,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. Offline gains do not always hold on live traffic; an A/B test on real requests with pre-agreed metrics confirms the gain with a small blast radius if it does not hold. Why not the others: A skips the live check entirely; B measures preference on a tiny sample rather than the agreed metrics; C only tightens an offline estimate of the same distribution.",
+    "explanation": "Correct: D. Offline gains do not always hold on live traffic; an A/B test on real requests with pre-agreed metrics confirms the gain with a small blast radius if it does not hold. Why not the others: A skips the live check entirely; B measures stated preference from a small sample rather than the agreed metrics; C only tightens an offline estimate of the same distribution.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4401,7 +4401,7 @@
     "options": [
       {
         "key": "A",
-        "text": "Traces of failing sessions showing which chunks were retrieved and tools called"
+        "text": "Traces of failing sessions showing the context the model received and tools called"
       },
       {
         "key": "B",

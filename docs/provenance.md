@@ -38,6 +38,13 @@ and at most 0.31 against every other current stem.
 `scripts/check-bank.py` now fails at 0.50 against the removed bank (read
 from git history, never re-committed) and above 0.70 between two current
 stems.
+**Independent read of the scenario pass (2026-10-29).** The 42 rewritten
+items still in the bank (`ccar-p-d6-01` was removed by the grading) were
+read by an independent reviewer for key defensibility, ambiguous
+distractors and product facts, the same read the second hundred had. 40
+passed; three options named an actor left over from the old scenario
+(`d3-09` A/B, `d4-04` B) and one assumed retrieval the stem never mentions
+(`d4-15` A). All four were reworded to fit the new scenario; no keys changed.
 
 ## Earlier bank — removed 2026-10-10
 
