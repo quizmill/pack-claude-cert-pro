@@ -523,11 +523,11 @@
     "id": "ccar-p-d1-15",
     "categoryKey": "solution-design",
     "difficulty": 3,
-    "prompt": "An architect is choosing between a fixed workflow and an autonomous agent for a new solution. Which TWO properties of the problem most strongly favour the fixed workflow? (Select TWO.)",
+    "prompt": "A payroll provider is planning how Claude will handle the salary-adjustment forms its clients upload. Before picking a scripted pipeline or a free-running agent loop, the architect notes down properties of the job. Which TWO point toward the scripted pipeline? (Select TWO.)",
     "options": [
       {
         "key": "A",
-        "text": "The sequence of steps is identical for every request and is known before work begins"
+        "text": "The sequence of steps is identical for every form and is known before work begins"
       },
       {
         "key": "B",
@@ -566,7 +566,7 @@
     "id": "ccar-p-d1-16",
     "categoryKey": "solution-design",
     "difficulty": 3,
-    "prompt": "A team is deciding whether a merger-screening task justifies a multi-agent design rather than one augmented agent. Which TWO characteristics of the task most strongly indicate that several agents are warranted? (Select TWO.)",
+    "prompt": "A venture fund wants Claude to vet startups ahead of its investment committee: market sizing, a cap-table review and an audit of the product's code. The architect must pick between one augmented agent and several cooperating agents. Which TWO facts about the work argue for several agents? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -574,7 +574,7 @@
       },
       {
         "key": "B",
-        "text": "Legal, financial and technical assessments each need their own tools and instructions"
+        "text": "Market, cap-table and code reviews each need their own tools and instructions"
       },
       {
         "key": "C",
@@ -2609,7 +2609,7 @@
     "id": "ccar-p-d3-08",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "A travel platform runs 60,000 agent sessions a day. Engineers log every full prompt, response and tool payload; storage is expensive and failures are still hard to locate. Which observability strategy is more appropriate at this scale?",
+    "prompt": "An insurer's claims agents handle 80,000 conversations a day. Each one is dumped verbatim, with every tool input and output, into a storage bucket; the bill keeps growing, and when a claim goes wrong it still takes hours to find the conversation. How should tracing be set up at this volume?",
     "options": [
       {
         "key": "A",
@@ -2646,15 +2646,15 @@
     "id": "ccar-p-d3-09",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "A hospital's scheduling agent must coordinate appointment slots with an independently operated transport provider's agent. Neither organisation will expose internal systems or tools to the other. Which connection mechanism fits?",
+    "prompt": "A hospital's ward-planning agent needs to book patient transfers with an ambulance company that runs its own dispatch agent. Each side insists that its internal systems and tools stay private. Which connection mechanism fits?",
     "options": [
       {
         "key": "A",
-        "text": "The hospital agent is given API credentials for the transport provider's booking system"
+        "text": "The hospital agent is given API credentials for the ambulance company's booking system"
       },
       {
         "key": "B",
-        "text": "The transport provider publishes an MCP server exposing its tools to the hospital agent"
+        "text": "The ambulance company publishes an MCP server exposing its tools to the hospital agent"
       },
       {
         "key": "C",
@@ -3746,7 +3746,7 @@
     "id": "ccar-p-d3-38",
     "categoryKey": "integration",
     "difficulty": 4,
-    "prompt": "An architect is deciding whether a new agent should discover tools and reference material on demand or load everything into context up front. Which TWO characteristics most strongly favour loading everything up front? (Select TWO.)",
+    "prompt": "For a new expense-claims agent, the team must choose between looking up tools and policy text per request and carrying all of it in a fixed prompt. Which TWO characteristics most strongly favour carrying everything up front? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -3912,11 +3912,11 @@
     "id": "ccar-p-d4-01",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A steering group asks whether a new policy-lookup assistant is \"good enough to launch\". The team has enthusiastic quotes from pilot users but no measurements. What should the architect put in place first?",
+    "prompt": "A city council has piloted an assistant that answers residents' building-permit questions. Councillors want to know if it can go live; so far the evidence is a handful of positive comments from residents. What should the architect put in place first?",
     "options": [
       {
         "key": "A",
-        "text": "Extend the pilot to more users so there are more quotes to present to the group"
+        "text": "Extend the pilot to more residents so there are more comments to present to councillors"
       },
       {
         "key": "B",
@@ -3948,7 +3948,7 @@
     "id": "ccar-p-d4-02",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A team is assembling an evaluation dataset for a travel-booking assistant before launch. Which composition gives the most trustworthy signal?",
+    "prompt": "An airline's rebooking assistant goes live next quarter. The quality lead is choosing the conversations the release will be judged on. Which set should be chosen?",
     "options": [
       {
         "key": "A",
@@ -3984,7 +3984,7 @@
     "id": "ccar-p-d4-03",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A marketing-copy assistant must be checked for tone and brand alignment across thousands of outputs a week. Reviewing every output by hand is not feasible. Which evaluation method fits?",
+    "prompt": "A cosmetics brand's copywriting assistant produces about 5,000 product blurbs a week, and the brand team needs to know whether they sound on-brand. Only a few can be read by a person. Which evaluation method fits?",
     "options": [
       {
         "key": "A",
@@ -4021,7 +4021,7 @@
     "id": "ccar-p-d4-04",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A revised prompt beats the current production prompt by five points on the offline evaluation suite. The team wants confidence before replacing it for all users. What is the right next step?",
+    "prompt": "A support chatbot's new prompt scores five points higher than the live one on the team's offline test set. Before switching every customer over, the product owner wants more confidence. What is the right next step?",
     "options": [
       {
         "key": "A",
@@ -4029,7 +4029,7 @@
       },
       {
         "key": "B",
-        "text": "Survey the pilot users on which of the two prompts they prefer before deciding"
+        "text": "Survey a sample of customers on which of the two prompts they prefer, then decide"
       },
       {
         "key": "C",
@@ -4041,7 +4041,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. Offline gains do not always hold on live traffic; an A/B test on real requests with pre-agreed metrics confirms the gain with a small blast radius if it does not hold. Why not the others: A skips the live check entirely; B measures preference on a tiny sample rather than the agreed metrics; C only tightens an offline estimate of the same distribution.",
+    "explanation": "Correct: D. Offline gains do not always hold on live traffic; an A/B test on real requests with pre-agreed metrics confirms the gain with a small blast radius if it does not hold. Why not the others: A skips the live check entirely; B measures stated preference from a small sample rather than the agreed metrics; C only tightens an offline estimate of the same distribution.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4058,7 +4058,7 @@
     "id": "ccar-p-d4-05",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A finance director asks for a 40% cut in a solution's inference bill. The team's first proposal is to switch every workload to the smallest model. What should the architect do before agreeing?",
+    "prompt": "An e-commerce company runs six Claude workloads, from product tagging to fraud-case summaries, and the board wants the monthly model bill down by 40%. An engineer suggests moving all six to the cheapest model tier this week. What should the architect do before agreeing?",
     "options": [
       {
         "key": "A",
@@ -4094,7 +4094,7 @@
     "id": "ccar-p-d4-06",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A team is moving production traffic to a newly released model version. Spot checks look fine. Which rollout practice best protects production quality?",
+    "prompt": "A newly released model version promises better reasoning, and a logistics company wants its routing assistant on it. A developer tried twenty requests by hand and saw no problems. How should the switch be made?",
     "options": [
       {
         "key": "A",
@@ -4131,15 +4131,15 @@
     "id": "ccar-p-d4-07",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "An architect wants early warning of quality degradation in a production RAG assistant, before users start complaining. Which signal is the most useful leading indicator?",
+    "prompt": "A legal research tool answers lawyers' questions from a case-law index. The architect wants to know that answer quality is slipping before the lawyers notice it. Which signal gives the earliest warning?",
     "options": [
       {
         "key": "A",
-        "text": "The number of support tickets mentioning the assistant, reviewed at the end of each month"
+        "text": "The number of support tickets mentioning the tool, reviewed at the end of each month"
       },
       {
         "key": "B",
-        "text": "Total monthly token spend compared with the budget approved for the assistant"
+        "text": "Total monthly token spend compared with the budget approved for the tool"
       },
       {
         "key": "C",
@@ -4353,7 +4353,7 @@
     "id": "ccar-p-d4-14",
     "categoryKey": "evaluation-testing",
     "difficulty": 4,
-    "prompt": "A team is designing the pre-production evaluation framework for an assistant that will operate in a regulated industry. Which TWO components are most important to include? (Select TWO.)",
+    "prompt": "A pharmaceutical company's assistant will answer medical-information questions from doctors, and the regulator will inspect how it was tested. Which TWO elements belong in the pre-launch test plan? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -4397,11 +4397,11 @@
     "id": "ccar-p-d4-15",
     "categoryKey": "evaluation-testing",
     "difficulty": 4,
-    "prompt": "A production assistant's answer quality has degraded gradually over two weeks. Latency, model version and prompts are unchanged. Which TWO data sources are most useful for finding the cause? (Select TWO.)",
+    "prompt": "Over the last two weeks, an online retailer's returns assistant has slowly started giving worse answers. Nobody has touched its prompts, the model version is pinned, and response times are flat. Which TWO places should the team look first? (Select TWO.)",
     "options": [
       {
         "key": "A",
-        "text": "Traces of failing sessions showing which chunks were retrieved and tools called"
+        "text": "Traces of failing sessions showing the context the model received and tools called"
       },
       {
         "key": "B",
@@ -5370,7 +5370,7 @@
     "id": "ccar-p-d5-06",
     "categoryKey": "governance-risk",
     "difficulty": 3,
-    "prompt": "An energy utility puts an AI assistant on its customer portal to answer billing questions. Compliance asks how the design supports transparency obligations. Which measure addresses this most directly?",
+    "prompt": "A utility company is putting a Claude-powered chat window on its billing page. Its compliance officer asks what in the design meets the duty to be open with customers about the AI. Which measure addresses this most directly?",
     "options": [
       {
         "key": "A",

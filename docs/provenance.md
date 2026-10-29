@@ -21,6 +21,31 @@ product facts; the fixes from that read are in the git history. Each of
 these questions also carries a one-line verdict on every option. The
 first hundred keep their ids unchanged.
 
+**Scenario pass (2026-10-27).** Scoring every stem against the removed
+bank (token Jaccard on lowercased words of four letters or more,
+markdown stripped) found 43 of the first hundred at 0.40 or above, two of
+them identical: the scenarios still tracked the removed items even though
+options and rationales did not. Those 43 stems were rewritten with a new
+setting, actors and specifics, testing the same objective; ids, domains,
+answer keys and the select-two count are unchanged, and options or
+rationale were adjusted only where the new scenario named something
+different. On merging with the 2026-10-29 Fable grading
+(docs/fable-grading-2026-10-29.md), each item keeps the graded options
+and explanation; the stem is the graded one where the grading rewrote it
+below 0.50, and this pass's rewrite otherwise (15 items). Every stem now
+scores below 0.45 against the removed bank (three between 0.40 and 0.44)
+and at most 0.31 against every other current stem.
+`scripts/check-bank.py` now fails at 0.50 against the removed bank (read
+from git history, never re-committed) and above 0.70 between two current
+stems.
+**Independent read of the scenario pass (2026-10-29).** The 42 rewritten
+items still in the bank (`ccar-p-d6-01` was removed by the grading) were
+read by an independent reviewer for key defensibility, ambiguous
+distractors and product facts, the same read the second hundred had. 40
+passed; three options named an actor left over from the old scenario
+(`d3-09` A/B, `d4-04` B) and one assumed retrieval the stem never mentions
+(`d4-15` A). All four were reworded to fit the new scenario; no keys changed.
+
 ## Earlier bank — removed 2026-10-10
 
 | sourceRef | Questions | Licence found | Outcome |
