@@ -65,13 +65,8 @@
   "sources": [
     {
       "label": "Original",
-      "name": "Hand-authored (100)",
-      "blurb": "Written for this pack against the objectives in Anthropic's public CCAR-P exam guide. Not drawn from the live exam."
-    },
-    {
-      "label": "Guide",
-      "name": "Anthropic exam guide v1.0",
-      "blurb": "The public exam guide: domains, weights, objectives and exam format.",
+      "name": "Hand-authored (200)",
+      "blurb": "Written for this pack against the objectives in Anthropic's public CCAR-P exam guide v1.0 and Anthropic's public docs. Not drawn from the live exam.",
       "url": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf"
     }
   ]

@@ -4,13 +4,22 @@ Every question in `questions.json` carries a `source` and a `sourceRef`.
 This audit records what each source permits, so the bank can leave
 `reviewStatus: draft` with its attribution in order.
 
-## Current bank (from 2026-10-10)
+## Current bank (from 2026-10-10; grown to 200 on 2026-10-24)
 
 | sourceRef | Questions | Licence | Status |
 |---|---|---|---|
-| Anthropic, *Claude Certified Architect – Professional Exam Guide* v1.0 (public PDF linked from the Anthropic Partner Academy certification page) | 100 of 100 | The guide is the public reference for the exam. The questions are **original**: written against the guide's domain objectives with new scenarios, options and rationales. Nothing from the guide's three sample items is reproduced. | Clear — original work; `source: original`. |
+| Anthropic, *Claude Certified Architect – Professional Exam Guide* v1.0 (public PDF linked from the Anthropic Partner Academy certification page) | 200 of 200 | The guide is the public reference for the exam. The questions are **original**: written against the guide's domain objectives with new scenarios, options and rationales. Nothing from the guide's three sample items is reproduced. Where a question turns on product behaviour (prompt caching, Skills, token counting, MCP transports and authorisation, Claude Code settings, hooks, subagents, non-interactive mode), it was checked against Anthropic's public documentation. | Clear — original work; `source: original`. |
 
-`concepts.json` (24 cards) is original in the same way.
+`concepts.json` (24 cards) is original in the same way. The manifest's
+`sources` legend has a single entry, since every question has the same
+origin.
+
+The second hundred (ids continuing each domain's numbering, e.g.
+`ccar-p-d1-19` onward) was drafted per domain, then read by an
+independent reviewer for key defensibility, ambiguous distractors and
+product facts; the fixes from that read are in the git history. Each of
+these questions also carries a one-line verdict on every option. The
+first hundred keep their ids unchanged.
 
 ## Earlier bank — removed 2026-10-10
 
@@ -25,7 +34,14 @@ attempt-history row can be mistaken for a different question.
 
 - **Blueprint weights.** Confirmed against the exam guide itself (section
   6): 17 / 13 / 19 / 16 / 14 / 14 / 7. `pack.json` weights match and sum
-  to 1.00. The bank has exactly those percentages (100 questions).
+  to 1.00. The bank has exactly those percentages (100 questions; on
+  2026-10-24, 200 questions: 34 / 26 / 38 / 32 / 28 / 28 / 14).
+- **Answer-key tells at 200 (2026-10-24).** Correct letters A 40 / B 41 /
+  C 40 / D 39; each of the ten select-two key pairs exactly four times.
+  The correct option is the single longest in 11 of 160 single-answer
+  questions and the single shortest in 34 of 160 (`scripts/check-bank.py`
+  now fails above 30% shortest as well as 35% longest); mean length
+  ratio of correct to distractor options 1.00.
 - **Exam block.** The guide gives 63 items, 120 minutes, multiple-choice
   and multiple-response, scaled pass mark 720 on 100–1,000. The manifest
   carries `questionCount: 63`, `passPct: 72`, `scaled: true`.
@@ -43,7 +59,8 @@ attempt-history row can be mistaken for a different question.
 - **Concept cards.** 24, one per objective cluster across all seven
   domains; every question links to one via `conceptId`.
 - **Engine validation.** `npm run pack:validate` on the engine reports a
-  valid pack, 100 questions.
+  valid pack, 100 questions (200 from 2026-10-24, via
+  `npx quizmill validate .`).
 - **Bundle.** `quizmill bundle` builds a single bundle file from the pack.
   Bundles are gitignored (`*.bundle.json`) so one is never committed here.
 
