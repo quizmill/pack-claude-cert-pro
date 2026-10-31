@@ -242,11 +242,11 @@
       },
       {
         "key": "D",
-        "text": "Which project can run fully automated with no human review step in the loop at all"
+        "text": "Which project automates the largest share of an existing manual workflow end to end"
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. A first project should be one where value can be measured, the data exists and a wrong answer is recoverable; that is what lets the organisation learn and build trust. Why not the others: A looks at value but ignores data availability and recoverability; B matters for sponsorship but is not the primary criterion; D treats removing humans as the goal, which raises risk on the first delivery.",
+    "explanation": "Correct: C. A first project should be one where value can be measured, the data exists and a wrong answer is recoverable; that is what lets the organisation learn and build trust. Why not the others: A looks at value but ignores data availability and recoverability; B matters for sponsorship but is not the primary criterion; D treats breadth of automation as the goal, which raises the cost of error on a first delivery.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -300,7 +300,7 @@
     "id": "ccar-p-d1-09",
     "categoryKey": "solution-design",
     "difficulty": 2,
-    "prompt": "A manufacturer wants Claude to answer engineers' questions about 40,000 maintenance manuals that are updated by suppliers every month. Which approach gives the model access to this material in a way that stays current?",
+    "prompt": "A manufacturer wants Claude to answer engineers' questions about 40,000 maintenance manuals that are updated by suppliers every month. Which approach keeps the model's knowledge current with the least ongoing cost and effort?",
     "options": [
       {
         "key": "A",
@@ -308,7 +308,7 @@
       },
       {
         "key": "B",
-        "text": "An augmented LLM that retrieves relevant manual sections from a regularly refreshed index"
+        "text": "Retrieve the relevant manual sections at query time from an index rebuilt as manuals change"
       },
       {
         "key": "C",
@@ -460,15 +460,15 @@
       },
       {
         "key": "C",
-        "text": "A second supervising agent that watches the first one's actions and steps in when it errs"
+        "text": "A supervising agent that reviews each action, plus an automatic retry on each failed tool call"
       },
       {
         "key": "D",
-        "text": "Removing all finance-system write tools and reverting to a drafting-only assistant"
+        "text": "Removing the credit-note tool, plus manual approval of each reconciled invoice"
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Agents need engineered stopping conditions and safe tools: a turn budget with an explicit fallback bounds cost, and idempotent write tools make a repeated action harmless. Why not the others: A relies on instructions to enforce what code should enforce; C adds a second non-deterministic component to police the first; D over-corrects, since the business accepted automation with fallback, not its removal.",
+    "explanation": "Correct: B. Agents need engineered stopping conditions and safe tools: a turn budget with an explicit fallback bounds cost, and idempotent write tools make a repeated action harmless. Why not the others: A relies on instructions to enforce what code should enforce; C adds a second non-deterministic component to police the first, and retries prolong a run rather than bound it; D over-corrects, since the business accepted automation with fallback, not approval of every invoice.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -570,7 +570,7 @@
     "options": [
       {
         "key": "A",
-        "text": "The whole task must finish in under two seconds to meet the agreed response-time target"
+        "text": "The committee needs results within a few minutes, so coordination steps risk missing that window"
       },
       {
         "key": "B",
@@ -578,7 +578,7 @@
       },
       {
         "key": "C",
-        "text": "The task is a single extraction with a fixed schema applied to one document at a time"
+        "text": "Each review depends on the conclusions of the one before it, so they must run in sequence"
       },
       {
         "key": "D",
@@ -593,7 +593,7 @@
       "B",
       "D"
     ],
-    "explanation": "Correct: B and D. Multiple agents pay off when sub-tasks need separate context and tools, so one agent's prompt would be bloated and confused, and when they can proceed in parallel and be merged. Why not the others: A argues against multi-agent, which adds coordination latency; C is a job for a single call; E argues against multi-agent, which adds calls and cost.",
+    "explanation": "Correct: B and D. Multiple agents pay off when sub-tasks need separate context and tools, so one agent's prompt would be bloated and confused, and when they can proceed in parallel and be merged. Why not the others: A argues against multi-agent, which adds coordination latency; C describes dependent steps that a single agent or a fixed pipeline handles better than cooperating agents; E argues against multi-agent, which adds calls and cost.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -973,7 +973,7 @@
     "id": "ccar-p-d1-28",
     "categoryKey": "solution-design",
     "difficulty": 3,
-    "prompt": "A university's course-design assistant launches four subagents at once to write learning outcomes, design assessments, draft the weekly schedule and compile the reading list. Results are often inconsistent: assessments test outcomes that were never written and the schedule ignores the assessments. How should the orchestration change?",
+    "prompt": "A university's course-design assistant launches four subagents at once to write learning outcomes, design assessments, draft the weekly schedule and compile the reading list from a fixed departmental canon. Results are often inconsistent: assessments test outcomes that were never written and the schedule ignores the assessments. How should the orchestration change?",
     "options": [
       {
         "key": "A",
@@ -987,8 +987,8 @@
       },
       {
         "key": "C",
-        "text": "Produce the learning outcomes first, pass them to dependent steps, parallelise the rest",
-        "explanation": "Respects the dependencies while keeping parallelism where it is safe."
+        "text": "Chain outcomes, assessments and schedule in that order, with the reading list in parallel",
+        "explanation": "Respects each dependency in order while the independent reading list runs alongside."
       },
       {
         "key": "D",
@@ -997,7 +997,7 @@
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. Parallelisation suits independent subtasks; when later work depends on earlier outputs, those steps must run in sequence with the outputs passed forward, and only the genuinely independent pieces run concurrently. Why not the others: A adds a costly repair pass instead of fixing the ordering; B substitutes guesses for real inputs; D applies voting to a problem of dependencies, not of judgement.",
+    "explanation": "Correct: C. Parallelisation suits independent subtasks; when later work depends on earlier outputs, those steps must run in sequence with the outputs passed forward: outcomes, then assessments, then the schedule, with only the reading list, which depends on nothing else, running concurrently. Why not the others: A adds a costly repair pass instead of fixing the ordering; B substitutes guesses for real inputs; D applies voting to a problem of dependencies, not of judgement.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1147,8 +1147,8 @@
       },
       {
         "key": "C",
-        "text": "Move every case to an overnight batch run, with clinicians picking up drafts next morning",
-        "explanation": "Cheaper, but overnight turnaround breaks a two-hour commitment for most requests."
+        "text": "Add more parallel workers and automatic retries so the bulk of cases finish even sooner",
+        "explanation": "Raises throughput for the cases that were already fine; looping cases still have no time limit."
       },
       {
         "key": "D",
@@ -1157,7 +1157,7 @@
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. An SLA stated as a percentile must be measured as that percentile across the whole journey, and long-tail agent runs need a hard budget with a defined fallback so the commitment holds even when the agent struggles. Why not the others: B reports a metric that conceals the tail; C optimises cost at the expense of the time commitment; D trades away quality and still leaves runaway loops unbounded.",
+    "explanation": "Correct: A. An SLA stated as a percentile must be measured as that percentile across the whole journey, and long-tail agent runs need a hard budget with a defined fallback so the commitment holds even when the agent struggles. Why not the others: B reports a metric that conceals the tail; C speeds up the cases that already met the target and leaves the tail unbounded; D trades away quality and still leaves runaway loops unbounded.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1187,7 +1187,7 @@
       },
       {
         "key": "C",
-        "text": "The exact prompt wording and number of examples the triage prompt must always contain",
+        "text": "The prompt wording and number of examples the triage prompt is required to contain",
         "explanation": "Implementation details belong in design documents, not in an outcome-based SLA."
       },
       {
@@ -1197,15 +1197,15 @@
       },
       {
         "key": "E",
-        "text": "A cap on the number of agents and tools in the architecture so the design cannot grow",
-        "explanation": "Architecture size is an internal design choice, not a service outcome."
+        "text": "A target for the average number of tool calls the triage agent makes per document",
+        "explanation": "Tool-call counts are an internal efficiency metric, not an outcome downstream teams experience."
       }
     ],
     "correctKeys": [
       "A",
       "B"
     ],
-    "explanation": "Correct: A and B. A performance SLA should state measurable outcomes that consumers of the service experience: latency at a percentile measured end to end, and a quality threshold measured on labelled samples of real traffic. Why not the others: C fixes implementation details the team must stay free to change; D cites benchmarks that ignore these documents; E caps design choices rather than service outcomes.",
+    "explanation": "Correct: A and B. A performance SLA should state measurable outcomes that consumers of the service experience: latency at a percentile measured end to end, and a quality threshold measured on labelled samples of real traffic. Why not the others: C fixes implementation details the team must stay free to change; D cites benchmarks that ignore these documents; E measures internal efficiency rather than a service outcome.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1225,8 +1225,8 @@
     "options": [
       {
         "key": "A",
-        "text": "Retain every raw prompt and response in cold storage, unlinked to the adjuster's actions",
-        "explanation": "Storage alone, without outcome data, gives nothing to learn from."
+        "text": "Retain every raw prompt and response in a searchable archive for later analysis",
+        "explanation": "An archive alone carries no outcome signal; nothing says which drafts were wrong or why."
       },
       {
         "key": "B",
@@ -1253,7 +1253,7 @@
       "C",
       "D"
     ],
-    "explanation": "Correct: C and D. A controlled feedback loop captures outcome signal tied to specific outputs and feeds it back into the evaluation set that gates future changes, so the system improves without regressing. Why not the others: A stores data without outcomes; B closes the loop without any evaluation gate, risking silent regressions; E monitors operations rather than output quality.",
+    "explanation": "Correct: C and D. A controlled feedback loop captures outcome signal tied to specific outputs and feeds it back into the evaluation set that gates future changes, so the system improves without regressing. Why not the others: A stores outputs without any outcome signal to learn from; B closes the loop without any evaluation gate, risking silent regressions; E monitors operations rather than output quality.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1357,7 +1357,7 @@
       },
       {
         "key": "B",
-        "text": "A random mix of tiers per listing, so that the night's cost and latency average out"
+        "text": "The largest tier for the categories with the most violations, the smallest tier elsewhere"
       },
       {
         "key": "C",
@@ -1369,7 +1369,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. Model selection follows measured task performance: when the labelled set shows no meaningful accuracy gap, the smallest tier delivers the same quality at the lowest cost and latency, as a fixed-budget nightly batch requires. Why not the others: A pays for capability the evaluation says is unused; B adds unpredictable behaviour and cost for no gain; C hedges a choice the data has already settled.",
+    "explanation": "Correct: D. Model selection follows measured task performance: when the labelled set shows no meaningful accuracy gap, the smallest tier delivers the same quality at the lowest cost and latency, as a fixed-budget nightly batch requires. Why not the others: A pays for capability the evaluation says is unused; B pays for it in some categories on the same absent evidence; C hedges a choice the data has already settled.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1467,7 +1467,7 @@
       },
       {
         "key": "B",
-        "text": "Remove it from the eligibility explainer as well, since it adds cost and latency there"
+        "text": "Keep reasoning on both endpoints but cap its length on the IBAN lookup to limit the cost"
       },
       {
         "key": "C",
@@ -1479,7 +1479,7 @@
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. Prompting techniques are matched to the task: step-by-step reasoning pays off where there are rules to weigh and is pure overhead on a single-field lookup, so the two endpoints should use different prompts. Why not the others: A buys reasoning the lookup never uses; B discards a measured quality gain; D applies another technique uniformly instead of fitting technique to task.",
+    "explanation": "Correct: C. Prompting techniques are matched to the task: step-by-step reasoning pays off where there are rules to weigh and is pure overhead on a single-field lookup, so the two endpoints should use different prompts. Why not the others: A buys reasoning the lookup never uses; B still pays for reasoning the lookup never uses, just less of it; D applies another technique uniformly instead of fitting technique to task.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1549,11 +1549,11 @@
       },
       {
         "key": "D",
-        "text": "Lower the output token limit so that the model has less room to stray from the layout"
+        "text": "Add emphatic wording to the prose description, such as capitals and MUST, on each rule"
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. Showing the format beats describing it: complete few-shot examples pin down section order, heading names and table layout in a way prose cannot. Why not the others: B helps on reasoning tasks, not on reproducing a layout; C may improve adherence a little but leaves the ambiguity of a prose spec in place; D truncates output instead of shaping it.",
+    "explanation": "Correct: A. Showing the format beats describing it: complete few-shot examples pin down section order, heading names and table layout in a way prose cannot. Why not the others: B helps on reasoning tasks, not on reproducing a layout; C may improve adherence a little but leaves the ambiguity of a prose spec in place; D shouts a description that is still open to interpretation.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1682,7 +1682,7 @@
     "id": "ccar-p-d2-11",
     "categoryKey": "models-context",
     "difficulty": 3,
-    "prompt": "A ticketing marketplace's assistant sends a 7,000-token system prompt on each of 2 million calls a day, most of them simple order-status checks. Input tokens dominate the bill. Which TWO changes most directly cut cost per request without reducing capability? (Select TWO.)",
+    "prompt": "A ticketing marketplace's live-chat assistant sends a 7,000-token system prompt on each of 2 million calls a day, most of them simple order-status checks answered while the customer waits. Input tokens dominate the bill. Which TWO changes most directly cut cost per request without reducing capability? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -1690,7 +1690,7 @@
       },
       {
         "key": "B",
-        "text": "Raise max output tokens on every request so that no response is ever cut short"
+        "text": "Compress the system prompt each turn with a summarisation call before the main request"
       },
       {
         "key": "C",
@@ -1698,7 +1698,7 @@
       },
       {
         "key": "D",
-        "text": "Send each request to two models in parallel and keep whichever response was cheaper"
+        "text": "Move the order-status traffic to the Message Batches API for its discounted token price"
       },
       {
         "key": "E",
@@ -1709,7 +1709,7 @@
       "C",
       "E"
     ],
-    "explanation": "Correct: C and E. Caching a stable prefix means the 7,000 repeated tokens are read at a fraction of the price, and routing the simple majority to the smallest model that measurably does the job removes capability spend where it is not needed. Why not the others: A cuts tokens by removing something that was there for quality; B does nothing for input cost and may raise output cost; D doubles the spend.",
+    "explanation": "Correct: C and E. Caching a stable prefix means the 7,000 repeated tokens are read at a fraction of the price, and routing the simple majority to the smallest model that measurably does the job removes capability spend where it is not needed. Why not the others: A cuts tokens by removing something that was there for quality; B adds a model call to every request and the summary can drop rules; D's discount comes with asynchronous completion, which a customer waiting in a chat cannot accept.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1808,7 +1808,7 @@
     "id": "ccar-p-d2-14",
     "categoryKey": "models-context",
     "difficulty": 3,
-    "prompt": "An insurer runs multi-step reinsurance scenarios through Claude. The prompt says \"think step by step\" and dictates a rigid 20-step script, yet answers on the hardest cases stay shallow. The team wants deeper reasoning at controllable cost. What should the architect recommend?",
+    "prompt": "An insurer runs multi-step reinsurance scenarios through Claude. The prompt asks for reasoning in a thinking section before the answer, says \"think step by step\" and dictates a rigid 20-step script, yet answers on the hardest cases stay shallow. The team wants deeper reasoning at controllable cost. What should the architect recommend?",
     "options": [
       {
         "key": "A",
@@ -1862,8 +1862,8 @@
       },
       {
         "key": "C",
-        "text": "Strip the document headers and merge the files so the pack reads as a single specification",
-        "explanation": "Removing boundaries and sources makes attribution errors more likely, not less."
+        "text": "Keep the documents as one block but move the question after them so it is read last",
+        "explanation": "Moving the question helps, but without per-document tags and sources the attribution errors remain."
       },
       {
         "key": "D",
@@ -1872,7 +1872,7 @@
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. Anthropic's long-context guidance is to place long documents near the top with the query at the end, to wrap each document in its own tags with source metadata, and to have the model extract relevant quotes before answering. Why not the others: B adds emphasis without fixing structure; C removes the boundaries needed to attribute requirements; D fragments the pack and multiplies calls.",
+    "explanation": "Correct: A. Anthropic's long-context guidance is to place long documents near the top with the query at the end, to wrap each document in its own tags with source metadata, and to have the model extract relevant quotes before answering. Why not the others: B adds emphasis without fixing structure; C applies the ordering advice but leaves the documents unlabelled, so attribution stays unreliable; D fragments the pack and multiplies calls.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -1907,7 +1907,7 @@
       },
       {
         "key": "D",
-        "text": "Turn caching off, since it only pays off for apps handling many requests every second",
+        "text": "Turn caching off, since the write premium outweighs the savings at this request volume",
         "explanation": "Caching pays off whenever reuse falls within the lifetime; a longer lifetime fits this traffic."
       }
     ],
@@ -2141,13 +2141,13 @@
       },
       {
         "key": "B",
-        "text": "Keep each team's own prompt but circulate edits weekly so changes spread across variants",
-        "explanation": "Manual propagation is what caused the drift; it does not create a single source of truth."
+        "text": "A shared base prompt with product rules concatenated in and customer details written into the prose",
+        "explanation": "Concatenation keeps the rules in one place but writes customer data into the instructions."
       },
       {
         "key": "C",
-        "text": "Splice customer details directly into the instruction sentences so the prompt reads well",
-        "explanation": "Mixing data into instructions blurs the boundary the architect wants and invites confusion."
+        "text": "A prompt library where each product team keeps its own copy and a linter flags wording drift",
+        "explanation": "A linter detects drift after it happens; twelve copies remain and nothing separates data from instructions."
       },
       {
         "key": "D",
@@ -2156,7 +2156,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. A single versioned template keeps the fixed instructions in one place and fills product and customer variables at run time; XML tags around the variables separate data from instructions, and static content first makes the prefix cacheable. Why not the others: A creates a bloated catch-all prompt; B is the manual process that caused the drift; C merges data into instructions, the opposite of the goal.",
+    "explanation": "Correct: D. A single versioned template keeps the fixed instructions in one place and fills product and customer variables at run time; XML tags around the variables separate data from instructions, and static content first makes the prefix cacheable. Why not the others: A creates a bloated catch-all prompt; B keeps the rules in one place but writes the data into the instructions; C polices drift instead of removing its cause.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2186,17 +2186,17 @@
       },
       {
         "key": "C",
-        "text": "Omit the role, since a role only changes tone and not accuracy in specialist domains",
-        "explanation": "Role prompting can improve focus and domain performance, not just tone."
+        "text": "Role in the system prompt, rules and notes in the user turn, the request as a prefilled assistant turn",
+        "explanation": "A prefilled assistant turn starts Claude's reply; it is not the place to pose the request."
       },
       {
         "key": "D",
-        "text": "Role and rules in each user turn and an empty system prompt, so the model has less to read",
+        "text": "Role and rules in each user turn with an empty system prompt, so each turn carries its own instructions",
         "explanation": "Repeating stable rules per turn gains nothing and loses the system prompt's role-setting purpose."
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Anthropic recommends the system prompt to set Claude's role and the stable rules that apply to every request, and putting task-specific instructions and data, here the notes and the request, in the user turn. Why not the others: A puts changing data into the system prompt and defeats reuse; C underrates role prompting, which can improve accuracy; D moves stable rules out of their intended place.",
+    "explanation": "Correct: B. Anthropic recommends the system prompt to set Claude's role and the stable rules that apply to every request, and putting task-specific instructions and data, here the notes and the request, in the user turn. Why not the others: A puts changing data into the system prompt and defeats reuse; C puts the request where Claude's own answer should begin; D moves stable rules out of their intended place.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2395,7 +2395,7 @@
       },
       {
         "key": "B",
-        "text": "Applications call each other's agents to borrow missing integrations"
+        "text": "A shared REST gateway, with each application writing its own tool definitions"
       },
       {
         "key": "C",
@@ -2407,7 +2407,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. MCP fits many systems, many consumers and frequent churn: each owning team exposes its system once and every application discovers and reuses it. Why not the others: A repeats the integration work per application; B couples applications to one another for no architectural reason; C moves ownership away from the teams that know the systems and creates a release bottleneck.",
+    "explanation": "Correct: D. MCP fits many systems, many consumers and frequent churn: each owning team exposes its system once and every application discovers and reuses it. Why not the others: A repeats the integration work per application; B centralises transport but leaves every application maintaining its own tool definitions as systems churn; C moves ownership away from the teams that know the systems and creates a release bottleneck.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2506,7 +2506,7 @@
       },
       {
         "key": "B",
-        "text": "Chunk by clause and section, with overlap and a document and section header on each"
+        "text": "Chunk by clause, with overlap and a header giving the section and the terms it relies on"
       },
       {
         "key": "C",
@@ -2518,7 +2518,7 @@
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Chunking should follow the shape of the data: clause-aligned chunks with overlap and a contextual header keep each clause intact and tell the model which treaty and section it came from. Why not the others: A makes the fragments smaller and worse; C produces chunks too large to retrieve precisely or to fit several of in context; D floods the context with fragments instead of fixing them.",
+    "explanation": "Correct: B. Chunking should follow the shape of the data: clause-aligned chunks with overlap keep each clause intact, and a contextual header naming the treaty, the section and the defined terms the clause relies on gives the model the context the treaty keeps elsewhere. Why not the others: A makes the fragments smaller and worse; C produces chunks too large to retrieve precisely or to fit several of in context; D floods the context with fragments instead of fixing them.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2572,11 +2572,11 @@
     "id": "ccar-p-d3-07",
     "categoryKey": "integration",
     "difficulty": 4,
-    "prompt": "Adding a re-ranking step to an internal IT-helpdesk assistant raises answer accuracy from 84% to 91% and adds 400 ms. The agreed response-time SLA is 2.5 seconds and current p95 latency is 1.4 seconds. What should the architect decide?",
+    "prompt": "Adding a re-ranking step to an internal IT-helpdesk assistant raises answer accuracy from 84% to 91% and adds 400 ms at p95. The agreed response-time SLA is 2.5 seconds and current p95 latency is 1.4 seconds. What should the architect decide?",
     "options": [
       {
         "key": "A",
-        "text": "Reject it, because any added latency erodes the margin against the SLA"
+        "text": "Reject it, because a 400 ms rise cuts the headroom under the SLA by more than a third"
       },
       {
         "key": "B",
@@ -2584,7 +2584,7 @@
       },
       {
         "key": "C",
-        "text": "Adopt it only for requests that arrive outside business hours when traffic is lower"
+        "text": "Defer it until the SLA is renegotiated to 3 seconds, so the headroom stays as it is today"
       },
       {
         "key": "D",
@@ -2592,7 +2592,7 @@
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. An accuracy-latency trade-off is settled with numbers: a 7-point gain for 400 ms leaves p95 near 1.8 seconds against a 2.5-second SLA, a clear win worth documenting. Why not the others: A treats latency as the only metric; C makes answer quality depend on the clock; D shows users a worse answer first and complicates the experience for no latency reason.",
+    "explanation": "Correct: B. An accuracy-latency trade-off is settled with numbers: a 7-point gain for 400 ms leaves p95 near 1.8 seconds against a 2.5-second SLA, a clear win worth documenting. Why not the others: A quotes a true number but treats headroom as the goal rather than the SLA and accuracy together; C renegotiates a commitment the numbers show is already met; D shows users a worse answer first and complicates the experience for no latency reason.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2629,7 +2629,7 @@
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. Observability at scale means structure and sampling: traces that link every step of a session, metadata you can query, and full payloads only for a sample plus the failures you need to debug. Why not the others: A removes the information needed to diagnose anything; B keeps the cost problem and loses history; D makes the cost problem bigger and still searches raw text rather than structured steps.",
+    "explanation": "Correct: C. Observability at scale means structure and sampling: traces that link every step of a session, metadata you can query, and full payloads only for a sample plus the failures you need to debug. Why not the others: A removes the information needed to diagnose anything; B lowers storage cost but deletes the history needed when a claim goes wrong weeks later, and still leaves the conversations unstructured and slow to search; D makes the cost problem bigger and still searches raw text rather than structured steps.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2646,7 +2646,7 @@
     "id": "ccar-p-d3-09",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "A hospital's ward-planning agent needs to book patient transfers with an ambulance company that runs its own dispatch agent. Each side insists that its internal systems and tools stay private. Which connection mechanism fits?",
+    "prompt": "A hospital's ward-planning agent needs to book patient transfers with an ambulance company that runs its own dispatch agent. Neither organisation will expose its internal systems to the other. Which connection mechanism fits?",
     "options": [
       {
         "key": "A",
@@ -2658,7 +2658,7 @@
       },
       {
         "key": "C",
-        "text": "An agent-to-agent protocol: the agents exchange messages and keep their tools private"
+        "text": "An agent-to-agent protocol through which the two agents exchange booking messages"
       },
       {
         "key": "D",
@@ -2666,7 +2666,7 @@
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. When autonomous agents under different ownership must cooperate without exposing internals, agent-to-agent communication fits: each side keeps its tools behind its own agent and they exchange messages at the boundary. Why not the others: A and B expose one organisation's systems to the other's agent, which was ruled out; D couples both organisations to shared data more tightly than either would accept.",
+    "explanation": "Correct: C. When autonomous agents under different ownership must cooperate without exposing internals, agent-to-agent communication fits: each side keeps its systems behind its own agent and they exchange messages at the boundary. Why not the others: A hands one side credentials for the other's system; B lets one agent call tools on a server the other organisation runs, whereas here two independently owned agents must cooperate as peers; D couples both organisations to shared data more tightly than either would accept.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2683,7 +2683,7 @@
     "id": "ccar-p-d3-10",
     "categoryKey": "integration",
     "difficulty": 2,
-    "prompt": "A claims-intake service in an insurer's existing pipeline must call Claude once per submitted form to label its claim type. The pipeline is deterministic, the service owns the whole flow, and no tool discovery is needed. Which integration mechanism is most appropriate?",
+    "prompt": "A claims-intake service in an insurer's existing pipeline must call Claude once per submitted form to label its claim type from a fixed list, returning the label to the code that already routes forms. Which integration mechanism is most appropriate?",
     "options": [
       {
         "key": "A",
@@ -2703,7 +2703,7 @@
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. A single deterministic model call inside existing application code is a direct API integration; MCP and agents add discovery and autonomy this pipeline does not want. Why not the others: B inverts the direction, since the service calls the model rather than the model calling the service; C and D add planning and messaging overhead to a one-shot labelling step.",
+    "explanation": "Correct: A. A single model call inside existing application code, with a fixed output and nothing for the model to plan, is a direct API integration; MCP and agents add discovery and autonomy this step does not use. Why not the others: B inverts the direction, since the service calls the model rather than the model calling the service; C and D add planning and messaging overhead to a one-shot labelling step.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2758,7 +2758,7 @@
     "id": "ccar-p-d3-13",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "An agent has three tools named `search_docs`, `find_docs` and `lookup_docs` with similar one-line descriptions, and it frequently picks the wrong one. What should the architect change first?",
+    "prompt": "An agent has three tools named `search_docs`, `find_docs` and `lookup_docs` that all query the same documentation index and return much the same results, each with a similar one-line description, and it frequently picks the wrong one. What should the architect change first?",
     "options": [
       {
         "key": "A",
@@ -2770,15 +2770,15 @@
       },
       {
         "key": "C",
-        "text": "Increase retries so the agent eventually lands on the right tool for each request"
+        "text": "Add two or three worked routing examples to the system prompt showing which tool to call"
       },
       {
         "key": "D",
-        "text": "Present the three tools in random order each request to avoid bias toward the first"
+        "text": "Expand each of the three descriptions with more detail while keeping the tools separate"
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. Tool selection is driven by names and descriptions; overlapping tools with vague one-liners are the root cause, so consolidate and describe precisely, including when not to use each. Why not the others: B adds indirection on top of the ambiguity; C makes errors slower and more expensive rather than rarer; D shuffles a problem it does not solve.",
+    "explanation": "Correct: A. Tool selection is driven by names and descriptions; overlapping tools with vague one-liners are the root cause, so consolidate and describe precisely, including when not to use each. Why not the others: B adds indirection on top of the ambiguity; C teaches a few cases without removing the overlap that causes the confusion; D documents three tools that still do the same thing.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -2870,7 +2870,7 @@
     "id": "ccar-p-d3-16",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "A RAG assistant for a field-service company must answer two kinds of query: free-text questions about repair procedures, and lookups of a specific job by job number. Which TWO measures best match retrieval to these query patterns? (Select TWO.)",
+    "prompt": "A RAG assistant for a field-service company must answer two kinds of query: free-text questions about repair procedures, which usually name an equipment model and often concern recent service bulletins, and lookups of a specific job by job number. Which TWO measures best match retrieval to these query patterns? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -2878,11 +2878,11 @@
       },
       {
         "key": "B",
-        "text": "Retrieve the top 100 chunks for every query so the right one is always in context"
+        "text": "Raise the retrieval depth to the top 100 chunks for each query and re-rank before answering"
       },
       {
         "key": "C",
-        "text": "Remove job numbers from the index so they cannot confuse semantic search"
+        "text": "Index job numbers as plain text alongside the procedure chunks so one semantic search covers both"
       },
       {
         "key": "D",
@@ -2897,7 +2897,7 @@
       "D",
       "E"
     ],
-    "explanation": "Correct: D and E. Different query patterns call for different retrieval paths, and metadata filtering narrows the candidate set before semantic ranking runs. Why not the others: A leaves the exact-identifier weakness in place and hopes the model compensates; B floods the context with noise; C deletes the data the lookup use case depends on.",
+    "explanation": "Correct: D and E. Different query patterns call for different retrieval paths, and metadata filtering narrows the candidate set before semantic ranking runs. Why not the others: A leaves the exact-identifier weakness in place and hopes the model compensates; B floods the context and the re-ranker with noise instead of routing by query type; C puts identifiers into an index that matches meaning, not exact strings.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3091,13 +3091,13 @@
       },
       {
         "key": "B",
-        "text": "Create one shared administrator account for every scheduled automation job",
-        "explanation": "A shared admin identity maximises privilege and blast radius and makes jobs' actions indistinguishable."
+        "text": "Create a dedicated service account for the agent with the finance and dispatch roles the manager had",
+        "explanation": "A service account fixes who the agent acts as but keeps the manager's broad permissions."
       },
       {
         "key": "C",
-        "text": "Extend the manager's refresh token lifetime and keep it in the secrets manager",
-        "explanation": "Keeping a departed employee's credential alive defeats offboarding and leaves an orphaned token in use."
+        "text": "Move the manager's refresh token into a secrets manager with automatic rotation",
+        "explanation": "Rotation protects the secret, but the agent still acts under a person's broad delegated permissions."
       },
       {
         "key": "D",
@@ -3106,7 +3106,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. An agent that runs without a user should not borrow a person's delegated credentials; it needs its own workload identity scoped to the systems and operations the job uses, so actions are attributable and offboarding does not break it. Why not the others: A and C keep a human's broad permissions attached to the agent; B puts every job under one maximally privileged shared account.",
+    "explanation": "Correct: D. An agent that runs without a user should not borrow a person's delegated credentials; it needs its own workload identity scoped to the systems and operations the job uses, so actions are attributable and offboarding does not break it. Why not the others: A and C keep a human's broad permissions attached to the agent; B gives the agent an identity of its own but the whole of the manager's access with it.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3496,8 +3496,8 @@
       },
       {
         "key": "C",
-        "text": "Keep retrying immediately but fire several identical requests in parallel to get through",
-        "explanation": "Parallel retries amplify the overload, worsen throttling and multiply duplicate bookings."
+        "text": "Add exponential backoff in the tool layer and let the model decide whether to re-issue a booking",
+        "explanation": "Backoff handles the throttling but leaves duplicate bookings to the model's judgement."
       },
       {
         "key": "D",
@@ -3506,7 +3506,7 @@
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Rate-limit handling belongs in deterministic code: respect Retry-After, back off with capped jitter, make non-idempotent operations such as bookings safe to repeat with idempotency keys, and return a clear result when retries run out so the model does not loop. Why not the others: A leaves timing to the model; C makes the overload worse; D treats capacity as the only issue and ignores duplicate writes.",
+    "explanation": "Correct: B. Rate-limit handling belongs in deterministic code: respect Retry-After, back off with capped jitter, make non-idempotent operations such as bookings safe to repeat with idempotency keys, and return a clear result when retries run out so the model does not loop. Why not the others: A leaves timing to the model; C handles the rate limit but not the duplicates; D treats capacity as the only issue and ignores duplicate writes.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3562,12 +3562,12 @@
     "id": "ccar-p-d3-34",
     "categoryKey": "integration",
     "difficulty": 4,
-    "prompt": "A grocer's product assistant has an accuracy target of 88% and a p95 latency budget of 2.5 s; differences under one point are noise. Config 1 (top-5): 86%, 1.3 s. Config 2 (top-10): 90%, 1.6 s. Config 3 (top-10, extended thinking): 91%, 3.8 s. Config 4 (top-20): 90.5%, 2.2 s. Which decision is best justified?",
+    "prompt": "A grocer's product assistant has an accuracy target of 88% and a p95 latency budget of 2.5 s; differences under one point are noise. Config 1 (top-5): 86%, 1.3 s. Config 2 (top-10): 90%, 1.6 s. Config 3 (top-10, extended thinking): 90.5%, 3.8 s. Config 4 (top-20): 90.5%, 2.2 s. Which decision is best justified?",
     "options": [
       {
         "key": "A",
         "text": "Config 3, as the most accurate, and ask stakeholders to relax the latency budget",
-        "explanation": "Its one-point gain is within noise and it breaches the agreed latency budget by a wide margin."
+        "explanation": "Its half-point gain is within noise and it breaches the agreed latency budget by a wide margin."
       },
       {
         "key": "B",
@@ -3582,11 +3582,11 @@
       {
         "key": "D",
         "text": "Config 4, as the most accurate option that still fits inside the latency budget",
-        "explanation": "Its half-point edge over config 2 is within noise, while costing latency headroom and more tokens."
+        "explanation": "Its half-point edge over config 2 is within noise, while costing latency headroom and twice the retrieved context."
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. A justified decision meets the agreed targets and does not pay for differences the evaluation cannot distinguish; config 2 clears 88% with margin at 1.6 s, and recording rejected options keeps it reviewable. Why not the others: A breaks the latency budget for a within-noise gain; B fails the accuracy target outright; D treats a half-point, within-noise difference as real while spending headroom.",
+    "explanation": "Correct: C. A justified decision meets the agreed targets and does not pay for differences the evaluation cannot distinguish; config 2 clears 88% with margin at 1.6 s, and recording rejected options keeps it reviewable. Why not the others: A breaks the latency budget for a within-noise gain; B fails the accuracy target outright; D treats a half-point, within-noise difference as real while spending headroom on twice the context.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3698,7 +3698,7 @@
     "id": "ccar-p-d3-37",
     "categoryKey": "integration",
     "difficulty": 3,
-    "prompt": "A chemicals manufacturer is designing RAG over safety procedures with numbered steps and tables of exposure limits. Operators usually ask about one step, but answers are only safe when the surrounding steps and limits are included. Which TWO design choices fit best? (Select TWO.)",
+    "prompt": "A chemicals manufacturer is designing RAG over safety procedures with numbered steps and tables of exposure limits. Operators usually ask about one step, but answers are only safe when the surrounding steps and limits are included, and first-stage search often returns near-duplicate steps from similar procedures. Which TWO design choices fit best? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -3723,14 +3723,14 @@
       {
         "key": "E",
         "text": "Retrieve a wider candidate set, then re-rank it and keep only the most relevant few",
-        "explanation": "Correct: a re-ranking stage improves which candidates reach the model without reducing first-stage recall."
+        "explanation": "Correct: a re-ranking stage, scoring candidates against the query with the procedure identifier as metadata, keeps the operator's own procedure ahead of look-alike steps."
       }
     ],
     "correctKeys": [
       "C",
       "E"
     ],
-    "explanation": "Correct: C and E. Matching on small units while returning the larger parent section (small-to-big retrieval) gives precise hits without losing the surrounding steps and limits that safety answers depend on, and retrieving broadly then re-ranking improves the precision of what reaches the model. Why not the others: A fragments procedures; B makes step-level matching unreliable; D deletes the tables operators need.",
+    "explanation": "Correct: C and E. Matching on small units while returning the larger parent section (small-to-big retrieval) gives precise hits without losing the surrounding steps and limits that safety answers depend on, and retrieving broadly then re-ranking against the query, with the procedure identifier carried as metadata, keeps the operator's own procedure ahead of near-identical steps from other procedures. Why not the others: A fragments procedures; B makes step-level matching unreliable; D deletes the tables operators need.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -3798,7 +3798,7 @@
     "options": [
       {
         "key": "A",
-        "text": "Move all queries to a smaller, faster model and accept whatever accuracy results"
+        "text": "Route all queries to a smaller, faster model tier and keep the retrieval unchanged"
       },
       {
         "key": "B",
@@ -3814,7 +3814,7 @@
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. The evidence shows the model uses only the top five re-ranked chunks, so sending fewer input tokens cuts latency and cost where the time is actually spent, and the eval set confirms accuracy is unchanged. Why not the others: A trades accuracy blindly for speed; B removes the stage that puts the right chunks first and saves little; D rewrites the index and risks the fragment problems that cost accuracy.",
+    "explanation": "Correct: C. The evidence shows the model uses only the top five re-ranked chunks, so sending fewer input tokens cuts latency and cost where the time is actually spent, and the eval run is how you confirm accuracy holds. Why not the others: A changes the model without evidence that generation, rather than the oversized context, is where the time goes; B removes the stage that puts the right chunks first and saves little; D cuts tokens by the same factor but rewrites the index and risks fragmenting the chunks the answers draw on.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4058,7 +4058,7 @@
     "id": "ccar-p-d4-05",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "An e-commerce company runs six Claude workloads, from product tagging to fraud-case summaries, and the board wants the monthly model bill down by 40%. An engineer suggests moving all six to the cheapest model tier this week. What should the architect do before agreeing?",
+    "prompt": "An e-commerce company runs six Claude workloads, from product tagging to fraud-case summaries, and the board wants the monthly model bill down by 40%. An engineer suggests moving all six to the cheapest model tier this week. How should the architect respond?",
     "options": [
       {
         "key": "A",
@@ -4066,7 +4066,7 @@
       },
       {
         "key": "B",
-        "text": "Refuse, since model downgrades tend to lower quality and should not be entertained"
+        "text": "Turn on prompt caching for all six workloads and keep the current models in place"
       },
       {
         "key": "C",
@@ -4074,11 +4074,11 @@
       },
       {
         "key": "D",
-        "text": "Switch only the costliest workload to the smallest model and wait for complaints"
+        "text": "Move every workload to the mid tier, since vendor benchmarks place it close to the largest"
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. Cost optimisation starts by measuring where the tokens go, then applies the cheapest change that holds quality, verified by evaluation; the smallest model may suit some workloads and not others. Why not the others: A and D change production without measuring quality; B rejects a reasonable goal instead of finding the safe route to it.",
+    "explanation": "Correct: C. Cost optimisation starts by measuring where the tokens go, then applies the cheapest change that holds quality, verified by evaluation; the smallest model may suit some workloads and not others. Why not the others: A and D change production on general evidence rather than the company's own evaluation; B applies one saving everywhere without measuring where the spend is or whether it reaches the target.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4106,7 +4106,7 @@
       },
       {
         "key": "C",
-        "text": "Keep the old version indefinitely, since a system that is working should not be changed"
+        "text": "Widen the hand check to 200 requests and move the whole user base over once they pass"
       },
       {
         "key": "D",
@@ -4114,7 +4114,7 @@
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. A model change is a change to system behaviour: evaluate it against the suite, then expose it gradually with monitoring and a rollback path. Why not the others: A makes the whole user base the test; C ignores deprecation and forgoes improvements; D never completes the migration and gains no evidence about production behaviour.",
+    "explanation": "Correct: B. A model change is a change to system behaviour: evaluate it against the suite, then expose it gradually with monitoring and a rollback path. Why not the others: A makes the whole user base the test; C scales up an unlabelled spot check that still measures nothing against the suite and has no rollback plan; D never completes the migration and gains no evidence about production behaviour.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4168,11 +4168,11 @@
     "id": "ccar-p-d4-08",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A summarisation feature using a small, fast model produces accurate summaries of short emails but consistently drops key points from 50-page reports, even with a well-structured prompt. Which system issue is this?",
+    "prompt": "A summarisation feature using a small, fast model produces accurate summaries of short emails but, on 50-page reports passed in full in the prompt, returns well-formed summaries that consistently omit key points, even with a well-structured prompt. Which system issue is this?",
     "options": [
       {
         "key": "A",
-        "text": "A hallucination, since the summaries contain content the source reports do not"
+        "text": "An output-length problem, since max_tokens cuts the summary off before the final points"
       },
       {
         "key": "B",
@@ -4180,7 +4180,7 @@
       },
       {
         "key": "C",
-        "text": "A retrieval failure, since the wrong parts of the long reports are being fetched"
+        "text": "A context-window overflow, since a 50-page report exceeds what the model can take in"
       },
       {
         "key": "D",
@@ -4188,7 +4188,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. The same prompt works on easy inputs and fails on hard ones, which points to the model's capability on long, dense documents rather than the prompt; the fix is a more capable model or decomposition. Why not the others: A describes invented content, but the problem here is omission; B is unlikely when the identical prompt succeeds on short inputs; C does not apply, as there is no retrieval step.",
+    "explanation": "Correct: D. The same prompt works on easy inputs and fails on hard ones, which points to the model's capability on long, dense documents rather than the prompt; the fix is a more capable model or decomposition. Why not the others: A would show as a summary cut off part-way, not a well-formed one that omits points; B is unlikely when the identical prompt succeeds on short inputs; C does not fit, since a 50-page report sits well inside the context window and an overflow would fail the call rather than return a tidy summary.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4213,7 +4213,7 @@
       },
       {
         "key": "B",
-        "text": "A model mismatch; move to a larger model that will know the correct tracking numbers"
+        "text": "A sampling issue; set temperature to zero so the model stops inventing values"
       },
       {
         "key": "C",
@@ -4225,7 +4225,7 @@
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. Fabricating a value to fill a gap is a hallucination; the fix is to specify the empty-result behaviour in the prompt and to check output values against what the tool actually returned. Why not the others: B fails because no model knows tracking numbers it was not given; C misreads a correct empty result as a failure; D invents a cause the scenario does not describe.",
+    "explanation": "Correct: A. Fabricating a value to fill a gap is a hallucination; the fix is to specify the empty-result behaviour in the prompt and to check output values against what the tool actually returned. Why not the others: B lowers variation, but a deterministic model invents a number just as readily when nothing tells it what to do with an empty result; C misreads a correct empty result as a failure; D invents a cause the scenario does not describe.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4242,7 +4242,7 @@
     "id": "ccar-p-d4-10",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "An assistant told to \"answer in two sentences\" keeps producing long answers. Inspection of the system prompt finds a later section that says \"explain your reasoning fully\". Which issue is this?",
+    "prompt": "An assistant told to \"answer in two sentences\" keeps producing long answers. Inspection of the short system prompt finds a later section that says \"explain your reasoning fully\". Which issue is this?",
     "options": [
       {
         "key": "A",
@@ -4254,7 +4254,7 @@
       },
       {
         "key": "C",
-        "text": "A hallucination, since the model is generating content the user did not ask for"
+        "text": "Too few examples; add two short sample answers so the model sees the expected length"
       },
       {
         "key": "D",
@@ -4262,7 +4262,7 @@
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Two instructions that cannot both be satisfied are a prompt defect; the model is simply following one of them, and the author should remove the conflict. Why not the others: A asks a model to resolve an ambiguity the author should remove; C is wrong because the content is relevant, just too long; D is not indicated by anything in the scenario, as the prompt is short.",
+    "explanation": "Correct: B. Two instructions that cannot both be satisfied are a prompt defect; the model is simply following one of them, and the author should remove the conflict. Why not the others: A asks a model to resolve an ambiguity the author should remove; C adds examples that still sit beside a contradictory instruction; D is not indicated, since the prompt is short and the failure is consistent rather than intermittent.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4279,7 +4279,7 @@
     "id": "ccar-p-d4-11",
     "categoryKey": "evaluation-testing",
     "difficulty": 4,
-    "prompt": "A document-analysis pipeline's p95 latency is 9 seconds. Tracing shows three sequential model calls of about 2.5 seconds each plus a 1.5-second retrieval step, and the second and third calls do not depend on each other. Which optimisation gives the largest latency reduction without changing quality?",
+    "prompt": "A document-analysis pipeline's p95 latency is 9 seconds. Tracing shows a 1.5-second retrieval step followed by three sequential model calls of about 2.5 seconds each: the first call summarises the retrieval output, and the second and third calls each take that summary as input and nothing from each other. Which optimisation gives the largest latency reduction without changing quality?",
     "options": [
       {
         "key": "A",
@@ -4295,11 +4295,11 @@
       },
       {
         "key": "D",
-        "text": "Remove the retrieval step and rely on the model's own knowledge of the documents"
+        "text": "Stream the output of the final call so the user sees the first tokens sooner"
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. The trace shows two independent calls running in sequence; running them in parallel removes a whole 2.5-second call from the critical path with no change to outputs. Why not the others: B cuts time-to-first-token on cached prefixes but does not remove generation time; C changes quality, which the question rules out; D removes grounding and will change answers.",
+    "explanation": "Correct: A. The trace shows that the second and third calls depend on the first but not on each other; running them in parallel removes a whole 2.5-second call from the critical path with no change to outputs. Why not the others: B cuts time-to-first-token on cached prefixes but does not remove generation time; C changes quality, which the question rules out; D makes the wait feel shorter but the pipeline still finishes at the same time.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4316,7 +4316,7 @@
     "id": "ccar-p-d4-12",
     "categoryKey": "evaluation-testing",
     "difficulty": 3,
-    "prompt": "A nightly job classifies 300,000 documents. Results are needed by the next morning and nobody waits on an individual document. Which change most reduces cost without changing the model or the prompt?",
+    "prompt": "A nightly job classifies 300,000 documents, each sent with a short classification instruction. Results are needed by the next morning and nobody waits on an individual document. Which change most reduces cost without changing the model or the prompt?",
     "options": [
       {
         "key": "A",
@@ -4328,15 +4328,15 @@
       },
       {
         "key": "C",
-        "text": "Retry each request several times and keep the cheapest response that comes back"
+        "text": "Enable prompt caching on the shared classification instruction sent with each document"
       },
       {
         "key": "D",
-        "text": "Submit the documents through the batch API, trading unneeded latency for a lower price"
+        "text": "Submit the documents through the Message Batches API and collect the results in the morning"
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. Batch processing is the designed trade: asynchronous completion within a window in exchange for a lower price, which fits a nightly job with no interactive user. Why not the others: A finishes faster but does not cost less; B changes the inputs and therefore the results; C makes no sense, since pricing is per token and retries only add cost.",
+    "explanation": "Correct: D. Batch processing is the designed trade: asynchronous completion within a window in exchange for a lower price on every token, which fits a nightly job with no interactive user. Why not the others: A finishes faster but does not cost less; B changes the inputs and therefore the results; C would cache a shared prefix too short to qualify, and the documents that follow it never repeat.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4357,7 +4357,7 @@
     "options": [
       {
         "key": "A",
-        "text": "A demo script showing the assistant's best answers to executives and the regulator"
+        "text": "A test set drawn from the doctor queries used to tune the prompt, scored by an LLM judge"
       },
       {
         "key": "B",
@@ -4369,18 +4369,18 @@
       },
       {
         "key": "D",
-        "text": "A single aggregate quality score so results are simple to communicate to leadership"
+        "text": "A large synthetic test set generated by the model and graded by an LLM judge with no clinician"
       },
       {
         "key": "E",
-        "text": "An evaluation run only on the final day before launch so it reflects the shipped version"
+        "text": "Monitoring of live answers after launch, offered to the regulator in place of pre-launch tests"
       }
     ],
     "correctKeys": [
       "B",
       "C"
     ],
-    "explanation": "Correct: B and C. A regulated setting needs a clean held-out set with reference answers, so scores are not inflated by tuning, plus adversarial cases graded by people who know the domain, showing that the boundaries hold under attack. Why not the others: A is marketing, not evaluation; D hides the per-category failures a regulator will ask about; E leaves no time to act on the findings.",
+    "explanation": "Correct: B and C. A regulated setting needs a clean held-out set with reference answers, so scores are not inflated by tuning, plus adversarial cases graded by people who know the domain, showing that the boundaries hold under attack. Why not the others: A reuses the tuning data, so its scores are inflated, and leaves no expert in the loop; D scales a test set that nobody with domain knowledge has checked; E offers after-the-fact monitoring where the regulator asked for pre-launch evidence.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -4453,7 +4453,7 @@
       },
       {
         "key": "C",
-        "text": "Raise `max_tokens` on every turn so the model can restate the history it needs itself"
+        "text": "Move the whole conversation history into the system prompt each turn so that it is cached"
       },
       {
         "key": "D",
@@ -4468,7 +4468,7 @@
       "B",
       "E"
     ],
-    "explanation": "Correct: B and E. Context management for long sessions means compacting history and clearing bulky tool outputs once they have served their purpose, while preserving the facts still needed. Why not the others: A breaks the assistant, because each request is stateless and the system prompt must be sent every time; C adds output tokens rather than removing input tokens; D destroys information before it has been used.",
+    "explanation": "Correct: B and E. Context management for long sessions means compacting history and clearing bulky tool outputs once they have served their purpose, while preserving the facts still needed. Why not the others: A breaks the assistant, because each request is stateless and the system prompt must be sent every time; C still sends the whole history every turn, since caching lowers the price of those tokens, not their number, and the history keeps growing; D destroys information before it has been used.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -5189,11 +5189,11 @@
     "options": [
       {
         "key": "A",
-        "text": "In front of every single action, so that nothing happens until a person approves"
+        "text": "In front of each action, with approvals batched into one queue to limit the delay"
       },
       {
         "key": "B",
-        "text": "Nowhere, because the 25,000 euro ceiling on contractor jobs is already a control"
+        "text": "On the tenant-notice step, since the 25,000 euro ceiling already bounds the bookings"
       },
       {
         "key": "C",
@@ -5205,7 +5205,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. A human gate belongs where an action is costly or hard to reverse, such as committing money to a contractor; low-risk, reversible steps like drafting and ticket updates can run unattended. Why not the others: A removes the efficiency the agent was meant to bring; B mistakes a spending ceiling for oversight; C reviews bookings after the cost has already been committed.",
+    "explanation": "Correct: D. A human gate belongs where an action is costly or hard to reverse, such as committing money to a contractor; low-risk, reversible steps like drafting and ticket updates can run unattended. Why not the others: A still stalls every step on a person, batched or not; B gates a reversible draft and mistakes a spending ceiling for oversight of the bookings; C reviews bookings after the cost has already been committed.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -5299,11 +5299,11 @@
     "options": [
       {
         "key": "A",
-        "text": "The model is malfunctioning; redeploy it and re-run every affected application"
+        "text": "A calibration issue; add a few-shot example from each school so the ratings even out"
       },
       {
         "key": "B",
-        "text": "The stripped fields were not the issue; restore them so the model has full context"
+        "text": "A model limitation; move to the largest tier, which is less likely to pick up spurious patterns"
       },
       {
         "key": "C",
@@ -5311,11 +5311,11 @@
       },
       {
         "key": "D",
-        "text": "The pattern is coincidence; take no action until more applications are collected"
+        "text": "A proxy; strip the school field and re-run the same validation set before redeploying"
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. Removing explicit demographic fields does not remove bias when other inputs stand in for them; a school can track ethnicity or income. The response is to find the proxies, measure outcomes by group and make fairness tests a standing part of evaluation. Why not the others: A treats a data problem as an outage; B reintroduces the direct attributes; D ignores a systematic disparity with legal consequences.",
+    "explanation": "Correct: C. Removing explicit demographic fields does not remove bias when other inputs stand in for them; a school can track ethnicity or income. The response is to find the proxies, measure outcomes by group and make fairness tests a standing part of evaluation. Why not the others: A papers over the pattern with examples and measures nothing; B hopes a bigger model ignores a signal that is in the data, with no measurement; D removes one proxy while others remain, and re-runs a set that never measures outcomes by group.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -5341,7 +5341,7 @@
       },
       {
         "key": "B",
-        "text": "Add a prompt line telling the model to ignore document instructions, then close the issue"
+        "text": "Add a prompt line telling the model to ignore instructions that appear inside documents"
       },
       {
         "key": "C",
@@ -5349,11 +5349,11 @@
       },
       {
         "key": "D",
-        "text": "Stop accepting uploaded contracts and answer only from the model's training knowledge"
+        "text": "Run a second model call that classifies each upload as injection or clean before review"
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. Indirect prompt injection is a trust-boundary problem: content from outside the system is data, not instructions, and the limits on what the assistant can reveal or do must hold in code whatever the model is persuaded to say. Why not the others: B relies on the prompt alone, which the test already showed is not enough; C blocks one phrasing of an unbounded set; D removes the product's core capability.",
+    "explanation": "Correct: A. Indirect prompt injection is a trust-boundary problem: content from outside the system is data, not instructions, and the limits on what the assistant can reveal or do must hold in code whatever the model is persuaded to say. Why not the others: B still leaves the boundary enforced only by the model's compliance, which an injected instruction is designed to override; C blocks one phrasing of an unbounded set; D adds a classifier that can itself be evaded and still leaves the limits enforced by nothing but the model.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -5374,15 +5374,15 @@
     "options": [
       {
         "key": "A",
-        "text": "Tuning replies to sound as human as possible so customers feel at ease"
+        "text": "A link in the page footer to the company's published AI-use policy"
       },
       {
         "key": "B",
-        "text": "Keeping the system prompt confidential so that rivals cannot copy the assistant's tone"
+        "text": "A note that an AI may have helped, appended to the transcript sent after the chat"
       },
       {
         "key": "C",
-        "text": "Choosing the largest available model so answers are correct more often"
+        "text": "Logging every conversation so the regulator can audit how the assistant replied"
       },
       {
         "key": "D",
@@ -5390,7 +5390,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. Transparency in deployment means customers know they are dealing with an AI, understand what it can and cannot do, and can reach a person when the matter is consequential; that is what regulators and ethics guidance ask for. Why not the others: A works against transparency by hiding the AI's nature; B is confidentiality, a different concern; C is about accuracy, a separate obligation.",
+    "explanation": "Correct: D. Transparency in deployment means customers know they are dealing with an AI, understand what it can and cannot do, and can reach a person when the matter is consequential; that is what regulators and ethics guidance ask for. Why not the others: A puts the disclosure where few customers look; B tells them after the fact; C serves accountability to the regulator, not openness with the customer.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -5530,15 +5530,15 @@
       },
       {
         "key": "C",
-        "text": "Assume any cloud deployment is acceptable because the provider is a well-known company"
+        "text": "Rely on the model vendor's SOC 2 report as evidence that the deployment is compliant"
       },
       {
         "key": "D",
-        "text": "Run the model on employees' laptops so the agency avoids cloud compliance obligations"
+        "text": "Use the provider's commercial cloud region and cover the gap with a data-processing addendum"
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. FedRAMP compliance is a property of the authorised environment, not of the model: the architect must verify that the platform used carries the authorisation and keep the agency's data within that boundary. Why not the others: B changes nothing about where the data goes; C substitutes reputation for authorisation; D is not feasible for a hosted model and does not remove the obligations.",
+    "explanation": "Correct: A. FedRAMP compliance is a property of the authorised environment, not of the model: the architect must verify that the platform used carries the authorisation and keep the agency's data within that boundary. Why not the others: B changes nothing about where the data goes; C offers a different attestation that does not satisfy FedRAMP; D keeps the data outside the authorised boundary, which a contract cannot cure.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -5559,11 +5559,11 @@
     "options": [
       {
         "key": "A",
-        "text": "LLMs cannot do the arithmetic that dosage calculations need reliably enough"
+        "text": "LLMs make arithmetic slips often enough that dosage sums should be done in code"
       },
       {
         "key": "B",
-        "text": "LLM latency is too high for a patient-facing channel such as this one"
+        "text": "LLM answers vary between identical requests, so patients could receive different dosages"
       },
       {
         "key": "C",
@@ -5571,11 +5571,11 @@
       },
       {
         "key": "D",
-        "text": "LLMs cannot be used in healthcare under current regulation, so the design is unlawful"
+        "text": "Healthcare regulation in most jurisdictions bars LLMs from patient-facing clinical advice"
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. The decisive failure mode is confident error: fluency is not accuracy, and where a wrong answer can cause serious harm the design needs human validation before the answer reaches the patient. Why not the others: A is not decisive, since arithmetic can be checked in code; B is manageable and not a safety argument; D overstates the position, since healthcare use is possible with appropriate controls.",
+    "explanation": "Correct: C. The decisive failure mode is confident error: fluency is not accuracy, and where a wrong answer can cause serious harm the design needs human validation before the answer reaches the patient. Why not the others: A is real but is handled by doing the arithmetic in code; B is manageable with templates and settings and is not the core safety argument; D overstates the position, since such use is possible with appropriate controls.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -5612,14 +5612,14 @@
       },
       {
         "key": "E",
-        "text": "A faster response-time target so customers get answers to their disputes sooner"
+        "text": "A weekly audit of a random 10% sample of the replies already sent to customers"
       }
     ],
     "correctKeys": [
       "B",
       "D"
     ],
-    "explanation": "Correct: B and D. A requirement that none may reach the customer calls for hard controls: an accountable person signs off each outgoing reply, and an automated check surfaces every amount and promise so the reviewer verifies it against the account. Why not the others: A and C lower the error rate but cannot guarantee zero; E is about speed and does nothing for accuracy.",
+    "explanation": "Correct: B and D. A requirement that none may reach the customer calls for hard controls: an accountable person signs off each outgoing reply, and an automated check surfaces every amount and promise so the reviewer verifies it against the account. Why not the others: A and C lower the error rate but cannot guarantee zero; E finds errors after they have already reached customers.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -5644,7 +5644,7 @@
       },
       {
         "key": "B",
-        "text": "Batch more tickets per run so any injected text is diluted by legitimate content"
+        "text": "Add a system-prompt instruction telling the model to ignore any instructions found in tickets"
       },
       {
         "key": "C",
@@ -5663,7 +5663,7 @@
       "C",
       "E"
     ],
-    "explanation": "Correct: C and E. Defence in depth against injection combines limiting what a hijacked agent can do, through least-privilege tools and confirmation on consequential writes, with making the trust boundary explicit so the model treats ticket text as data. Why not the others: A asks the model to police itself; B adds more untrusted text rather than less; D hampers investigation and prevents nothing.",
+    "explanation": "Correct: C and E. Defence in depth against injection combines limiting what a hijacked agent can do, through least-privilege tools and confirmation on consequential writes, with making the trust boundary explicit so the model treats ticket text as data. Why not the others: A asks the model to police itself; B is a blanket rule that injected text can directly contradict, whereas E marks where the text came from so the model can treat it as data, and neither is enough without C; D hampers investigation and prevents nothing.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -5688,7 +5688,7 @@
       },
       {
         "key": "B",
-        "text": "The model refuses to run without an internet connection on the user's own device"
+        "text": "Response latency is higher than for the static FAQ page the assistant replaces"
       },
       {
         "key": "C",
@@ -5707,7 +5707,7 @@
       "A",
       "D"
     ],
-    "explanation": "Correct: A and D. Hallucinated content and prompt injection are two central failure modes of LLM systems, and each needs an owner and a mitigation on the register. Why not the others: B describes a hosted service in a confused way rather than a failure; C is ordinary sampling variance, not a risk; E is false, because inference does not update the model's weights.",
+    "explanation": "Correct: A and D. Hallucinated content and prompt injection are two central failure modes of LLM systems, and each needs an owner and a mitigation on the register. Why not the others: B is a performance characteristic to design for, not a failure mode; C is ordinary sampling variance, not a risk; E is false, because inference does not update the model's weights.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -5851,8 +5851,8 @@
     "options": [
       {
         "key": "A",
-        "text": "Treat the high acceptance rate as proof of accuracy and cut review back to a sample",
-        "explanation": "High agreement with short review times signals rubber-stamping, and the appeal shows errors slip through."
+        "text": "Add a second caseworker's sign-off to every draft so two people check each decision",
+        "explanation": "A second rubber stamp adds cost, not scrutiny, and nothing measures whether review catches errors."
       },
       {
         "key": "B",
@@ -5871,7 +5871,7 @@
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. Near-total acceptance in seconds, with missed errors, is a sign of automation bias: the human gate exists only on paper. Seeding known errors measures whether review works, and source evidence with required confirmation makes the check real. Why not the others: A misreads rubber-stamping as accuracy; B strengthens anchoring on the model; D adds capacity without changing behaviour or measuring it.",
+    "explanation": "Correct: C. Near-total acceptance in seconds, with missed errors, is a sign of automation bias: the human gate exists only on paper. Seeding known errors measures whether review works, and source evidence with required confirmation makes the check real. Why not the others: A doubles a review that is not working rather than changing how reviewers engage; B strengthens anchoring on the model; D adds capacity without changing behaviour or measuring it.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -5902,8 +5902,8 @@
       },
       {
         "key": "C",
-        "text": "Move to the largest model available, since capable models do not cave to incorrect users",
-        "explanation": "Capability may help, but assuming the problem away without grounding or measurement is not a control."
+        "text": "Move to a larger model and add a system-prompt line telling it to stand by its answers",
+        "explanation": "A capability upgrade and an instruction may reduce deference, but neither grounds the answer nor measures the behaviour."
       },
       {
         "key": "D",
@@ -5912,7 +5912,7 @@
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Abandoning a correct answer under social pressure is sycophancy, a known LLM failure mode. Grounding claims in cited sources, changing the answer only on new evidence, and testing pushback turns in evals address it and make it measurable. Why not the others: A confuses sycophancy with non-determinism; C assumes the problem away without evidence; D breaks the product and does not remove leading questions.",
+    "explanation": "Correct: B. Abandoning a correct answer under social pressure is sycophancy, a known LLM failure mode. Grounding claims in cited sources, changing the answer only on new evidence, and testing pushback turns in evals address it and make it measurable. Why not the others: A confuses sycophancy with non-determinism; C hopes capability and an instruction fix it, without grounding or measurement; D breaks the product and does not remove leading questions.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -6187,8 +6187,8 @@
     "options": [
       {
         "key": "A",
-        "text": "Screen pupils' messages on the way in only, as clean inputs guarantee acceptable replies",
-        "explanation": "Harmless inputs can still produce unsuitable outputs, so input screening alone leaves a gap."
+        "text": "Classify each pupil message on the way in and let replies to clean messages go out unchecked",
+        "explanation": "A clean input can still produce an unsuitable reply, so an input check alone leaves a gap."
       },
       {
         "key": "B",
@@ -6202,20 +6202,20 @@
       },
       {
         "key": "D",
-        "text": "Put all safeguarding rules in the system prompt and drop the classifiers to cut latency",
-        "explanation": "The system prompt is a soft layer, and removing independent checks leaves no defence if the model is steered."
+        "text": "Put the safeguarding rules in the system prompt and log each reply for a weekly human review",
+        "explanation": "The system prompt is a soft layer, and a weekly review finds problems after pupils have already seen them."
       },
       {
         "key": "E",
-        "text": "Screen replies only after they are displayed so the output check never adds latency",
-        "explanation": "A check that runs after display cannot stop unsuitable content from reaching the pupil."
+        "text": "Use the same model call to write each reply and to judge whether that reply is suitable",
+        "explanation": "A judge inside the generating call shares its context and its failures; the check needs to be independent."
       }
     ],
     "correctKeys": [
       "B",
       "C"
     ],
-    "explanation": "Correct: B and C. Layered guardrails put independent checks on both sides of the model: input screening that routes safeguarding disclosures to people, and output screening that blocks unsuitable replies before display. Why not the others: A assumes clean inputs guarantee clean outputs; D collapses the layers into a single soft control; E runs the output check too late to prevent harm.",
+    "explanation": "Correct: B and C. Layered guardrails put independent checks on both sides of the model: input screening that routes safeguarding disclosures to people, and output screening that blocks unsuitable replies before display. Why not the others: A leaves the output side unguarded; D pairs a soft control with a review that comes too late; E makes the generator its own judge, so the two layers fail together.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -6232,7 +6232,7 @@
     "id": "ccar-p-d5-28",
     "categoryKey": "governance-risk",
     "difficulty": 3,
-    "prompt": "An accounts-payable agent has tools to read, send and delete email, update supplier bank details and issue payments. Fraudsters regularly impersonate suppliers to request bank-detail changes. Which TWO measures best reduce the risk from the agent's excessive agency? (Select TWO.)",
+    "prompt": "An accounts-payable agent whose job is to triage supplier emails and prepare payment requests for staff has tools to read, send and delete email, update supplier bank details and issue payments. Fraudsters regularly impersonate suppliers to request bank-detail changes. Which TWO measures best reduce the risk from the agent's excessive agency? (Select TWO.)",
     "options": [
       {
         "key": "A",
@@ -6367,7 +6367,7 @@
       },
       {
         "key": "C",
-        "text": "Keep retrieval in place quietly and hide the cost in another line of the project budget"
+        "text": "Switch to a cheaper retrieval setup that meets the cost target and brief the director afterwards"
       },
       {
         "key": "D",
@@ -6375,7 +6375,7 @@
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. A trade-off is communicated by putting the evidence (error rates, wrong advice to claimants, rework and complaints) next to the saving, making a clear recommendation, and leaving the accountable owner to decide with full information. Why not the others: B withholds a material risk from the decision-maker; C is deception that surfaces later; D escalates before the conversation with the owner has happened.",
+    "explanation": "Correct: A. A trade-off is communicated by putting the evidence (error rates, wrong advice to claimants, rework and complaints) next to the saving, making a clear recommendation, and leaving the accountable owner to decide with full information. Why not the others: B withholds a material risk from the decision-maker; C makes a product decision without the owner and informs them only afterwards; D escalates before the conversation with the owner has happened.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -6399,11 +6399,11 @@
       },
       {
         "key": "B",
-        "text": "Quietly take billing and security tickets out of scope so the headline target is met"
+        "text": "Launch full automation with a confidence threshold that routes uncertain tickets to staff"
       },
       {
         "key": "C",
-        "text": "Ignore the demand, since it is unrealistic and will be forgotten once the system ships"
+        "text": "Delay the launch until evaluation shows each category meets the bar for full automation"
       },
       {
         "key": "D",
@@ -6411,7 +6411,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. Expectation management rests on evidence: show where the assistant is reliable, propose automating those categories with human handling for the rest, and agree a measurable automation rate that can grow as evidence allows. Why not the others: A signs up to a target the evidence already contradicts; B changes scope behind the sponsor's back; C leaves the sponsor uninformed and the gap to surface at launch.",
+    "explanation": "Correct: D. Expectation management rests on evidence: show where the assistant is reliable, propose automating those categories with human handling for the rest, and agree a measurable automation rate that can grow as evidence allows. Why not the others: A signs up to a target the evidence already contradicts; B leaves the full-automation target unchallenged and relies on a confidence threshold that does not reliably catch confidently wrong answers in billing and security; C withholds the value already available in the strong categories and may wait indefinitely.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -6587,7 +6587,7 @@
       },
       {
         "key": "C",
-        "text": "A copy of the model provider's public documentation on the API and prompt engineering"
+        "text": "Class diagrams, API signatures, sequence diagrams and a deployment topology for each module"
       },
       {
         "key": "D",
@@ -6595,7 +6595,7 @@
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Implementation guidance needs the structure, the data flows (especially where sensitive data travels), the prompts as owned first-class artefacts, the quality gates a change must pass, and the rationale that stops implementers from undoing decisions. Why not the others: A is useful but says nothing about the design; C is already available to everyone; D is context, not guidance.",
+    "explanation": "Correct: B. Implementation guidance needs the structure, the data flows (especially where sensitive data travels), the prompts as owned first-class artefacts, the quality gates a change must pass, and the rationale that stops implementers from undoing decisions. Why not the others: A is useful but says nothing about the design; C documents the code's shape in detail but not the prompts, gates or decisions implementers must preserve; D is context, not guidance.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -6660,11 +6660,11 @@
     "options": [
       {
         "key": "A",
-        "text": "Accept every request at once so the director stays engaged and supportive of the project"
+        "text": "Route each request to the sponsor by email and act on whichever ones the sponsor approves"
       },
       {
         "key": "B",
-        "text": "Refuse all changes until the original scope has shipped, then revisit the backlog"
+        "text": "Collect the requests in a phase-two backlog to be scoped once the current build has shipped"
       },
       {
         "key": "C",
@@ -6676,14 +6676,14 @@
       },
       {
         "key": "E",
-        "text": "Pad every estimate by 20 percent so new requests can be absorbed without any discussion"
+        "text": "Set aside a contingency of 20 percent in the estimate so most requests can be absorbed"
       }
     ],
     "correctKeys": [
       "C",
       "D"
     ],
-    "explanation": "Correct: C and D. Scope is managed by making the impact of each change visible against the agreed baseline, and by giving stakeholders a structured forum in which they prioritise and trade off. Why not the others: A guarantees overrun with nothing visible until it is too late; B ignores legitimate change and damages the relationship; E hides the trade-off instead of surfacing it.",
+    "explanation": "Correct: C and D. Scope is managed by making the impact of each change visible against the agreed baseline, and by giving stakeholders a structured forum in which they prioritise and trade off. Why not the others: A moves the decision to one person without showing cost or risk; B defers each request without assessing it, so urgent ones are missed and the director feels unheard; E hides the trade-off inside the estimate instead of surfacing it.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -6882,8 +6882,8 @@
       },
       {
         "key": "C",
-        "text": "Whether clinicians prefer bullet points or short prose for summaries read on the ward",
-        "explanation": "An output-format preference is cheap to change and does not drive architectural choices."
+        "text": "Which screen of the electronic health record the summary should appear on for clinicians",
+        "explanation": "A display location is an interface choice that can change late without touching the architecture."
       },
       {
         "key": "D",
@@ -6892,7 +6892,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. Non-functional requirements such as data residency, latency and volume decide the deployment region, the model and the processing pattern (real-time versus batch), so discovering them late means rework. Why not the others: A and C are presentation preferences that a prompt change can address; B helps build the evaluation set but can be collected at any point without changing the design.",
+    "explanation": "Correct: D. Non-functional requirements such as data residency, latency and volume decide the deployment region, the model and the processing pattern (real-time versus batch), so discovering them late means rework. Why not the others: A and C are presentation choices that a prompt or interface change can address; B helps build the evaluation set but can be collected at any point without changing the design.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -6927,12 +6927,12 @@
       },
       {
         "key": "D",
-        "text": "Ask the executives to wait until summaries of the original 50 files are flawless",
-        "explanation": "Perfection on a small curated set is neither achievable nor evidence of real-world performance."
+        "text": "Go live for every branch next month, with a reviewer checking each summary before it is used",
+        "explanation": "A reviewer on each summary looks safe but skips the staged evidence a pilot gives and will not scale."
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. A proof of concept answers 'can it work?' on chosen inputs; a pilot answers 'does it work here?' on real traffic with real users, and exit criteria agreed up front (accuracy on unselected files, handling time, escalation rate) decide promotion. Why not the others: A skips that evidence entirely; C keeps the selection bias; D sets an absolute bar on the wrong data set.",
+    "explanation": "Correct: B. A proof of concept answers 'can it work?' on chosen inputs; a pilot answers 'does it work here?' on real traffic with real users, and exit criteria agreed up front (accuracy on unselected files, handling time, escalation rate) decide promotion. Why not the others: A skips that evidence entirely; C keeps the selection bias; D commits every branch before any evidence exists, and per-summary review neither scales nor sets criteria for promotion or rollback.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -6962,8 +6962,8 @@
       },
       {
         "key": "C",
-        "text": "Open every briefing with the model's public benchmark scores to persuade each audience",
-        "explanation": "General benchmarks do not address this deployment's access, liability or cost questions."
+        "text": "Give each audience a different recommendation, matched to the concern it cares most about",
+        "explanation": "Tailored recommendations put the three executives on different pages and the decision stalls."
       },
       {
         "key": "D",
@@ -6972,7 +6972,7 @@
       }
     ],
     "correctKey": "D",
-    "explanation": "Correct: D. Trade-offs are presented in each audience's terms without changing the facts: data flows, tool permissions and abuse paths for security; liability for customer-facing errors for legal; cost, throughput and residual risk for the COO. Why not the others: A is consistent but not tailored; B excludes stakeholders who can block the decision; C uses evidence that answers none of their questions.",
+    "explanation": "Correct: D. Trade-offs are presented in each audience's terms without changing the facts: data flows, tool permissions and abuse paths for security; liability for customer-facing errors for legal; cost, throughput and residual risk for the COO. Why not the others: A is consistent but not tailored; B excludes stakeholders who can block the decision; C tailors the conclusion rather than the framing, so the stakeholders cannot converge.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -7047,12 +7047,12 @@
       },
       {
         "key": "D",
-        "text": "Explain that temperature zero makes output deterministic, so summaries will be error-free",
-        "explanation": "Temperature zero does not make output fully deterministic, and consistency is not correctness."
+        "text": "Explain that at temperature zero summaries are consistent, so a one-off review of samples suffices",
+        "explanation": "Consistency is not correctness, and a one-off review gives no ongoing error rate."
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. Probabilistic behaviour is communicated as a measured rate on representative data, concrete examples of the failure types, the controls that catch them and how the rate is tracked after launch. Why not the others: B over-promises; C explains mechanisms without answering the question; D is wrong twice: temperature zero does not guarantee determinism, and consistency would not remove errors.",
+    "explanation": "Correct: A. Probabilistic behaviour is communicated as a measured rate on representative data, concrete examples of the failure types, the controls that catch them and how the rate is tracked after launch. Why not the others: B over-promises; C explains mechanisms without answering the question; D confuses consistency with correctness and offers no measured rate.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -7152,8 +7152,8 @@
     "options": [
       {
         "key": "A",
-        "text": "Report only the exception types that performed well, and give the overall figure later",
-        "explanation": "Selective reporting misleads the board and damages trust when the full figure surfaces."
+        "text": "Extend the pilot by two months to gather more data before reporting anything to the board",
+        "explanation": "Delaying the report withholds a material result and offers no diagnosis to act on."
       },
       {
         "key": "B",
@@ -7167,12 +7167,12 @@
       },
       {
         "key": "D",
-        "text": "Recommend going to production, since 12 percent is positive, and raise the shortfall later",
-        "explanation": "Skipping the shortfall hides a material gap and scales a partly failing design."
+        "text": "Recommend stopping the project, since 12 percent falls well short of the 40 percent target",
+        "explanation": "Stopping without costing a narrowed scope discards the exception types that delivered value."
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. A disappointing pilot is reported as it is, with a breakdown showing where value was and was not delivered, the causes found, and costed options (narrow scope to the types that work, fix the weak type, or stop) plus a recommendation. Why not the others: A hides part of the evidence; B changes the population to flatter the result; D avoids the conversation and scales a partly failing design.",
+    "explanation": "Correct: C. A disappointing pilot is reported as it is, with a breakdown showing where value was and was not delivered, the causes found, and costed options (narrow scope to the types that work, fix the weak type, or stop) plus a recommendation. Why not the others: A delays the conversation without a diagnosis; B changes the population to flatter the result; D discards the types that worked without costing a narrower scope.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -7207,8 +7207,8 @@
       },
       {
         "key": "D",
-        "text": "Change the model silently and ask teachers to report any differences they happen to notice",
-        "explanation": "Relying on ad hoc user reports replaces evaluation with chance and erodes trust."
+        "text": "Switch to the replacement after a manual spot-check of a few essays, then watch feedback",
+        "explanation": "A spot-check is not an evaluation, and teacher feedback arrives after students are affected."
       },
       {
         "key": "E",
@@ -7220,7 +7220,7 @@
       "C",
       "E"
     ],
-    "explanation": "Correct: C and E. Model retirement is a planned lifecycle event: re-run the evaluation suite on candidate replacements to see how quality, latency and cost change and where prompts need adjusting, then run an owned, dated migration with staged rollout, user communication and rollback. Why not the others: A switches without evidence; B waits for an outage; D treats users as the test harness.",
+    "explanation": "Correct: C and E. Model retirement is a planned lifecycle event: re-run the evaluation suite on candidate replacements to see how quality, latency and cost change and where prompts need adjusting, then run an owned, dated migration with staged rollout, user communication and rollback. Why not the others: A switches without evidence; B waits for an outage; D treats a spot-check and later feedback as evaluation.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -7288,8 +7288,8 @@
     "options": [
       {
         "key": "A",
-        "text": "Keep the vendor's lead architect as accountable owner for the whole system indefinitely",
-        "explanation": "This leaves accountability outside the organisation that runs and answers for the system."
+        "text": "A vendor-written runbook plus a 90-day support contract to cover the transition period",
+        "explanation": "Documentation and a short contract leave no named internal owner once the 90 days end."
       },
       {
         "key": "B",
@@ -7308,15 +7308,15 @@
       },
       {
         "key": "E",
-        "text": "Postpone ownership decisions until the first production incident shows where the gaps are",
-        "explanation": "Learning ownership from an incident in a regulated setting finds the gap at the worst time."
+        "text": "Make the platform team accountable for prompt and output quality, since it controls deployments",
+        "explanation": "Engineers who run the system are not the ones who can judge whether a regulatory document is right."
       }
     ],
     "correctKeys": [
       "B",
       "C"
     ],
-    "explanation": "Correct: B and C. Handoff needs explicit ownership: a RACI with exactly one accountable owner per operational area, and a split that puts quality judgements with the domain owners and runtime operation with the platform team. Why not the others: A leaves accountability outside the organisation; D spreads it so thinly that nobody holds it; E finds the gaps through an incident, which is costly in a regulated domain.",
+    "explanation": "Correct: B and C. Handoff needs explicit ownership: a RACI with exactly one accountable owner per operational area, and a split that puts quality judgements with the domain owners and runtime operation with the platform team. Why not the others: A covers the transition but names no internal owner for anything after it; D spreads accountability so thinly that nobody holds it; E puts quality judgements with the team that cannot make them.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -7436,7 +7436,7 @@
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. A proof of concept exists to retire the riskiest assumption, here whether the model can produce acceptable letters from real data; integration, identity and polish are solved problems for the pilot and build. Why not the others: B spends the window on plumbing, not on the open question; C judges presentation before there is anything to show; D tests infrastructure the insurer already knows how to build.",
+    "explanation": "Correct: A. A proof of concept exists to retire the riskiest assumption, here whether the model can produce acceptable letters from real data; integration, identity and polish are solved problems for the pilot and build. Why not the others: B spends the window on plumbing, not on the open question; C judges presentation before there is anything to show; D tests standard, low-uncertainty integration work that says nothing about whether the model adds value, so it belongs in the pilot.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -7505,11 +7505,11 @@
       },
       {
         "key": "D",
-        "text": "Relax the merge bar so fixes for regressions can ship faster when they appear"
+        "text": "Spin up a second instance that shares the session's conversation history to review the diff"
       }
     ],
     "correctKey": "A",
-    "explanation": "Correct: A. A reviewer that shares the author's context inherits the author's assumptions and blind spots; a fresh session judging the diff against stated criteria restores an independent check, and a human still decides the merge. Why not the others: B manufactures findings inside the same anchored context; C removes a useful check instead of fixing how it is run; D ships defects faster rather than catching them.",
+    "explanation": "Correct: A. A reviewer that shares the author's context inherits the author's assumptions and blind spots; a fresh session judging the diff against stated criteria restores an independent check, and a human still decides the merge. Why not the others: B manufactures findings inside the same anchored context; C removes a useful check instead of fixing how it is run; D inherits the same history and with it the same blind spots.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -7538,15 +7538,15 @@
       },
       {
         "key": "C",
-        "text": "Roll back to the previous model version before looking any further"
+        "text": "Roll back to the previous model version, since the behaviour began yesterday"
       },
       {
         "key": "D",
-        "text": "Take the agent offline for good and rebuild it with stricter controls"
+        "text": "Add retries around the modify tool, since a failed modify may be what triggers a cancel"
       }
     ],
     "correctKey": "B",
-    "explanation": "Correct: B. Evidence comes before treatment: the traces show what the agent actually saw and did, which separates a prompt problem from injected content, a bad tool result or a data change, while containment such as disabling the cancel action limits harm meanwhile. Why not the others: A changes the system before the cause is known; C guesses at a different cause; D is disproportionate for a handful of requests.",
+    "explanation": "Correct: B. Evidence comes before treatment: the traces show what the agent actually saw and did, which separates a prompt problem from injected content, a bad tool result or a data change, while containment such as disabling the cancel action limits harm meanwhile. Why not the others: A changes the system before the cause is known; C guesses at one cause from timing alone; D treats a guess as a diagnosis and may leave the real cause in place.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -7567,11 +7567,11 @@
     "options": [
       {
         "key": "A",
-        "text": "Let the assistant push straight to the main branch so it never has to wait on a reviewer"
+        "text": "Auto-merge the assistant's pull requests whenever the continuous-integration checks pass"
       },
       {
         "key": "B",
-        "text": "Run the assistant only in a sandbox with no access to the repository"
+        "text": "Pair each assistant session with an engineer who approves each edit live before it is saved"
       },
       {
         "key": "C",
@@ -7579,11 +7579,11 @@
       },
       {
         "key": "D",
-        "text": "Have a human retype every suggested line so nothing is committed unread"
+        "text": "Have the assistant flag its riskier pull requests and send just those for human review"
       }
     ],
     "correctKey": "C",
-    "explanation": "Correct: C. The assistant stays inside the existing safety net: it works on branches, its pull requests run the automated checks, and a human decides the merge, so routine work speeds up without anything unreviewed reaching main. Why not the others: A removes the review gate entirely; B removes the access the assistant needs to be useful; D removes the speed the team wanted in the first place.",
+    "explanation": "Correct: C. The assistant stays inside the existing safety net: it works on branches, its pull requests run the automated checks, and a human decides the merge, so routine work speeds up without anything unreviewed reaching main. Why not the others: A lets changes reach main unreviewed whenever the checks are green; B keeps a person in the loop but at the cost of the speed the team wanted; D lets the author decide what gets reviewed.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",
@@ -7649,22 +7649,22 @@
       },
       {
         "key": "C",
-        "text": "Letting each team grant whatever permission the assistant happens to request mid-session"
+        "text": "Letting each team write its own project configuration from scratch to suit its codebase"
       },
       {
         "key": "D",
-        "text": "Turning off logging of assistant actions to protect developer privacy"
+        "text": "A central approval board that signs off each assistant session before it can start"
       },
       {
         "key": "E",
-        "text": "Allowing the assistant to deploy to production once the test suite is green"
+        "text": "Copying the pilots' permission allow-lists to the new teams as a one-off, unversioned export"
       }
     ],
     "correctKeys": [
       "A",
       "B"
     ],
-    "explanation": "Correct: A and B. Scaling safely needs a shared starting point and no exemptions: a versioned baseline spreads proven configuration to every team, and holding AI-authored changes to the same checks and review keeps the existing quality gates intact. Why not the others: C lets permissions sprawl with no review; D removes the visibility needed to operate the tooling; E bypasses the human gate before production.",
+    "explanation": "Correct: A and B. Scaling safely needs a shared starting point and no exemptions: a versioned baseline spreads proven configuration to every team, and holding AI-authored changes to the same checks and review keeps the existing quality gates intact. Why not the others: C forfeits the pilots' learning and produces forty divergent setups; D adds a bottleneck that removes the speed without reducing risk inside the session; E spreads the pilots' settings once, after which they drift and cannot be updated.",
     "source": "original",
     "sourceRef": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf",
     "reviewStatus": "draft",

@@ -46,6 +46,17 @@ passed; three options named an actor left over from the old scenario
 (`d3-09` A/B, `d4-04` B) and one assumed retrieval the stem never mentions
 (`d4-15` A). All four were reworded to fit the new scenario; no keys changed.
 
+**Judge gate over all 200 (2026-10-30).** The admin quality gate (strict
+lint, then the solve, choices-only and review passes over every question)
+was run in full and the bank revised until it passed: 15 major and 53
+minor findings before, 0 major and 4 minor after, with no key ever
+disputed by the solve or review pass. 68 questions had a distractor,
+note, explanation or stem revised; no key, id, domain or difficulty
+changed. The run used Claude Opus 5.5 because the model the gate pins
+was not reachable that night; see
+[eval-gate-2026-10-30.md](eval-gate-2026-10-30.md) for the before/after
+comparison and the caveat.
+
 ## Earlier bank — removed 2026-10-10
 
 | sourceRef | Questions | Licence found | Outcome |
