@@ -20,9 +20,13 @@ practice app.
   blueprint to the question, and the manifest carries the same weights so
   the engine's readiness estimate is blueprint-weighted.
 - **24 concept cards** — one per objective cluster, shown after a wrong
-  answer. Every question links to one.
+  answer. Every original question links to one.
+- **A full practice exam** — Matthew Purcell's
+  [CCAR-P practice set](https://www.linkedin.com/posts/purcellmatthew_claude-certified-architect-professional-practice-ugcPost-7482585280751824896-E03X/)
+  (63 items, 83 questions here), used with his permission as the paper
+  "CCAR-P practice exam". See [NOTICE.md](NOTICE.md).
 
-| Domain | Weight | Questions |
+| Domain | Weight | Original questions |
 |---|---|---|
 | Solution Design & Architecture | 17% | 34 |
 | Claude Models, Prompting & Context Engineering | 13% | 26 |

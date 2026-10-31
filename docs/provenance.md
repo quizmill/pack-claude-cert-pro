@@ -46,6 +46,16 @@ passed; three options named an actor left over from the old scenario
 (`d3-09` A/B, `d4-04` B) and one assumed retrieval the stem never mentions
 (`d4-15` A). All four were reworded to fit the new scenario; no keys changed.
 
+## Purcell paper (from 2026-10-31)
+
+| sourceRef | Questions | Licence | Status |
+|---|---|---|---|
+| Matthew Purcell, *CCAR-P Full Practice Exam Question Set* (LinkedIn post `ugcPost-7482585280751824896`) | 83 (63 items; five scenario-matching items split per scenario) | **Permission from the author** (2026-10-31), covering his published practice sets. | Back as the paper `purcell-ccar-p`, `source: curated`, ids `cca-p-*` (the same ids as the removed bank below, so earlier attempt history reattaches). Re-parsed from the post's document on 2026-10-31. |
+
+`scripts/check-bank.py` skips paper questions: they are his, not curated
+here. The overlap gate still keeps the original bank below 0.50 against
+them.
+
 ## Earlier bank — removed 2026-10-10
 
 | sourceRef | Questions | Licence found | Outcome |

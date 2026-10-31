@@ -11,7 +11,7 @@ This script checks the things a test-wise candidate exploits instead:
   * every question has a difficulty, tags, and an explanation that names
     the correct option and at least one distractor
   * the bank's domain split tracks the manifest weights
-  * no stem tracks the removed bank (token Jaccard < 0.50 against every
+  * no stem tracks the removed bank (now back as the Purcell paper) (token Jaccard < 0.50 against every
     removed stem, read from git history) and no two stems are near-copies
     (Jaccard <= 0.70)
 
@@ -28,6 +28,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 qs = json.loads((ROOT / "questions.json").read_text())
+# Papers carry third-party sets as their authors wrote them (Matthew
+# Purcell's CCAR-P set, `paperId: purcell-ccar-p`): they are credited, not
+# curated here, and they ARE the "removed bank" the overlap gate below
+# keeps the original questions away from. These checks cover the original
+# bank only.
+paper_qs = [q for q in qs if q.get("paperId")]
+qs = [q for q in qs if not q.get("paperId")]
 manifest = json.loads((ROOT / "pack.json").read_text())
 weights = {c["key"]: c["weight"] for c in manifest["categories"]}
 
@@ -39,6 +46,7 @@ n = len(qs)
 single = [q for q in qs if "correctKey" in q]
 multi = [q for q in qs if "correctKeys" in q]
 letters = collections.Counter(q["correctKey"] for q in single)
+print(f"papers (not checked): {len(paper_qs)}")
 print(f"questions: {n}  single-answer: {len(single)}  select-many: {len(multi)}")
 print("correct letter (single-answer):", dict(sorted(letters.items())))
 if single:

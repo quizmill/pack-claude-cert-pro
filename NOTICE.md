@@ -14,9 +14,26 @@ guide's three sample items. Where a question turns on a product
 behaviour (prompt caching, Skills, MCP, Claude Code configuration), the
 behaviour was checked against Anthropic's public documentation.
 
-The pack carries no third-party question content. The history of an
-earlier, since-removed bank is recorded in
+The history of an earlier, since-removed bank is recorded in
 [docs/provenance.md](docs/provenance.md).
+
+## Matthew Purcell — CCAR-P Full Practice Question Set (paper `purcell-ccar-p`)
+
+The 83 questions with ids `cca-p-*` are adapted, with the author's
+permission, from Matthew Purcell's free *Claude Certified Architect –
+Professional Full Practice Question Set*, shared publicly on LinkedIn:
+
+- <https://www.linkedin.com/in/purcellmatthew>
+- <https://www.linkedin.com/posts/purcellmatthew_claude-certified-architect-professional-practice-ugcPost-7482585280751824896-E03X/>
+
+His set has 63 items. Its five scenario-matching items (five scenarios
+each) appear here as one single-answer question per scenario (ids ending
+`-s1`…`-s5`), which gives 83. They are kept together as one paper, in the
+author's order. Answer keys and rationales are his. Notes on why each wrong
+option falls short come from his rationales, split per option.
+
+The author states the set is original material written against Anthropic's
+public exam guide, **not** actual exam content, which is under NDA.
 
 ## Trademarks
 
