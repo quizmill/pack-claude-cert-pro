@@ -19,8 +19,7 @@ The history of an earlier, since-removed bank is recorded in
 
 ## Matthew Purcell — CCAR-P Full Practice Question Set (paper `purcell-ccar-p`)
 
-The 83 questions with ids `cca-p-*` are adapted, with the author's
-permission, from Matthew Purcell's free *Claude Certified Architect –
+The 83 questions with ids `cca-p-*` are adapted from Matthew Purcell's free *Claude Certified Architect –
 Professional Full Practice Question Set*, shared publicly on LinkedIn:
 
 - <https://www.linkedin.com/in/purcellmatthew>

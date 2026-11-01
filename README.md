@@ -23,8 +23,7 @@ practice app.
   answer. Every original question links to one.
 - **A full practice exam** — Matthew Purcell's
   [CCAR-P practice set](https://www.linkedin.com/posts/purcellmatthew_claude-certified-architect-professional-practice-ugcPost-7482585280751824896-E03X/)
-  (63 items, 83 questions here), used with his permission as the paper
-  "CCAR-P practice exam". See [NOTICE.md](NOTICE.md).
+  (63 items, 83 questions here), as the paper "CCAR-P practice exam". See [NOTICE.md](NOTICE.md).
 
 | Domain | Weight | Original questions |
 |---|---|---|

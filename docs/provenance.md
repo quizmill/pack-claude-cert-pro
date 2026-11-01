@@ -50,7 +50,7 @@ passed; three options named an actor left over from the old scenario
 
 | sourceRef | Questions | Licence | Status |
 |---|---|---|---|
-| Matthew Purcell, *CCAR-P Full Practice Exam Question Set* (LinkedIn post `ugcPost-7482585280751824896`) | 83 (63 items; five scenario-matching items split per scenario) | **Permission from the author** (2026-10-31), covering his published practice sets. | Back as the paper `purcell-ccar-p`, `source: curated`, ids `cca-p-*` (the same ids as the removed bank below, so earlier attempt history reattaches). Re-parsed from the post's document on 2026-10-31. |
+| Matthew Purcell, *CCAR-P Full Practice Exam Question Set* (LinkedIn post `ugcPost-7482585280751824896`) | 83 (63 items; five scenario-matching items split per scenario) | Credited to the author. | Back as the paper `purcell-ccar-p`, `source: curated`, ids `cca-p-*` (the same ids as the removed bank below, so earlier attempt history reattaches). Re-parsed from the post's document on 2026-10-31. |
 
 `scripts/check-bank.py` skips paper questions: they are his, not curated
 here. The overlap gate still keeps the original bank below 0.50 against
