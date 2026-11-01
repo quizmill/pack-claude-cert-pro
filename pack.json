@@ -69,5 +69,10 @@
       "blurb": "Written for this pack against the objectives in Anthropic's public CCAR-P exam guide v1.0 and Anthropic's public docs. Not drawn from the live exam.",
       "url": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf"
     }
-  ]
+  ],
+  "upgrade": {
+    "title": "Next up: AWS Certified Generative AI Developer – Professional",
+    "url": "https://aws-genai.quizmill.dev?ref=claude-app",
+    "blurb": "Building on AWS too? Practise for the AIP-C01 exam across ten topic categories — foundation models, RAG, agents, prompt management, security and observability — with multiple-choice and multi-answer questions, each with a rationale."
+  }
 }
