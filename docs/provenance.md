@@ -57,6 +57,19 @@ was not reachable that night; see
 [eval-gate-2026-10-30.md](eval-gate-2026-10-30.md) for the before/after
 comparison and the caveat.
 
+## Purcell paper — added 2026-11-02
+
+The author's **second edition** of his CCAR-P set (LinkedIn post
+`ugcPost-7522215192798142464`, revised 3 November 2026) is published
+under **CC BY-NC 4.0**: the post says so, and so does the footer of every
+page of its PDF. 43 of its 63 questions are carried as the paper
+`purcell-ccar-p-v2`, kept apart from the original bank and excluded from
+the repository's MIT licence; see [NOTICE.md](../NOTICE.md). The
+edition is rewritten, but many stems still track the first edition
+below (`scripts/check-bank.py` saw 22 of the 43 at 0.50 or more), which
+is why the gate checks the original bank only and keeps it clear of the
+paper as well as of the removed bank.
+
 ## Earlier bank — removed 2026-10-10
 
 | sourceRef | Questions | Licence found | Outcome |
