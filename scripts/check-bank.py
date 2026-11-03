@@ -184,8 +184,10 @@ if removed is not None:
     print(f"stem overlap vs removed bank ({len(old)} items):",
           {k: bands[k] for k in ("1.00", "0.60-0.99", "0.50-0.59", "0.40-0.49", "<0.40")})
 # The original bank must also stay clear of the Purcell paper it now sits
-# next to, so it never borrows from licensed-in material.
-purcell = {q["id"]: tokens(q["prompt"]) for q in bank if q.get("paperId") == PURCELL_PAPER}
+# next to, so it never borrows from licensed-in material. A matching
+# item's scenario is mostly in its rows, so they count as its stem.
+purcell = {q["id"]: tokens(" ".join([q["prompt"], *(r["text"] for r in q.get("rows", []))]))
+           for q in bank if q.get("paperId") == PURCELL_PAPER}
 if purcell:
     worst = (0.0, "", "")
     for qid, t in stems.items():
