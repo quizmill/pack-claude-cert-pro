@@ -16,7 +16,7 @@ This script checks the things a test-wise candidate exploits instead:
     paper, and no two stems are near-copies (Jaccard <= 0.70)
 
 Every check runs on the original bank only (`source: original`). The
-Purcell paper (`paperId: purcell-ccar-p-v2`) is his work, kept as he wrote
+Purcell paper (`paperId: purcell-ccar-p`) is his work, kept as he wrote
 it, so it is only used as a reference for the overlap gate.
 
 Run from the pack root:  python3 scripts/check-bank.py
@@ -33,7 +33,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 bank = json.loads((ROOT / "questions.json").read_text())
 qs = [q for q in bank if q["source"] == "original"]
-PURCELL_PAPER = "purcell-ccar-p-v2"
+PURCELL_PAPER = "purcell-ccar-p"
 manifest = json.loads((ROOT / "pack.json").read_text())
 weights = {c["key"]: c["weight"] for c in manifest["categories"]}
 

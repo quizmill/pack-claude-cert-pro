@@ -76,8 +76,8 @@ only, and fails if an original stem tracks the Purcell paper.
 The 200 bank questions are original; see [NOTICE.md](NOTICE.md) and
 [docs/provenance.md](docs/provenance.md).
 
-The paper **"CCAR-P practice exam v2"** (`purcell-ccar-p-v2`, 43
+The paper **"CCAR-P practice exam"** (`purcell-ccar-p`, 43
 questions) is Matthew Purcell's practice set, second edition, licensed
 **CC BY-NC 4.0** and **excluded from the MIT licence**. Its 20 matching
 items are left out until the engine can show them. Credit, licence and
-the list of changes are in [NOTICE.md](NOTICE.md#matthew-purcell--ccar-p-practice-question-set-second-edition-paper-purcell-ccar-p-v2).
+the list of changes are in [NOTICE.md](NOTICE.md#matthew-purcell--ccar-p-practice-question-set-second-edition-paper-purcell-ccar-p).

@@ -18,10 +18,10 @@ Apart from the Purcell paper below, the pack carries no third-party
 question content. The history of an earlier, since-removed bank is
 recorded in [docs/provenance.md](docs/provenance.md).
 
-## Matthew Purcell — CCAR-P Practice Question Set, Second Edition (paper `purcell-ccar-p-v2`)
+## Matthew Purcell — CCAR-P Practice Question Set, Second Edition (paper `purcell-ccar-p`)
 
 **These questions are not covered by the MIT licence.** The 43 questions
-with `paperId: purcell-ccar-p-v2` (ids `ccar-p-purcell-v2-*`) are
+with `paperId: purcell-ccar-p` (ids `ccar-p-purcell-v2-*`) are
 adapted from Matthew Purcell's *Claude Certified Architect – Professional:
 Full Practice Question Set — Second Edition* (revised 3 November 2026,
 written following Exam Guide v1.0, July 2026), © Matthew Purcell,

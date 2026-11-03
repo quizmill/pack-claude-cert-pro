@@ -65,8 +65,8 @@
   "papersLabel": "Practice exams",
   "papers": [
     {
-      "key": "purcell-ccar-p-v2",
-      "label": "CCAR-P practice exam v2 (43 of 63)",
+      "key": "purcell-ccar-p",
+      "label": "CCAR-P practice exam (43 of 63)",
       "series": "Matthew Purcell"
     }
   ],
@@ -80,7 +80,7 @@
     {
       "label": "Purcell",
       "name": "CCAR-P Practice Question Set, 2nd ed. (43 of 63)",
-      "blurb": "The paper \"CCAR-P practice exam v2\": Matthew Purcell's practice set, written against the public exam guide, CC BY-NC 4.0. Its 20 matching items are left out: the app does not show matching questions yet.",
+      "blurb": "The paper \"CCAR-P practice exam\": Matthew Purcell's practice set, written against the public exam guide, CC BY-NC 4.0. Its 20 matching items are left out: the app does not show matching questions yet.",
       "url": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/"
     }
   ],

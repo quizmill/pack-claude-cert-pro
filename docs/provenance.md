@@ -63,8 +63,10 @@ The author's **second edition** of his CCAR-P set (LinkedIn post
 `ugcPost-7522215192798142464`, revised 3 November 2026) is published
 under **CC BY-NC 4.0**: the post says so, and so does the footer of every
 page of its PDF. 43 of its 63 questions are carried as the paper
-`purcell-ccar-p-v2`, kept apart from the original bank and excluded from
-the repository's MIT licence; see [NOTICE.md](../NOTICE.md). The
+`purcell-ccar-p`, kept apart from the original bank and excluded from
+the repository's MIT licence; see [NOTICE.md](../NOTICE.md). It
+supersedes the first edition: this is the pack's one Purcell paper, and
+the first-edition questions (`cca-p-*`) stay out. The
 edition is rewritten, but many stems still track the first edition
 below (`scripts/check-bank.py` saw 22 of the 43 at 0.50 or more), which
 is why the gate checks the original bank only and keeps it clear of the
