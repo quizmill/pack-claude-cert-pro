@@ -20,7 +20,7 @@ recorded in [docs/provenance.md](docs/provenance.md).
 
 ## Matthew Purcell — CCAR-P Practice Question Set, Second Edition (paper `purcell-ccar-p`)
 
-**These questions are not covered by the MIT licence.** The 43 questions
+**These questions are not covered by the MIT licence.** The 63 questions
 with `paperId: purcell-ccar-p` (ids `ccar-p-purcell-v2-*`) are
 adapted from Matthew Purcell's *Claude Certified Architect – Professional:
 Full Practice Question Set — Second Edition* (revised 3 November 2026,
@@ -42,21 +42,25 @@ under NDA.
 **What was changed:**
 
 - **Format.** Converted from the PDF to the pack's JSON format. Stems,
-  options and answer keys are his, in his order (questions 1.1–7.3).
+  options and answer keys are his, in his order (questions 1.1–7.4).
   Each stem and its question line are joined into one prompt, and the
   multiple-response line "Each correct answer presents part of the
   solution" (or "a complete solution") is dropped.
+- **Matching items.** His 20 matching items (Yes/No review and
+  classify-each-row: 1.9–1.11, 2.6–2.8, 3.9–3.12, 4.8–4.10, 5.7–5.9,
+  6.7–6.9 and 7.4) are carried as matching questions: his statements
+  or items become `rows`, his Yes/No or category list becomes
+  `choices`, and his per-row answers become `correctMatch`. The table
+  headers ("Statement", "Select Yes or No") are dropped.
 - **Rationales.** Each question's `explanation` is his rationale for the
-  correct answer. His "Why not the others" note is split per option
-  into `options[].explanation`, lightly reworded so each note reads on
-  its own (a note shared by two options, such as "A and C pay for…",
-  appears on both).
-- **Matching items left out.** The set has 63 questions; 20 of them are
-  matching items (Yes/No review and classify-each-row: 1.9–1.11,
-  2.6–2.8, 3.9–3.12, 4.8–4.10, 5.7–5.9, 6.7–6.9 and 7.4). The quizmill
-  engine cannot show matching questions yet, so they are left out
-  rather than rewritten into a different format. The paper is labelled
-  "43 of 63" to say so.
+  correct answer. On multiple-choice and multiple-response questions,
+  his "Why not the others" note is split per option into
+  `options[].explanation`, lightly reworded so each note reads on its
+  own (a note shared by two options, such as "A and C pay for…",
+  appears on both). On a matching question, the explanation starts with
+  his per-row answer line ("Correct: 1 → Yes; 2 → No; …") followed by
+  his rationale for the item as a whole. He gives no per-row notes, so
+  the rows carry none.
 - **Key corrections.** None; every answer key is as published.
 
 ## Trademarks

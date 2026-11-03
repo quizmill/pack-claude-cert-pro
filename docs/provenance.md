@@ -62,7 +62,7 @@ comparison and the caveat.
 The author's **second edition** of his CCAR-P set (LinkedIn post
 `ugcPost-7522215192798142464`, revised 3 November 2026) is published
 under **CC BY-NC 4.0**: the post says so, and so does the footer of every
-page of its PDF. 43 of its 63 questions are carried as the paper
+page of its PDF. All 63 of its questions are carried as the paper
 `purcell-ccar-p`, kept apart from the original bank and excluded from
 the repository's MIT licence; see [NOTICE.md](../NOTICE.md). It
 supersedes the first edition: this is the pack's one Purcell paper, and
@@ -71,6 +71,12 @@ edition is rewritten, but many stems still track the first edition
 below (`scripts/check-bank.py` saw 22 of the 43 at 0.50 or more), which
 is why the gate checks the original bank only and keeps it clear of the
 paper as well as of the removed bank.
+
+The 20 matching items (Yes/No review and classify-each-row) were added
+on 2026-11-03, once the engine shipped a matching question type
+(quizmill v0.4.0). Rows, choices, per-row keys and rationales were
+checked by script against the PDF text, word for word. For the overlap
+gate, a matching item's rows count as part of its stem.
 
 ## Earlier bank — removed 2026-10-10
 

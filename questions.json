@@ -8288,6 +8288,178 @@
     "reviewStatus": "draft"
   },
   {
+    "id": "ccar-p-purcell-v2-1-9",
+    "categoryKey": "solution-design",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are a solution architect evaluating candidate use cases for a Claude-based program. For each scenario, select Yes if Claude is appropriate as the primary solution at the architectural level. Otherwise, select No.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "drafting first-pass root-cause narratives from semi-structured incident logs for engineer review"
+      },
+      {
+        "key": "2",
+        "text": "long-context lease review with structured clause extraction and deviation flagging"
+      },
+      {
+        "key": "3",
+        "text": "computing per-transaction fraud scores at sub-50-millisecond latency on a streaming pipeline"
+      },
+      {
+        "key": "4",
+        "text": "calculating payroll tax withholdings where the result must be exact and reproducible"
+      },
+      {
+        "key": "5",
+        "text": "routing inbound support tickets into 30 categories with a stated reason for each routing"
+      },
+      {
+        "key": "6",
+        "text": "replacing the vector index used for semantic retrieval over a multi-million-document corpus"
+      }
+    ],
+    "choices": [
+      {
+        "key": "yes",
+        "text": "Yes"
+      },
+      {
+        "key": "no",
+        "text": "No"
+      }
+    ],
+    "correctMatch": {
+      "1": "yes",
+      "2": "yes",
+      "3": "no",
+      "4": "no",
+      "5": "yes",
+      "6": "no"
+    },
+    "explanation": "Correct: 1 → Yes; 2 → Yes; 3 → No; 4 → No; 5 → Yes; 6 → No. Language-heavy tasks with tolerance for review (narratives, clause extraction, reasoned routing) are Claude's sweet spot. Hard real-time scoring, serving as an index, and exact deterministic arithmetic are jobs for purpose-built components; Claude may orchestrate or call them but should not be them.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-1-10",
+    "categoryKey": "solution-design",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are sequencing decomposed components in a customer-email handling pipeline. For each component, select the execution layer it belongs to. Choose from: Pre-Processing, Model Stage, Post-Processing.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "Claude-based classification of the request type"
+      },
+      {
+        "key": "2",
+        "text": "stripping email signatures and quoted replies before the model sees the message"
+      },
+      {
+        "key": "3",
+        "text": "writing the validated record to the CRM system of record"
+      },
+      {
+        "key": "4",
+        "text": "redaction of card numbers from the message body prior to model invocation"
+      },
+      {
+        "key": "5",
+        "text": "schema validation of the extracted fields"
+      },
+      {
+        "key": "6",
+        "text": "Claude-based drafting of the reply from the classified intent"
+      }
+    ],
+    "choices": [
+      {
+        "key": "pre-processing",
+        "text": "Pre-Processing"
+      },
+      {
+        "key": "model-stage",
+        "text": "Model Stage"
+      },
+      {
+        "key": "post-processing",
+        "text": "Post-Processing"
+      }
+    ],
+    "correctMatch": {
+      "1": "model-stage",
+      "2": "pre-processing",
+      "3": "post-processing",
+      "4": "pre-processing",
+      "5": "post-processing",
+      "6": "model-stage"
+    },
+    "explanation": "Correct: 1 → Model Stage; 2 → Pre-Processing; 3 → Post-Processing; 4 → Pre-Processing; 5 → Post-Processing; 6 → Model Stage. Anything that shapes or sanitises input before invocation is pre-processing; the model's own inference steps are the model stage; validation and persistence of what the model produced is post-processing.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-1-11",
+    "categoryKey": "solution-design",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are matching scenarios to architectural patterns for a proposal. For each scenario, select the most appropriate pattern. Choose from: Single augmented LLM call, Fixed workflow, Autonomous agent, Multi-agent system.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "investigating a production incident where the diagnostic path depends entirely on what each log query reveals"
+      },
+      {
+        "key": "2",
+        "text": "summarising each inbound support email into a CRM note, with the customer's account record retrieved for context"
+      },
+      {
+        "key": "3",
+        "text": "a merger review needing legal, financial and technical assessments, each with its own tools and context, coordinated into one recommendation"
+      },
+      {
+        "key": "4",
+        "text": "translating each incoming document into English with a glossary of approved terminology supplied as context"
+      },
+      {
+        "key": "5",
+        "text": "a monthly compliance report produced through the same five steps every time: gather, validate, analyse, format, distribute"
+      }
+    ],
+    "choices": [
+      {
+        "key": "single-llm-call",
+        "text": "Single augmented LLM call"
+      },
+      {
+        "key": "fixed-workflow",
+        "text": "Fixed workflow"
+      },
+      {
+        "key": "autonomous-agent",
+        "text": "Autonomous agent"
+      },
+      {
+        "key": "multi-agent-system",
+        "text": "Multi-agent system"
+      }
+    ],
+    "correctMatch": {
+      "1": "autonomous-agent",
+      "2": "single-llm-call",
+      "3": "multi-agent-system",
+      "4": "single-llm-call",
+      "5": "fixed-workflow"
+    },
+    "explanation": "Correct: 1 → Autonomous agent; 2 → Single augmented LLM call; 3 → Multi-agent system; 4 → Single augmented LLM call; 5 → Fixed workflow. Single transformations with supplied context are one augmented call. A stable repeating sequence is a workflow. A path that only emerges during execution is an autonomous agent. Distinct specialists coordinated into one output is multi-agent.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
     "id": "ccar-p-purcell-v2-2-1",
     "categoryKey": "models-context",
     "paperId": "purcell-ccar-p",
@@ -8455,6 +8627,165 @@
       "E"
     ],
     "explanation": "Correct: C, E. You cannot judge a sample run without a defined bar to judge it against, and you cannot run it without a candidate chosen on the requirements profile. Both precede the empirical test.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-2-6",
+    "categoryKey": "models-context",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are evaluating prompting claims in a peer's design document. For each claim, select Yes if the claim reflects sound practice. Otherwise, select No.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "Zero-shot prompting is an appropriate starting point for closed-set classification when the categories and their descriptions are supplied in the prompt."
+      },
+      {
+        "key": "2",
+        "text": "A few-shot example set using the exact output field names anchors formatting on extraction tasks."
+      },
+      {
+        "key": "3",
+        "text": "Chain-of-thought should be the default on every task regardless of its complexity."
+      },
+      {
+        "key": "4",
+        "text": "Critical rules are most reliably followed when placed in the middle of a long reference block."
+      },
+      {
+        "key": "5",
+        "text": "A prompt validated on one model version can be assumed to behave identically on the next version without re-testing."
+      }
+    ],
+    "choices": [
+      {
+        "key": "yes",
+        "text": "Yes"
+      },
+      {
+        "key": "no",
+        "text": "No"
+      }
+    ],
+    "correctMatch": {
+      "1": "yes",
+      "2": "yes",
+      "3": "no",
+      "4": "no",
+      "5": "no"
+    },
+    "explanation": "Correct: 1 → Yes; 2 → Yes; 3 → No; 4 → No; 5 → No. Zero-shot with clear category descriptions and few-shot with exact field names are both standard, evidence-based techniques. Chain-of-thought adds cost and latency with no benefit on simple tasks; mid-context placement is where attention is weakest; and behaviour across model versions must be re-validated, never assumed.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-2-7",
+    "categoryKey": "models-context",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are evaluating model-selection claims made by a peer team. For each statement, select Yes if the statement is generally true. Otherwise, select No.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "The most capable model is always the right choice regardless of the workload profile."
+      },
+      {
+        "key": "2",
+        "text": "Heavier-reasoning models typically consume more of the rate limit and respond more slowly than lighter models on the same input."
+      },
+      {
+        "key": "3",
+        "text": "Selecting whichever model version was most recently announced is a sound basis for production decisions."
+      },
+      {
+        "key": "4",
+        "text": "A representative-sample evaluation on the target workload is the right basis for confirming a model selection."
+      },
+      {
+        "key": "5",
+        "text": "Tiered routing can serve routine traffic with a lighter model while reserving a heavier model for requests that need its capability."
+      }
+    ],
+    "choices": [
+      {
+        "key": "yes",
+        "text": "Yes"
+      },
+      {
+        "key": "no",
+        "text": "No"
+      }
+    ],
+    "correctMatch": {
+      "1": "no",
+      "2": "yes",
+      "3": "no",
+      "4": "yes",
+      "5": "yes"
+    },
+    "explanation": "Correct: 1 → No; 2 → Yes; 3 → No; 4 → Yes; 5 → Yes. Model choice is a trade-off between capability, latency, cost and throughput, confirmed by measurement on the real workload. Tiered routing is the standard way to pay for capability only where it is needed. Recency and maximum capability are not selection criteria on their own.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-2-8",
+    "categoryKey": "models-context",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are classifying token-management tactics by where in the request lifecycle each applies. For each tactic, select the stage of the request lifecycle where it applies. Choose from: Input Preparation, Prompt Construction, Output Handling.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "validate the model's structured output against the expected schema"
+      },
+      {
+        "key": "2",
+        "text": "trim retrieved passages to the spans relevant to the user's question"
+      },
+      {
+        "key": "3",
+        "text": "compact prior conversation turns into a summary once the full history is no longer needed"
+      },
+      {
+        "key": "4",
+        "text": "stream partial tokens to the interface so users see progress before completion"
+      },
+      {
+        "key": "5",
+        "text": "order prompt sections so cacheable content sits before per-request content"
+      },
+      {
+        "key": "6",
+        "text": "redact personal identifiers from the source text before invocation"
+      }
+    ],
+    "choices": [
+      {
+        "key": "input-preparation",
+        "text": "Input Preparation"
+      },
+      {
+        "key": "prompt-construction",
+        "text": "Prompt Construction"
+      },
+      {
+        "key": "output-handling",
+        "text": "Output Handling"
+      }
+    ],
+    "correctMatch": {
+      "1": "output-handling",
+      "2": "input-preparation",
+      "3": "prompt-construction",
+      "4": "output-handling",
+      "5": "prompt-construction",
+      "6": "input-preparation"
+    },
+    "explanation": "Correct: 1 → Output Handling; 2 → Input Preparation; 3 → Prompt Construction; 4 → Output Handling; 5 → Prompt Construction; 6 → Input Preparation. Input preparation shapes what goes in (trimming, redaction). Prompt construction decides how context is assembled (ordering, history compaction). Output handling deals with what comes back (validation, streaming, persistence).",
     "source": "curated",
     "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
     "reviewStatus": "draft"
@@ -8745,6 +9076,219 @@
     "reviewStatus": "draft"
   },
   {
+    "id": "ccar-p-purcell-v2-3-9",
+    "categoryKey": "integration",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are evaluating retrieval-strategy claims used by a peer team. For each claim, select Yes if the statement is generally accurate. Otherwise, select No.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "Dense vector retrieval is well suited to recovering paraphrased intent against unstructured text."
+      },
+      {
+        "key": "2",
+        "text": "Sparse term-matching retrieval recovers exact terms such as identifiers and rare tokens more reliably than dense retrieval alone."
+      },
+      {
+        "key": "3",
+        "text": "Structured query retrieval is the right fit for filter-and-aggregate workloads against a relational store with a schema and indexes."
+      },
+      {
+        "key": "4",
+        "text": "Hybrid retrieval is identical to dense-only retrieval and shares the same recall characteristics."
+      },
+      {
+        "key": "5",
+        "text": "Increasing the number of retrieved chunks always improves answer quality regardless of the context budget."
+      }
+    ],
+    "choices": [
+      {
+        "key": "yes",
+        "text": "Yes"
+      },
+      {
+        "key": "no",
+        "text": "No"
+      }
+    ],
+    "correctMatch": {
+      "1": "yes",
+      "2": "yes",
+      "3": "yes",
+      "4": "no",
+      "5": "no"
+    },
+    "explanation": "Correct: 1 → Yes; 2 → Yes; 3 → Yes; 4 → No; 5 → No. Dense retrieval captures meaning, sparse retrieval captures exact tokens, and structured queries serve filter-and-aggregate questions; hybrid retrieval combines dense and sparse precisely because they differ. More chunks past the point of relevance add noise and cost, not quality.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-3-10",
+    "categoryKey": "integration",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are classifying chunking strategies by the corpus type each is best suited to. For each chunking strategy, select the corpus type it fits best. Choose from: Long Structured Documents, Heterogeneous Short Records, Code or Hierarchical Specs.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "per-record chunking where each record is one chunk"
+      },
+      {
+        "key": "2",
+        "text": "hierarchical chunking that mirrors section and sub-section structure"
+      },
+      {
+        "key": "3",
+        "text": "tree-aware chunking that preserves nesting in a specification"
+      },
+      {
+        "key": "4",
+        "text": "semantic chunking along clause or paragraph boundaries"
+      },
+      {
+        "key": "5",
+        "text": "function-level or module-level chunking that follows the source tree"
+      },
+      {
+        "key": "6",
+        "text": "fixed-size chunking with overlap across records of similar length"
+      }
+    ],
+    "choices": [
+      {
+        "key": "long-documents",
+        "text": "Long Structured Documents"
+      },
+      {
+        "key": "short-records",
+        "text": "Heterogeneous Short Records"
+      },
+      {
+        "key": "code-or-specs",
+        "text": "Code or Hierarchical Specs"
+      }
+    ],
+    "correctMatch": {
+      "1": "short-records",
+      "2": "long-documents",
+      "3": "code-or-specs",
+      "4": "long-documents",
+      "5": "code-or-specs",
+      "6": "short-records"
+    },
+    "explanation": "Correct: 1 → Heterogeneous Short Records; 2 → Long Structured Documents; 3 → Code or Hierarchical Specs; 4 → Long Structured Documents; 5 → Code or Hierarchical Specs; 6 → Heterogeneous Short Records. Match the chunk boundary to the unit of meaning in the corpus: clauses and sections for long documents, the record itself for short records, and functions or tree nodes for code and nested specifications.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-3-11",
+    "categoryKey": "integration",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are matching integration needs to connection mechanisms. For each integration need, select the most suitable mechanism. Choose from: MCP server, Direct API integration, Agent-to-agent protocol.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "a deterministic nightly batch job must push records into a data warehouse with no model involvement in the transfer"
+      },
+      {
+        "key": "2",
+        "text": "two autonomous agents owned by different companies must coordinate logistics without exposing internal systems to each other"
+      },
+      {
+        "key": "3",
+        "text": "multiple AI applications across the company need standardised, reusable access to the internal ticketing system"
+      },
+      {
+        "key": "4",
+        "text": "an existing microservice needs to call the model once to classify a document inside its own tightly controlled pipeline"
+      },
+      {
+        "key": "5",
+        "text": "a new internal knowledge base should be discoverable and usable by any current or future agent in the organisation"
+      }
+    ],
+    "choices": [
+      {
+        "key": "mcp-server",
+        "text": "MCP server"
+      },
+      {
+        "key": "direct-api-integration",
+        "text": "Direct API integration"
+      },
+      {
+        "key": "agent-to-agent-protocol",
+        "text": "Agent-to-agent protocol"
+      }
+    ],
+    "correctMatch": {
+      "1": "direct-api-integration",
+      "2": "agent-to-agent-protocol",
+      "3": "mcp-server",
+      "4": "direct-api-integration",
+      "5": "mcp-server"
+    },
+    "explanation": "Correct: 1 → Direct API integration; 2 → Agent-to-agent protocol; 3 → MCP server; 4 → Direct API integration; 5 → MCP server. Standardised, reusable, discoverable access for many consumers is what MCP is for. Deterministic, tightly scoped calls inside owned pipelines are direct integration. Coordination across an organisational trust boundary between autonomous agents is agent-to-agent.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-3-12",
+    "categoryKey": "integration",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are reviewing a peer's end-to-end design for a Claude-based platform expected to serve thousands of concurrent users. For each statement, select Yes if it reflects sound architectural practice. Otherwise, select No.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "Authorisation is resolved before retrieval so the index can filter by the caller's entitlements."
+      },
+      {
+        "key": "2",
+        "text": "An asynchronous queue absorbs bursty traffic between intake and the model invocation layer."
+      },
+      {
+        "key": "3",
+        "text": "Currency-conversion arithmetic is delegated to the model rather than to a deterministic function."
+      },
+      {
+        "key": "4",
+        "text": "Conversation logs retain unredacted account numbers to maximise signal for later tuning."
+      },
+      {
+        "key": "5",
+        "text": "A single shared service account is used for all downstream calls to simplify credential management."
+      }
+    ],
+    "choices": [
+      {
+        "key": "yes",
+        "text": "Yes"
+      },
+      {
+        "key": "no",
+        "text": "No"
+      }
+    ],
+    "correctMatch": {
+      "1": "yes",
+      "2": "yes",
+      "3": "no",
+      "4": "no",
+      "5": "no"
+    },
+    "explanation": "Correct: 1 → Yes; 2 → Yes; 3 → No; 4 → No; 5 → No. Entitlement-aware retrieval, queue-based buffering and deterministic code for arithmetic are sound. Unredacted identifiers in logs and a shared over-privileged account are the two most common ways a scaled platform fails a security review.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
     "id": "ccar-p-purcell-v2-4-1",
     "categoryKey": "evaluation-testing",
     "paperId": "purcell-ccar-p",
@@ -8990,6 +9534,173 @@
     "reviewStatus": "draft"
   },
   {
+    "id": "ccar-p-purcell-v2-4-8",
+    "categoryKey": "evaluation-testing",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are diagnosing reported issues in several Claude-based systems. For each scenario, select the system issue present. Choose from: Prompt failure, Hallucination, Model mismatch.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "a summarisation system using a small, fast model is accurate on short emails but consistently loses key details in 40-page contracts"
+      },
+      {
+        "key": "2",
+        "text": "an assistant told to respond concisely returns three-paragraph answers because the same prompt also says to explain reasoning in detail"
+      },
+      {
+        "key": "3",
+        "text": "a product Q&A bot confidently cites a warranty clause that appears nowhere in the supplied documentation"
+      },
+      {
+        "key": "4",
+        "text": "a general-purpose model performs poorly on a specialised task needing deep legal reasoning despite well-structured prompts"
+      },
+      {
+        "key": "5",
+        "text": "a customer-service agent invents a tracking number when the lookup tool returns no result, rather than reporting that the shipment was not found"
+      }
+    ],
+    "choices": [
+      {
+        "key": "prompt-failure",
+        "text": "Prompt failure"
+      },
+      {
+        "key": "hallucination",
+        "text": "Hallucination"
+      },
+      {
+        "key": "model-mismatch",
+        "text": "Model mismatch"
+      }
+    ],
+    "correctMatch": {
+      "1": "model-mismatch",
+      "2": "prompt-failure",
+      "3": "hallucination",
+      "4": "model-mismatch",
+      "5": "hallucination"
+    },
+    "explanation": "Correct: 1 → Model mismatch; 2 → Prompt failure; 3 → Hallucination; 4 → Model mismatch; 5 → Hallucination. Capability gaps between the chosen model and the task are mismatch. Conflicting instructions make the prompt the defect. Confident fabrications ungrounded in source data or tool results are hallucination.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-4-9",
+    "categoryKey": "evaluation-testing",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are assigning production metrics for a RAG assistant to evaluation categories. For each metric, select the evaluation dimension it primarily measures. Choose from: Accuracy, Latency, Cost, Safety.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "rate of outputs blocked by the personal-data filter before display"
+      },
+      {
+        "key": "2",
+        "text": "proportion of answers whose citations resolve to an actually retrieved chunk"
+      },
+      {
+        "key": "3",
+        "text": "success rate of the adversarial injection suite against the current version"
+      },
+      {
+        "key": "4",
+        "text": "p95 time to first token"
+      },
+      {
+        "key": "5",
+        "text": "exact-match rate against gold labels on the held-out set"
+      },
+      {
+        "key": "6",
+        "text": "billable input tokens per resolved conversation"
+      }
+    ],
+    "choices": [
+      {
+        "key": "accuracy",
+        "text": "Accuracy"
+      },
+      {
+        "key": "latency",
+        "text": "Latency"
+      },
+      {
+        "key": "cost",
+        "text": "Cost"
+      },
+      {
+        "key": "safety",
+        "text": "Safety"
+      }
+    ],
+    "correctMatch": {
+      "1": "safety",
+      "2": "accuracy",
+      "3": "safety",
+      "4": "latency",
+      "5": "accuracy",
+      "6": "cost"
+    },
+    "explanation": "Correct: 1 → Safety; 2 → Accuracy; 3 → Safety; 4 → Latency; 5 → Accuracy; 6 → Cost. Grounding and exact-match rates measure accuracy; time to first token measures latency; tokens per resolved conversation measures cost; filter hits and injection success rates measure safety. Each dimension needs its own metric or it will not be managed.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-4-10",
+    "categoryKey": "evaluation-testing",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are reviewing a team's evaluation plan before launch. For each claim, select Yes if the claim reflects sound evaluation practice. Otherwise, select No.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "An evaluation set composed entirely of model-generated synthetic queries is sufficient on its own for a launch decision."
+      },
+      {
+        "key": "2",
+        "text": "Gains measured on an offline suite can be assumed to transfer unchanged to the production traffic distribution."
+      },
+      {
+        "key": "3",
+        "text": "A production A/B test should compare guardrail and safety metrics as well as quality metrics between arms."
+      },
+      {
+        "key": "4",
+        "text": "LLM-as-judge scores should be periodically calibrated against human expert ratings."
+      },
+      {
+        "key": "5",
+        "text": "Re-running the same offline suite several more times increases coverage of the production distribution."
+      }
+    ],
+    "choices": [
+      {
+        "key": "yes",
+        "text": "Yes"
+      },
+      {
+        "key": "no",
+        "text": "No"
+      }
+    ],
+    "correctMatch": {
+      "1": "no",
+      "2": "no",
+      "3": "yes",
+      "4": "yes",
+      "5": "no"
+    },
+    "explanation": "Correct: 1 → No; 2 → No; 3 → Yes; 4 → Yes; 5 → No. Synthetic-only sets inherit the generator's blind spots; offline gains need production confirmation; re-running the same suite re-measures the same distribution. A/B tests must watch safety as well as quality, and model judges need human calibration to stay honest.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
     "id": "ccar-p-purcell-v2-5-1",
     "categoryKey": "governance-risk",
     "paperId": "purcell-ccar-p",
@@ -9197,6 +9908,173 @@
       "D"
     ],
     "explanation": "Correct: C, D. The requirement is that incorrect commitments never reach customers: preventative guardrails constrain what can be drafted, and mandatory human approval catches what the guardrails miss.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-5-7",
+    "categoryKey": "governance-risk",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are selecting the primary control for each risk scenario. For each scenario, select the most appropriate primary control. Choose from: Preventative guardrail, Human-in-the-loop validation, Monitoring and audit.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "compliance needs to demonstrate, months later, exactly what an agent did and why during a disputed transaction"
+      },
+      {
+        "key": "2",
+        "text": "an assistant must never output customer account numbers in any response, under any circumstances"
+      },
+      {
+        "key": "3",
+        "text": "an agent recommends loan approvals, each carrying significant financial and regulatory consequences"
+      },
+      {
+        "key": "4",
+        "text": "leadership wants early detection if the assistant's refusal rate or error rate trends upward across the fleet"
+      },
+      {
+        "key": "5",
+        "text": "a content generator must be prevented from producing text that breaches advertising standards before it is ever displayed"
+      }
+    ],
+    "choices": [
+      {
+        "key": "preventative-guardrail",
+        "text": "Preventative guardrail"
+      },
+      {
+        "key": "human-in-the-loop",
+        "text": "Human-in-the-loop validation"
+      },
+      {
+        "key": "monitoring-and-audit",
+        "text": "Monitoring and audit"
+      }
+    ],
+    "correctMatch": {
+      "1": "monitoring-and-audit",
+      "2": "preventative-guardrail",
+      "3": "human-in-the-loop",
+      "4": "monitoring-and-audit",
+      "5": "preventative-guardrail"
+    },
+    "explanation": "Correct: 1 → Monitoring and audit; 2 → Preventative guardrail; 3 → Human-in-the-loop validation; 4 → Monitoring and audit; 5 → Preventative guardrail. Absolute never-before-display requirements must be prevented, not caught. A consequential judgement per decision is a human gate. Reconstruction and trend detection are the audit trail and fleet monitoring.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-5-8",
+    "categoryKey": "governance-risk",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are reviewing compliance claims in a peer's governance plan. For each claim, select Yes if the claim is accurate. Otherwise, select No.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "Pseudonymising personal data before it leaves the system boundary supports GDPR data-minimisation obligations."
+      },
+      {
+        "key": "2",
+        "text": "Health-data obligations apply to every subprocessor that handles patient information, including logging and analytics services."
+      },
+      {
+        "key": "3",
+        "text": "FedRAMP authorisation of the hosting environment is irrelevant when the customer is a US federal agency."
+      },
+      {
+        "key": "4",
+        "text": "Encrypting data in transit alone satisfies cross-border transfer obligations under GDPR."
+      },
+      {
+        "key": "5",
+        "text": "Disclosing to users that they are interacting with an AI system supports transparency obligations."
+      }
+    ],
+    "choices": [
+      {
+        "key": "yes",
+        "text": "Yes"
+      },
+      {
+        "key": "no",
+        "text": "No"
+      }
+    ],
+    "correctMatch": {
+      "1": "yes",
+      "2": "yes",
+      "3": "no",
+      "4": "no",
+      "5": "yes"
+    },
+    "explanation": "Correct: 1 → Yes; 2 → Yes; 3 → No; 4 → No; 5 → Yes. Minimisation, whole-data-path coverage and disclosure are correct readings of GDPR, health-data and transparency obligations. FedRAMP is exactly the authorisation a US federal customer will require, and transit encryption does not address where data is processed or who can access it.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-5-9",
+    "categoryKey": "governance-risk",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are classifying production incidents by the LLM failure mode involved. For each incident, select the failure mode it best illustrates. Choose from: Prompt injection, Hallucination, Excess privilege, Data leakage.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "the assistant cites a regulation section number that does not exist"
+      },
+      {
+        "key": "2",
+        "text": "text in a retrieved web page causes the agent to email its system prompt to an external address"
+      },
+      {
+        "key": "3",
+        "text": "the model invents a tracking number when the lookup tool returns nothing"
+      },
+      {
+        "key": "4",
+        "text": "the agent deletes records because its tool scope permitted it, although the task required only reads"
+      },
+      {
+        "key": "5",
+        "text": "a document in the index instructs the model to ignore its grounding rules, and it complies"
+      },
+      {
+        "key": "6",
+        "text": "a support bot includes another customer's order details in its reply"
+      }
+    ],
+    "choices": [
+      {
+        "key": "prompt-injection",
+        "text": "Prompt injection"
+      },
+      {
+        "key": "hallucination",
+        "text": "Hallucination"
+      },
+      {
+        "key": "excess-privilege",
+        "text": "Excess privilege"
+      },
+      {
+        "key": "data-leakage",
+        "text": "Data leakage"
+      }
+    ],
+    "correctMatch": {
+      "1": "hallucination",
+      "2": "prompt-injection",
+      "3": "hallucination",
+      "4": "excess-privilege",
+      "5": "prompt-injection",
+      "6": "data-leakage"
+    },
+    "explanation": "Correct: 1 → Hallucination; 2 → Prompt injection; 3 → Hallucination; 4 → Excess privilege; 5 → Prompt injection; 6 → Data leakage. Untrusted content steering behaviour is injection. Confident fabrication is hallucination. Harm enabled by permissions the task never needed is excess privilege. Information crossing a tenant or user boundary is leakage. Naming the mode correctly points to the right control.",
     "source": "curated",
     "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
     "reviewStatus": "draft"
@@ -9414,6 +10292,177 @@
     "reviewStatus": "draft"
   },
   {
+    "id": "ccar-p-purcell-v2-6-7",
+    "categoryKey": "stakeholder-lifecycle",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are mapping engagement activities to lifecycle phases. For each activity, select the phase in which it primarily belongs. Choose from: Discovery, Design, Handoff, Monitoring and iteration.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "facilitating a workshop to agree what success will mean and how it will be measured"
+      },
+      {
+        "key": "2",
+        "text": "walking the client's engineers through the runbooks and transferring operational ownership"
+      },
+      {
+        "key": "3",
+        "text": "interviewing frontline staff to understand how quotes are produced today and where time is lost"
+      },
+      {
+        "key": "4",
+        "text": "selecting the retrieval strategy and defining the guardrail architecture for the agreed use case"
+      },
+      {
+        "key": "5",
+        "text": "reviewing production evaluation trends and prioritising the next round of prompt improvements"
+      }
+    ],
+    "choices": [
+      {
+        "key": "discovery",
+        "text": "Discovery"
+      },
+      {
+        "key": "design",
+        "text": "Design"
+      },
+      {
+        "key": "handoff",
+        "text": "Handoff"
+      },
+      {
+        "key": "monitoring-and-iteration",
+        "text": "Monitoring and iteration"
+      }
+    ],
+    "correctMatch": {
+      "1": "discovery",
+      "2": "handoff",
+      "3": "discovery",
+      "4": "design",
+      "5": "monitoring-and-iteration"
+    },
+    "explanation": "Correct: 1 → Discovery; 2 → Handoff; 3 → Discovery; 4 → Design; 5 → Monitoring and iteration. Establishing the problem and its success definition is discovery. Architectural choices against agreed requirements are design. Transferring operational ownership is handoff. Using production evidence to drive the next cycle is monitoring and iteration.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-6-8",
+    "categoryKey": "stakeholder-lifecycle",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are reviewing claims in a consultancy's stakeholder-engagement playbook. For each claim, select Yes if the claim reflects sound practice. Otherwise, select No.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "Architecture decision records should capture the alternatives that were rejected and why."
+      },
+      {
+        "key": "2",
+        "text": "Reporting token spend, latency and uptime alone keeps executive sponsors aligned to business outcomes."
+      },
+      {
+        "key": "3",
+        "text": "Handoff documentation should include evaluation baselines the receiving team can re-run."
+      },
+      {
+        "key": "4",
+        "text": "An SLA should be negotiated from measured pipeline latency rather than from the stakeholder's initial ask."
+      },
+      {
+        "key": "5",
+        "text": "Mid-build scope additions should be absorbed silently to preserve the relationship."
+      }
+    ],
+    "choices": [
+      {
+        "key": "yes",
+        "text": "Yes"
+      },
+      {
+        "key": "no",
+        "text": "No"
+      }
+    ],
+    "correctMatch": {
+      "1": "yes",
+      "2": "no",
+      "3": "yes",
+      "4": "yes",
+      "5": "no"
+    },
+    "explanation": "Correct: 1 → Yes; 2 → No; 3 → Yes; 4 → Yes; 5 → No. Decision records with rejected alternatives, SLAs grounded in measurement and re-runnable baselines are what make a system explainable and operable by others. Technical-only reporting and silent scope absorption are the two classic ways sponsor alignment is lost.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-6-9",
+    "categoryKey": "stakeholder-lifecycle",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are triaging stakeholder concerns raised in a steering committee. For each concern, select the primary trade-off dimension you should quantify in your response. Choose from: Cost, Latency, Quality, Risk.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "legal asks what happens if the assistant commits the company to a refund it should not"
+      },
+      {
+        "key": "2",
+        "text": "the CFO asks why the monthly inference invoice has doubled"
+      },
+      {
+        "key": "3",
+        "text": "the product owner reports that summaries omit key clauses in long contracts"
+      },
+      {
+        "key": "4",
+        "text": "the operations manager asks whether overnight batch processing could replace the real-time path to cut spend"
+      },
+      {
+        "key": "5",
+        "text": "the security officer asks whether retrieved documents could alter the assistant's behaviour"
+      },
+      {
+        "key": "6",
+        "text": "the support lead reports that customers abandon chats before the answer appears"
+      }
+    ],
+    "choices": [
+      {
+        "key": "cost",
+        "text": "Cost"
+      },
+      {
+        "key": "latency",
+        "text": "Latency"
+      },
+      {
+        "key": "quality",
+        "text": "Quality"
+      },
+      {
+        "key": "risk",
+        "text": "Risk"
+      }
+    ],
+    "correctMatch": {
+      "1": "risk",
+      "2": "cost",
+      "3": "quality",
+      "4": "cost",
+      "5": "risk",
+      "6": "latency"
+    },
+    "explanation": "Correct: 1 → Risk; 2 → Cost; 3 → Quality; 4 → Cost; 5 → Risk; 6 → Latency. Each concern maps to one dimension the architect should quantify first. Answering a cost question with quality data, or a risk question with latency data, is how committees lose confidence in the architect.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
     "id": "ccar-p-purcell-v2-7-1",
     "categoryKey": "developer-enablement",
     "paperId": "purcell-ccar-p",
@@ -9508,6 +10557,56 @@
     ],
     "correctKey": "A",
     "explanation": "Correct: A. Diagnose before treating. Traces reveal whether the failure lives in inputs, retrieval, tool behaviour or the prompt. Changing the prompt first risks masking the real cause and destabilising working behaviour.",
+    "source": "curated",
+    "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
+    "reviewStatus": "draft"
+  },
+  {
+    "id": "ccar-p-purcell-v2-7-4",
+    "categoryKey": "developer-enablement",
+    "paperId": "purcell-ccar-p",
+    "difficulty": 3,
+    "prompt": "You are reviewing a team's proposed Claude Code working agreement. For each statement, select Yes if it reflects sound practice. Otherwise, select No.",
+    "rows": [
+      {
+        "key": "1",
+        "text": "A project-level CLAUDE.md committed to the repository lets every team member's sessions inherit the same conventions."
+      },
+      {
+        "key": "2",
+        "text": "Granting the coding agent unrestricted shell and credential access is the recommended way to reduce friction."
+      },
+      {
+        "key": "3",
+        "text": "Having a separate session or agent review AI-authored changes reduces anchoring on the authoring session's reasoning."
+      },
+      {
+        "key": "4",
+        "text": "Custom slash commands and Skills let teams package repeatable workflows for reuse."
+      },
+      {
+        "key": "5",
+        "text": "AI-generated code can be merged without human review once the agent's own tests pass."
+      }
+    ],
+    "choices": [
+      {
+        "key": "yes",
+        "text": "Yes"
+      },
+      {
+        "key": "no",
+        "text": "No"
+      }
+    ],
+    "correctMatch": {
+      "1": "yes",
+      "2": "no",
+      "3": "yes",
+      "4": "yes",
+      "5": "no"
+    },
+    "explanation": "Correct: 1 → Yes; 2 → No; 3 → Yes; 4 → Yes; 5 → No. Shared project configuration, independent review and packaged workflows are how teams get consistent, safe leverage from the tooling. Unrestricted credentials and unreviewed merges are how they get incidents.",
     "source": "curated",
     "sourceRef": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/",
     "reviewStatus": "draft"

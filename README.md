@@ -22,8 +22,9 @@ practice app.
 - **24 concept cards** — one per objective cluster, shown after a wrong
   answer. Every bank question links to one.
 - **One practice paper** — Matthew Purcell's CCAR-P practice set,
-  second edition: 43 of its 63 questions, in his order, with his answer
-  keys and rationales (CC BY-NC 4.0, see below).
+  second edition: all 63 questions (30 single-answer, 13 "choose two" and
+  20 matching), in his order, with his answer keys and rationales
+  (CC BY-NC 4.0, see below).
 
 | Domain | Weight | Questions |
 |---|---|---|
@@ -76,8 +77,7 @@ only, and fails if an original stem tracks the Purcell paper.
 The 200 bank questions are original; see [NOTICE.md](NOTICE.md) and
 [docs/provenance.md](docs/provenance.md).
 
-The paper **"CCAR-P practice exam"** (`purcell-ccar-p`, 43
+The paper **"CCAR-P practice exam"** (`purcell-ccar-p`, 63
 questions) is Matthew Purcell's practice set, second edition, licensed
-**CC BY-NC 4.0** and **excluded from the MIT licence**. Its 20 matching
-items are left out until the engine can show them. Credit, licence and
+**CC BY-NC 4.0** and **excluded from the MIT licence**. Credit, licence and
 the list of changes are in [NOTICE.md](NOTICE.md#matthew-purcell--ccar-p-practice-question-set-second-edition-paper-purcell-ccar-p).
