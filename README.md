@@ -20,7 +20,11 @@ practice app.
   blueprint to the question, and the manifest carries the same weights so
   the engine's readiness estimate is blueprint-weighted.
 - **24 concept cards** — one per objective cluster, shown after a wrong
-  answer. Every question links to one.
+  answer. Every bank question links to one.
+- **One practice paper** — Matthew Purcell's CCAR-P practice set,
+  second edition: all 63 questions (30 single-answer, 13 "choose two" and
+  20 matching), in his order, with his answer keys and rationales
+  (CC BY-NC 4.0, see below).
 
 | Domain | Weight | Questions |
 |---|---|---|
@@ -65,9 +69,15 @@ exploits rather than knowledge: the correct option being the longest
 (or the shortest),
 one letter dominating, absolute wording only in distractors, and
 explanations that do not discuss the distractors. It also checks the
-domain split against the manifest weights.
+domain split against the manifest weights. It checks the original bank
+only, and fails if an original stem tracks the Purcell paper.
 
 ## Sources & attribution
 
-All questions are original; see [NOTICE.md](NOTICE.md) and
+The 200 bank questions are original; see [NOTICE.md](NOTICE.md) and
 [docs/provenance.md](docs/provenance.md).
+
+The paper **"CCAR-P practice exam"** (`purcell-ccar-p`, 63
+questions) is Matthew Purcell's practice set, second edition, licensed
+**CC BY-NC 4.0** and **excluded from the MIT licence**. Credit, licence and
+the list of changes are in [NOTICE.md](NOTICE.md#matthew-purcell--ccar-p-practice-question-set-second-edition-paper-purcell-ccar-p).

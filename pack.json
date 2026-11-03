@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "id": "claude-cert-pro",
   "title": "Claude Architect – Professional",
-  "description": "Unofficial Claude Certified Architect – Professional (CCAR-P) practice — multiple-choice and multiple-response questions across the seven exam domains, with rationales.",
+  "description": "Unofficial Claude Certified Architect – Professional (CCAR-P) practice — multiple-choice, multiple-response and matching questions across the seven exam domains, with rationales.",
   "homeSubtitle": "Architect Professional — own the whole delivery.",
   "themeColor": "#3d348b",
   "categories": [
@@ -62,12 +62,26 @@
     "scaled": true,
     "questionCount": 63
   },
+  "papersLabel": "Practice exams",
+  "papers": [
+    {
+      "key": "purcell-ccar-p",
+      "label": "CCAR-P practice exam",
+      "series": "Matthew Purcell"
+    }
+  ],
   "sources": [
     {
       "label": "Original",
       "name": "Hand-authored (200)",
       "blurb": "Written for this pack against the objectives in Anthropic's public CCAR-P exam guide v1.0 and Anthropic's public docs. Not drawn from the live exam.",
       "url": "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542810%2FClaude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf"
+    },
+    {
+      "label": "Purcell",
+      "name": "CCAR-P Practice Question Set, 2nd ed. (63)",
+      "blurb": "The paper \"CCAR-P practice exam\": Matthew Purcell's practice set, written against the public exam guide, CC BY-NC 4.0. All 63 questions, including his 20 matching items.",
+      "url": "https://www.linkedin.com/posts/purcellmatthew_ccar-p-practice-exam-question-set-ugcPost-7522215192798142464-zF9t/"
     }
   ],
   "upgrade": {

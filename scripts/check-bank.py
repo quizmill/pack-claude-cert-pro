@@ -12,8 +12,12 @@ This script checks the things a test-wise candidate exploits instead:
     the correct option and at least one distractor
   * the bank's domain split tracks the manifest weights
   * no stem tracks the removed bank (token Jaccard < 0.50 against every
-    removed stem, read from git history) and no two stems are near-copies
-    (Jaccard <= 0.70)
+    removed stem, read from git history) or Matthew Purcell's CCAR-P v2
+    paper, and no two stems are near-copies (Jaccard <= 0.70)
+
+Every check runs on the original bank only (`source: original`). The
+Purcell paper (`paperId: purcell-ccar-p`) is his work, kept as he wrote
+it, so it is only used as a reference for the overlap gate.
 
 Run from the pack root:  python3 scripts/check-bank.py
 Exit code is non-zero when a hard check fails.
@@ -27,7 +31,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-qs = json.loads((ROOT / "questions.json").read_text())
+bank = json.loads((ROOT / "questions.json").read_text())
+qs = [q for q in bank if q["source"] == "original"]
+PURCELL_PAPER = "purcell-ccar-p"
 manifest = json.loads((ROOT / "pack.json").read_text())
 weights = {c["key"]: c["weight"] for c in manifest["categories"]}
 
@@ -39,7 +45,7 @@ n = len(qs)
 single = [q for q in qs if "correctKey" in q]
 multi = [q for q in qs if "correctKeys" in q]
 letters = collections.Counter(q["correctKey"] for q in single)
-print(f"questions: {n}  single-answer: {len(single)}  select-many: {len(multi)}")
+print(f"original questions: {n}  single-answer: {len(single)}  select-many: {len(multi)}")
 print("correct letter (single-answer):", dict(sorted(letters.items())))
 if single:
     top = max(letters.values()) / len(single)
@@ -177,6 +183,20 @@ if removed is not None:
             failures.append(f"{qid}: stem overlap {best:.2f} with removed {best_id} (limit <{REMOVED_LIMIT:.2f})")
     print(f"stem overlap vs removed bank ({len(old)} items):",
           {k: bands[k] for k in ("1.00", "0.60-0.99", "0.50-0.59", "0.40-0.49", "<0.40")})
+# The original bank must also stay clear of the Purcell paper it now sits
+# next to, so it never borrows from licensed-in material. A matching
+# item's scenario is mostly in its rows, so they count as its stem.
+purcell = {q["id"]: tokens(" ".join([q["prompt"], *(r["text"] for r in q.get("rows", []))]))
+           for q in bank if q.get("paperId") == PURCELL_PAPER}
+if purcell:
+    worst = (0.0, "", "")
+    for qid, t in stems.items():
+        best_id, best = max(((pid, jaccard(t, pt)) for pid, pt in purcell.items()), key=lambda p: p[1])
+        worst = max(worst, (best, qid, best_id))
+        if best >= REMOVED_LIMIT:
+            failures.append(f"{qid}: stem overlap {best:.2f} with Purcell paper {best_id} (limit <{REMOVED_LIMIT:.2f})")
+    print(f"highest stem overlap vs Purcell paper ({len(purcell)} items): "
+          f"{worst[0]:.2f} ({worst[1]} / {worst[2]})")
 ids = sorted(stems)
 top_pair = (0.0, "", "")
 for i, a in enumerate(ids):
@@ -190,7 +210,7 @@ print(f"highest stem overlap between current items: {top_pair[0]:.2f} ({top_pair
 diff = collections.Counter(q["difficulty"] for q in qs)
 print("difficulty:", dict(sorted(diff.items())))
 print("reviewStatus:", dict(collections.Counter(q["reviewStatus"] for q in qs)))
-print("source:", dict(collections.Counter(q["source"] for q in qs)))
+print("source (whole pack):", dict(collections.Counter(q["source"] for q in bank)))
 
 for w in warnings:
     print("warning:", w)
